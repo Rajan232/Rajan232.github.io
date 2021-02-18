@@ -508,6 +508,11 @@
 	right:46px;
 }
 
+#cat_general_general .uc-attr-list-sections__icon-copy{
+	right:26px;
+}
+
+
 .uc-attr-list-sections__icon-move{
 	position:absolute;
 	left:-16px;

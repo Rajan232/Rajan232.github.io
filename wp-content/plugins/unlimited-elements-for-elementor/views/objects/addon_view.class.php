@@ -300,6 +300,8 @@ class UniteCreatorAddonView{
 		
 		$name = $this->objAddon->getNameByType();
 		
+		$catTitle = $this->objAddon->getCatTitle();
+		
 		$generalSettings = $this->initGeneralSettings();
 		
 		//set options from addon
@@ -336,10 +338,17 @@ class UniteCreatorAddonView{
 			
 			
 			<!-- TYPE -->
-			<div class="vert_sap15"></div>
+			<div class="vert_sap20"></div>
 			
 			<?php esc_html_e("Widget Type", "unlimited-elements-for-elementor");?>: <b> <?php echo esc_html($addonTypeTitle)?> </b>
 			
+			<?php if(!empty($catTitle)):?>
+			<div class="vert_sap10"></div>
+			
+			<?php esc_html_e("Category", "unlimited-elements-for-elementor");?>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<b> <?php echo $catTitle?> </b>
+			
+			<?php endif?>
 			
 			<?php UniteProviderFunctionsUC::doAction(UniteCreatorFilters::ACTION_EDIT_ADDON_ADDSETTINGS, $arrOptions)?>
 			

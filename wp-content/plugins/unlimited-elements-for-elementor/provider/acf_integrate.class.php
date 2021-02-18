@@ -62,7 +62,7 @@ class UniteCreatorAcfIntegrate{
 		 * get image field data
 		 */
 		private function getImageFieldData($field, $key=null){
-			
+						
 			$title = $this->getImageFieldTitle($field);
 			
 			$caption = UniteFunctionsUC::getVal($field, "caption");
@@ -77,6 +77,10 @@ class UniteCreatorAcfIntegrate{
 			
 			$urlImage = UniteFunctionsUC::getVal($field, "url");
 			$arrSizes = UniteFunctionsUC::getVal($field, "sizes");
+
+			$width = UniteFunctionsUC::getVal($field, "width");
+			$height = UniteFunctionsUC::getVal($field, "height");
+			
 			
 			$arrValues = array();
 			
@@ -84,18 +88,29 @@ class UniteCreatorAcfIntegrate{
 			if(!empty($key))
 				$keyprefix = $key."_";				
 			
-			if(!empty($key))
+			if(!empty($key)){
 				$arrValues[$key] = $urlImage;
-			else
+				$arrValues[$keyprefix."width"] = $width;
+				$arrValues[$keyprefix."height"] = $height;
+			}
+			else{
 				$arrValues["image"] = $urlImage;
+				$arrValues["image_width"] = $width;
+				$arrValues["image_height"] = $height;
+			}			
 			
-				
 			$thumbMedium = UniteFunctionsUC::getVal($arrSizes, "medium");
 			$arrValues[$keyprefix."thumb"] = $thumbMedium;
 			
+			$thumbMediumWidth = UniteFunctionsUC::getVal($arrSizes, "medium-width");
+			$thumbMediumHeight = UniteFunctionsUC::getVal($arrSizes, "medium-width");
+
+			$arrValues[$keyprefix."thumb_width"] = $thumbMediumWidth;
+			$arrValues[$keyprefix."thumb_height"] = $thumbMediumHeight;
+						
 			foreach($arrSizes as $size => $value){
 				
-				if($size == "medium")
+				if( $size == "medium")
 					continue;
 				
 				if(is_numeric($value))
@@ -104,13 +119,18 @@ class UniteCreatorAcfIntegrate{
 				$thumbName = $keyprefix."thumb_".$size;
 				$thumbName = str_replace("-", "_", $thumbName);
 				
+				$thumbWidth = UniteFunctionsUC::getVal($arrSizes, $size."-width");
+				$thumbHeight = UniteFunctionsUC::getVal($arrSizes, $size."-height");
+				
 				$arrValues[$thumbName] = $value;
+				$arrValues[$thumbName."_width"] = $width;
+				$arrValues[$thumbName."_height"] = $height;
 			}
-			
+						
+					
 			$arrValues[$keyprefix."title"] = $title;
 			$arrValues[$keyprefix."description"] = $description;
 			$arrValues[$keyprefix."alt"] = $alt;
-			
 			
 			return($arrValues);
 		}

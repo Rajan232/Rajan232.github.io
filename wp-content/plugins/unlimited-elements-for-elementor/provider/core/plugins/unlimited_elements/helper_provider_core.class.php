@@ -130,18 +130,7 @@ class HelperProviderCoreUC_EL{
 		
 		return($value);
 	}
-	
-	
-	/**
-	 * add constant data to addon output
-	 */
-	public static function addOutputConstantData($data){
 		
-		$data["uc_platform_title"] = "Elementor Page Builder";
-		$data["uc_platform"] = "elementor";
-		
-		return($data);
-	}
 	
 	/**
 	 * register widget by it's name for outside uses
@@ -286,9 +275,7 @@ class HelperProviderCoreUC_EL{
 	public static function globalInit(){
 		
 		self::$operations = new UCOperations();
-		
-		add_filter(UniteCreatorFilters::FILTER_ADD_ADDON_OUTPUT_CONSTANT_DATA ,array("HelperProviderCoreUC_EL","addOutputConstantData"));
-		
+				
 		//set path and url
 		self::$pathCore = dirname(__FILE__)."/";
 		self::$urlCore = HelperUC::pathToFullUrl(self::$pathCore);

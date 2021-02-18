@@ -52,6 +52,9 @@ class UniteCreatorDialogParamElementor extends UniteCreatorDialogParam{
 		
 		$bottomText = __("* You can use those placeholders: ", "unlimited-elements-for-elementor") . $bottomTextUnits;
 		
+		$checkID = "check_".UniteFunctionsUC::getRandomString();
+		
+		
 		?>		
 		<div class="unite-inputs-sap"></div>
 		
@@ -68,6 +71,51 @@ class UniteCreatorDialogParamElementor extends UniteCreatorDialogParam{
 		</div>
 		
 		<input type="text" name="selector_value" data-initval="<?php echo $value?>" value="<?php echo $value?>" placeholder="<?php echo $selectorValuePlaceholder?>">
+		
+		<div class="unite-inputs-sap"></div>
+		
+		<label for="<?php echo esc_attr($checkID)?>">
+			<input id="<?php echo esc_attr($checkID)?>" type="checkbox" class="uc-param-checkbox uc-control" data-controlled-selector=".uc-more-selectors" name="show_more_selectors">
+			<?php _e("Show More Selectors", "unlimited-elements-for-elementor")?>
+		</label>
+		
+		<div class="uc-more-selectors" style="display:none">
+				
+				<div class="unite-inputs-sap-double"></div>
+			
+				<div class="unite-inputs-label">
+					<?php esc_html_e("CSS Selector 2", "unlimited-elements-for-elementor")?>:
+				</div>
+						
+				<input type="text" name="selector2"  value="" placeholder="<?php echo $selectorPlaceholder?>">
+				
+				<div class="unite-inputs-sap"></div>
+				
+				<div class="unite-inputs-label">
+					<?php esc_html_e("CSS Selector 2 Value", "unlimited-elements-for-elementor")?>:
+				</div>
+				
+				<input type="text" name="selector2_value" data-initval="<?php echo $value?>" value="<?php echo $value?>" placeholder="<?php echo $selectorValuePlaceholder?>">
+				
+				
+				<div class="unite-inputs-sap-double"></div>
+				
+				
+				<div class="unite-inputs-label">
+					<?php esc_html_e("CSS Selector 3", "unlimited-elements-for-elementor")?>:
+				</div>
+						
+				<input type="text" name="selector3"  value="" placeholder="<?php echo $selectorPlaceholder?>">
+				
+				<div class="unite-inputs-sap"></div>
+				
+				<div class="unite-inputs-label">
+					<?php esc_html_e("CSS Selector 3 Value", "unlimited-elements-for-elementor")?>:
+				</div>
+				
+				<input type="text" name="selector3_value" data-initval="<?php echo $value?>" value="<?php echo $value?>" placeholder="<?php echo $selectorValuePlaceholder?>">
+										
+		</div>
 		
 		<div class="unite-inputs-sap"></div>
 		
@@ -625,7 +673,6 @@ class UniteCreatorDialogParamElementor extends UniteCreatorDialogParam{
 			
  		    <input type="text" name="<?php echo $name?>" class="uc-text-colorpicker" value="<?php echo $color?>" data-initval="<?php echo $color?>">
 			<div class='unite-color-picker-element'></div>
-			
 		<?php 
 	}
 	

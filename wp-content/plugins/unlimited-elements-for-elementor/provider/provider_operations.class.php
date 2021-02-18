@@ -89,7 +89,7 @@ class ProviderOperationsUC extends UCOperations{
 				$arrTypesAssoc = UniteFunctionsWPUC::getPostTypesAssoc(array(), true);
 			break;
 		}
-				
+		
 		$arrPostTypes = array_keys($arrTypesAssoc);
 		
 		$strPostTypes = implode("','", $arrPostTypes);
@@ -103,7 +103,7 @@ class ProviderOperationsUC extends UCOperations{
 		$search = $db->escape($search);
 				
 		$where = "post_type in ($strPostTypes)";
-		$where .= " and post_status in ('publish','draft')";
+		$where .= " and post_status in ('publish','draft','private')";
 		
 		$isStartWord = (strlen($search) == 1);
 		
@@ -114,7 +114,7 @@ class ProviderOperationsUC extends UCOperations{
 		$sqlStartWord = "select * from $tablePosts where $whereStartWord limit $limit";
 		
 		$sql = "select * from $tablePosts where $whereRegular limit $limit";
-
+		
 		if($isStartWord == true){
 			
 			//start word, then regular

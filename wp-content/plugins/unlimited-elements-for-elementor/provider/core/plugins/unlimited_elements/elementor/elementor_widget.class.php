@@ -776,7 +776,6 @@ class UniteCreatorElementorWidget extends Widget_Base {
     	
     	$arrControl["default"] = $value;
     	
-    	
     	//add options
     	switch($type){
     		case "uc_select_special":
@@ -1007,7 +1006,17 @@ class UniteCreatorElementorWidget extends Widget_Base {
     			if(!isset($arrDefaults["background"]))
     				$arrDefaults["background"] = array();
     			
+    			//default label
     			$arrDefaults["background"]["label"] = $title;
+    			
+    			if(!isset($arrDefaults["color"]))
+    				$arrDefaults["color"] = array();
+    			
+    			if(!isset($arrDefaults["image"]))
+    				$arrDefaults["image"] = array();
+    			
+    			$arrDefaults["color"]["label"] = $title. " ".__("Color", "unlimited-elements-of-elementor");
+    			$arrDefaults["image"]["label"] = $title." ".__("Image", "unlimited-elements-of-elementor");
     			
     			if(!empty($arrDefaults)){
     				
@@ -1134,10 +1143,17 @@ class UniteCreatorElementorWidget extends Widget_Base {
 				);
 				
 				$arrControl["fields_options"] = $arrDefaults;
-								
+				
     		break;
     		case UniteCreatorDialogParam::PARAM_BOXSHADOW:
     			$arrControl["name"] = $name;
+					
+				$arrDefaults["box_shadow_type"] = array(
+					'label' => $title
+				);
+				
+				$arrControl["fields_options"] = $arrDefaults;
+    			
     		break;
     		case UniteCreatorDialogParam::PARAM_ICON_LIBRARY:
     			
@@ -1184,7 +1200,7 @@ class UniteCreatorElementorWidget extends Widget_Base {
     			}
     			
     		break;		//name value selectors
-    		case UniteCreatorDialogParam::PARAM_COLORPICKER:
+    		case UniteCreatorDialogParam::PARAM_COLORPICKER:    			
     		case UniteCreatorDialogParam::PARAM_NUMBER:
     		case UniteCreatorDialogParam::PARAM_SLIDER:
     		case UniteCreatorDialogParam::PARAM_DROPDOWN:
@@ -1196,7 +1212,23 @@ class UniteCreatorElementorWidget extends Widget_Base {
     				$selector = $this->addWrapperToSelector($selector);
     				$arrControl["selectors"][$selector] = $selectorValue;
     			}
-    			    			
+				
+    			$selector2 = UniteFunctionsUC::getVal($param, "selector2");
+    			$selector2Value = UniteFunctionsUC::getVal($param, "selector2_value");
+    			
+    			if(!empty($selector2)){
+    				$selector2 = $this->addWrapperToSelector($selector2);
+    				$arrControl["selectors"][$selector2] = $selector2Value;
+    			}
+    			
+    			$selector3 = UniteFunctionsUC::getVal($param, "selector3");
+    			$selector3Value = UniteFunctionsUC::getVal($param, "selector3_value");
+    			
+    			if(!empty($selector3)){
+    				$selector3 = $this->addWrapperToSelector($selector3);
+    				$arrControl["selectors"][$selector3] = $selector3Value;
+    			}
+    			
     		break;
     	}
     	
@@ -2703,7 +2735,6 @@ class UniteCreatorElementorWidget extends Widget_Base {
 	        if($isEditMode == true)
 	            $scriptsHardCoded = true;
 	
-	        
 	        $putCssIncludesInBody = ($cssFilesPlace == "body") ? true : false;
 			
 	        $params = array();
@@ -2723,7 +2754,7 @@ class UniteCreatorElementorWidget extends Widget_Base {
 	        	
 	        	$output->processIncludes("js");
 	        }
-	                
+	        
 	        $htmlOutput = $output->getHtmlBody($scriptsHardCoded, $putCssIncludesInBody,true,$params);
 	        	        
         	echo UniteProviderFunctionsUC::escCombinedHtml($htmlOutput);

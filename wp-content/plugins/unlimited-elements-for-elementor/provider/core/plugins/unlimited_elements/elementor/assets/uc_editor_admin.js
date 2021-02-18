@@ -536,12 +536,12 @@ function UniteCreatorElementorEditorAdmin(){
 	 * init post id's selector
 	 */
 	function initPostIDsSelect(objSelect){
-		
+				
 		var widgetSettings = getLastOpenedWidgetSettings();
 		
 		var settingName = objSelect.data("setting");
 		var isSingle = objSelect.data("issingle");
-		
+				
 		if(isSingle === true)
 			objSelect.removeAttr("multiple");
 				
@@ -589,24 +589,29 @@ function UniteCreatorElementorEditorAdmin(){
 	 */
 	function initSpecialSelects(){
 		
-		var objSelect = g_objSettingsPanel.find(".unite-setting-special-select");
-		if(objSelect.length == 0)
+		var objSelects = g_objSettingsPanel.find(".unite-setting-special-select");
+		if(objSelects.length == 0)
 			return(false);
 		
-		var isInited = objSelect.data("isinited");
-		if(isInited === true)
-			return(false);
-		
-		objSelect.data("isinited", true);
-		
-		var settingType = objSelect.data("settingtype");
+		jQuery.each(objSelects, function(index, select){
+			var objSelect = jQuery(select);
+			
+			var isInited = objSelect.data("isinited");
+			if(isInited === true)
+				return(true);
+			
+			objSelect.data("isinited", true);
+			
+			var settingType = objSelect.data("settingtype");
+			
+			switch(settingType){
+				case "post_ids":
+					initPostIDsSelect(objSelect);
+				break;
+			}
+			
+		});
 				
-		switch(settingType){
-			case "post_ids":
-				initPostIDsSelect(objSelect);
-			break;
-		}
-		
 	}
 	
 	

@@ -2211,6 +2211,18 @@ function UniteAdminUC(){
 		
 	};
 	
+	/**
+	 * print time stamp
+	 */
+	this.printTimeStamp = function(stamp){
+		
+		if(!stamp)
+			var stamp = jQuery.now();
+		
+		var date1 = new Date(stamp);
+		trace(date1);
+	}
+	
 	this.z_________DATA_FUNCTIONS_______ = function(){};
 	
 	/**

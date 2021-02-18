@@ -637,15 +637,61 @@ class UniteCreatorTemplateEngineWork{
 	/**
 	 * get listing item data
 	 */
-	function getListingItemData(){
+	public function getListingItemData($type = null, $defaultObjectID = null){
 		
-		$data = get_queried_object();
+		$data = UniteFunctionsWPUC::getQueriedObject($type, $defaultObjectID);
 		
 		$data = UniteFunctionsUC::convertStdClassToArray($data);
 		
 		return($data);
 	}
 	
+	/**
+	 * put post image attributes
+	 */
+	public function putPostImageAttributes($arrPost, $thumbName, $isPutPlaceholder = false, $urlPlaceholder = ""){
+		
+		if(empty($arrPost))
+			UniteFunctionsUC::throwError("No post found :(");
+		
+		$attributes = "";
+		
+		if(isset($arrPost[$thumbName]) == false)
+			$thumbName = "image";
+
+		//dmp("put dummy placeholder");exit();
+			
+		if(!empty($arrPost[$thumbName])){
+			
+			$urlImage = $arrPost[$thumbName];
+			$width = UniteFunctionsUC::getVal($arrPost, $thumbName."_width");
+			$height = UniteFunctionsUC::getVal($arrPost, $thumbName."_height");
+			
+			$attributes .= "src=\"{$urlImage}\"";
+			if(!empty($width) && !empty($height))
+				$attributes .= " width=\"{$width}\" height=\"{$height}\"";
+				
+			return($attributes);
+		}
+		
+		$isPutPlaceholder = UniteFunctionsUC::strToBool($isPutPlaceholder);
+		
+		if($isPutPlaceholder == false)
+			return("");
+		
+		//put placeholder
+		
+		if(!empty($urlPlaceholder)){
+			
+			dmP("put built in placeholder");
+			exit();
+		}
+			
+		
+		dmp($arrPost);
+		exit();
+		
+	}
 	
 	/**
 	 * add extra functions to twig
@@ -679,6 +725,8 @@ class UniteCreatorTemplateEngineWork{
 		$getPostTags = new Twig_SimpleFunction('getPostTags', array($this,"getPostTags"));
 		$getPostData = new Twig_SimpleFunction('getPostData', array($this,"getPostData"));
 		$putPagination = new Twig_SimpleFunction('putPagination', array($this,"putPagination"));
+		
+		$putPostImageAttributes = new Twig_SimpleFunction('putPostImageAttributes', array($this,"putPostImageAttributes"));
 		
 		$printVar = new Twig_SimpleFunction('printVar', array($this,"printVar"));
 		$printJsonVar = new Twig_SimpleFunction('printJsonVar', array($this,"printJsonVar"));
@@ -746,6 +794,8 @@ class UniteCreatorTemplateEngineWork{
 		$this->twig->addFunction($getTermCustomFields);
 		$this->twig->addFunction($putItemsJsonFunction);
 		$this->twig->addFunction($getItems);
+		$this->twig->addFunction($putPostImageAttributes);
+		
 		
 		//add filters
 		$this->twig->addFilter($filterTruncate);

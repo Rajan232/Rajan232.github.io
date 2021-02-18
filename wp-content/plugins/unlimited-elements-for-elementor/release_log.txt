@@ -1,4 +1,23 @@
 
+
+version 1.4.66
+
+-feature: added "box shadow" attribute type
+-feature: added url_posts and num_posts to users output
+-bug fix: load js include file in editor even if no js code
+-feature: added option for selector 2 and selector 3 in several attributes
+-feature: added copy / paste attributes sections in widget editor
+-bug fix: fixed some php notice with exclude terms posts selection
+-bug fix: fixed small bug in getListingItemData function with no object returned
+-feature: added option for get default object to getListingItemData function
+-feature: added support for wpml site language inside a widget
+-bug fix: fixed post selection manual select no posts shown at init
+-bug fix: fixed bug when private posts not fetched on manual posts selection
+-feature: added acf image and thumbnails widths and heights to placeholders list
+-change: updated codemirror to latest version, added code search feature
+-change: updated freemius sdk to 2.4.2
+
+
 version 1.4.65
 
 -bug fix: fixed php sanitize array bug

@@ -1354,9 +1354,16 @@ class UniteCreatorOutputWork extends HtmlOutputBaseUC{
 			//add html
 			
 			$output .= "\n\n			".$html;
-						
+			
+			$isOutputJs = false;
+			if(!empty($js))
+				$isOutputJs = true;
+			
+			if(isset($params["wrap_js_start"]) || isset($params["wrap_js_timeout"]))
+				$isOutputJs = true;
+			
 			//output js
-			if(!empty($js)){
+			if($isOutputJs == true){
 				
 				$title = $this->addon->getTitle();
 								
@@ -1371,7 +1378,6 @@ class UniteCreatorOutputWork extends HtmlOutputBaseUC{
 					
 					$wrapStart = UniteFunctionsUC::getVal($params, "wrap_js_start");
 					$wrapEnd = UniteFunctionsUC::getVal($params, "wrap_js_end");
-					
 					
 					$output .= "\n\n			<script type=\"text/javascript\">";
 										
@@ -1422,7 +1428,7 @@ class UniteCreatorOutputWork extends HtmlOutputBaseUC{
 			return($this->cacheConstants);
 		
 		$data = array();
-		
+				
 		$prefix = "ucid";
 		if($this->isInited)
 			$prefix = "uc_".$this->addon->getName();

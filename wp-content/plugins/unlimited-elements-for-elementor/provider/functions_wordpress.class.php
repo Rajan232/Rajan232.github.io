@@ -2294,9 +2294,14 @@ defined('UNLIMITED_ELEMENTS_INC') or die('Restricted access');
 		/**
 		 * get user avatar data
 		 */
-		public static function getUserAvatarData($userID){
-						
-			$arrAvatar = get_avatar_data($userID);
+		public static function getUserAvatarData($userID, $urlDefaultImage =""){
+			
+			$args = array();
+			
+			if(!empty($urlDefaultImage))
+			$args["default"] = $urlDefaultImage;
+			
+			$arrAvatar = get_avatar_data($userID, $args);
 			
 			$hasAvatar = UniteFunctionsUC::getVal($arrAvatar, "found_avatar");
 			$size = UniteFunctionsUC::getVal($arrAvatar, "size");
@@ -2482,6 +2487,38 @@ defined('UNLIMITED_ELEMENTS_INC') or die('Restricted access');
 		
 		
 		public static function a___________OTHER_FUNCTIONS__________(){}
+		
+		/**
+		 * get queried object by type
+		 * fill the empty objects by default objects
+		 */
+		public static function getQueriedObject($type = null, $defaultObjectID = null){
+			
+			$data = get_queried_object();
+			
+			switch($type){
+				case "user":		//if not user fetched - get first user
+					if(empty($data) || $data instanceof WP_User == false){
+						
+						if(!empty($defaultObjectID)){
+							$data = get_user_by("id", $defaultObjectID);
+							return($data);
+						}
+						
+						//get first object
+						$arrUsers = get_users(array("number"=>1));
+						if(empty($arrUsers))
+							return(false);
+							
+						$data = $arrUsers[0];
+						
+						return($data);
+					}
+				break;
+			}
+			
+			return($data);
+		}
 		
 		
 		/**

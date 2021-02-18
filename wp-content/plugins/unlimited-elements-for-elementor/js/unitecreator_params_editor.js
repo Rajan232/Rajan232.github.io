@@ -10,12 +10,12 @@ function UniteCreatorParamsEditor(){
 	
 	if(!g_ucAdmin)
 		var g_ucAdmin = new UniteAdminUC();
-	 
+	
 	this.events = {
 			UPDATE: "update",	//update list event
 			BULK: "bulk"	
 	};
-	 
+	
 	var g_temp = {
 			hasCats:false,
 			isItemsType:false,
@@ -23,8 +23,7 @@ function UniteCreatorParamsEditor(){
 			DEFAULT_CAT: "cat_general_general",
 			CLASS_MOVE_MODE: "uc-move-mode",
 			LOCAL_STORAGE_KEY: "uc_param_cat_copied",
-			hasCopyCategory:false,
-			HOUR_IN_SECONDS: 3600
+			HOUR_IN_MS: 60*60*1000
 	};
 	
 	
@@ -666,8 +665,7 @@ function UniteCreatorParamsEditor(){
 				
 		html += "<i class=\"uc-attr-list-sections__icon-delete fas fa-trash uc-hide-on-movemode\" title=\""+g_uctext.delete_section+"\"></i>";
 		
-		if(g_temp.hasCopyCategory == true)
-			html += "<i class=\"uc-attr-list-sections__icon-copy fas fa-copy uc-hide-on-movemode\" title=\""+g_uctext.copy_section+"\"></i>";
+		html += "<i class=\"uc-attr-list-sections__icon-copy fas fa-copy uc-hide-on-movemode\" title=\""+g_uctext.copy_section+"\"></i>";
 		
 		html += "<i class=\"uc-attr-list-sections__icon-move fas fa-bullseye uc-show-on-movemode\" title=\"Move Here\"></i>";
 		
@@ -679,6 +677,8 @@ function UniteCreatorParamsEditor(){
 		g_ucAdmin.validateNotEmpty(objList, "list sections");
 		
 		objList.append(objCat);
+		
+		return(catID);
 	}
 	
 		
@@ -715,7 +715,7 @@ function UniteCreatorParamsEditor(){
 	 * select some category
 	 */
 	function selectCategory(objCat){
-				
+		
 		if(objCat.hasClass("uc-active"))
 			return(true);
 		
@@ -923,8 +923,7 @@ function UniteCreatorParamsEditor(){
 		g_objCatsWrapper.on("click",".uc-attr-list-sections__icon-delete", onDeleteCatIconClick);
 		
 		//on cat copy icon click
-		if(g_temp.hasCopyCategory == true)
-			g_objCatsWrapper.on("click",".uc-attr-list-sections__icon-copy", onCopyCatIconClick);
+		g_objCatsWrapper.on("click",".uc-attr-list-sections__icon-copy", onCopyCatIconClick);
 		
 		var objButtonSwitchMoveMode = jQuery("#uc_attr_button_switch_move_mode");
 		
@@ -1006,11 +1005,10 @@ function UniteCreatorParamsEditor(){
 		
 		//set expire time
 		var currentTimeStamp = Date.now();
-		var expireTime = currentTimeStamp+g_temp.HOUR_IN_SECONDS;
+		var expireTime = currentTimeStamp + g_temp.HOUR_IN_MS;
 		objSaveData["expire"] = expireTime;
 		
 		var strSaveData = g_ucAdmin.encodeObjectForSave(objSaveData);
-		
 		
 		//save the local storage data
 		window.localStorage.setItem(g_temp.LOCAL_STORAGE_KEY, strSaveData);
@@ -1056,13 +1054,52 @@ function UniteCreatorParamsEditor(){
 	 */
 	function clearCopiedSection(){
 		
-		trace("remove");
-		
 		window.localStorage.removeItem(g_temp.LOCAL_STORAGE_KEY);
 		
 		g_objCopyCatSection.hide();		
 	}
 	
+	/**
+	 * paste copied section
+	 */
+	function pasteCopiedSection(){
+		
+		var objButton = jQuery(this);
+		var tab = objButton.data("tab");
+		
+		var objData = copySectionGetStoredData();
+		
+		if(!objData)
+			return(false);
+		
+		// add category
+		
+		var title = g_ucAdmin.getVal(objData, "title");
+		
+		var catID = addCatToTab(tab, title);
+		
+		// add attributes
+		
+		var params = g_ucAdmin.getVal(objData, "params");
+		
+		if(!params)
+			params = [];
+		
+		jQuery.each(params,function(index, param){
+			param["__attr_catid__"] = catID;
+			addParamRow(param);
+		});
+		
+		// clear and select
+		
+		clearCopiedSection();
+		
+		// select cat
+		
+		var objCat = getCatByID(catID);
+		selectCategory(objCat);
+		
+	}
 	
 	/**
 	 * init copies section div event
@@ -1071,6 +1108,9 @@ function UniteCreatorParamsEditor(){
 		
 		jQuery("#uc_attr_cats_copied_section_clear").on("click", clearCopiedSection);
 		
+		jQuery("#uc_attr_cats_copied_section_paste_content").on("click", pasteCopiedSection);
+		jQuery("#uc_attr_cats_copied_section_paste_style").on("click", pasteCopiedSection);
+		
 	}
 	
 	/**
@@ -1078,10 +1118,7 @@ function UniteCreatorParamsEditor(){
 	 * show on init if data exists
 	 */
 	function initCopyCatSection(){
-		
-		if(g_temp.hasCopyCategory == false)
-			return(false);
-		
+				
 		if(g_temp.hasCats == false)
 			return(false);
 		
@@ -1095,8 +1132,20 @@ function UniteCreatorParamsEditor(){
 		
 		//show if available
 		var objData = copySectionGetStoredData();
-		
+				
 		var title = g_ucAdmin.getVal(objData, "title");
+		var expire = g_ucAdmin.getVal(objData, "expire");
+				
+		if(!expire){
+			clearCopiedSection();
+			return(false);
+		}
+		
+		var currentTime = jQuery.now();
+		if(currentTime > expire){
+			clearCopiedSection();
+			return(false);
+		}
 		
 		if(!title)
 			return(false);
@@ -1243,7 +1292,7 @@ function UniteCreatorParamsEditor(){
 	 * add row from parameter
 	 */
 	function addParamRow(objParam, rowBefore, noEventTrigger){
-				
+		
 		if(!rowBefore)
 			var rowBefore = null;
 		

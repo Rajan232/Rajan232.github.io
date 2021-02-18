@@ -68,10 +68,7 @@ class UniteCreatorParamsProcessor extends UniteCreatorParamsProcessorWork{
 		$imageHeight = UniteFunctionsUC::getVal($metaData, "height");
 		
 		$urlFull = UniteFunctionsWPUC::getUrlAttachmentImage($imageID);
-		
-		$imageWidth = UniteFunctionsUC::getVal($metaData, "width");
-		$imageHeight = UniteFunctionsUC::getVal($metaData, "height");
-		
+				
 		$data["{$name}_width"] = $imageWidth;
 		$data["{$name}_height"] = $imageHeight;
 
@@ -788,9 +785,7 @@ class UniteCreatorParamsProcessor extends UniteCreatorParamsProcessorWork{
 					$arrTerms = UniteFunctionsUC::getVal($value, "{$name}_exclude_terms");
 
 					$arrExcludeTerms = UniteFunctionsUC::mergeArraysUnique($arrExcludeTerms, $arrTerms);
-					
-					$filters["exclude_category"] = $excludeTerms;
-					
+															
 					$termsExcludeChildren = UniteFunctionsUC::getVal($value, "{$name}_terms_exclude_children");
 					$termsExcludeChildren = UniteFunctionsUC::strToBool($termsExcludeChildren);
 					
@@ -1254,6 +1249,7 @@ class UniteCreatorParamsProcessor extends UniteCreatorParamsProcessorWork{
 		$args["post__in"] = $postIDs;
 		$args["ignore_sticky_posts"] = true;
 		$args["post_type"] = "any";
+		$args["post_status"] = "publish, private";
 		
 		$args = $this->getPostListData_addOrderBy($args, $value, $name, true);
 		
@@ -1494,7 +1490,7 @@ class UniteCreatorParamsProcessor extends UniteCreatorParamsProcessorWork{
 	 * modify users array for output
 	 */
 	public function modifyArrUsersForOutput($arrUsers, $getMeta, $getAvatar, $arrMetaKeys = null){
-				
+		
 		if(empty($arrUsers))
 			return(array());
 		

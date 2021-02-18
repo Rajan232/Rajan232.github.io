@@ -289,9 +289,11 @@ class UniteCreatorAddonViewChildParams{
 		
 		$key = "getListingItemData()";
 		$text = "
-{# This function gets the data if the widget inside template that are item in any listing of any plugin #} \n	
+{# This function gets the data if the widget inside template that are item in any listing of any plugin \n
+   For type the only option for now is: \"user\", and for ID, default user ID.
+ #} \n
 
-{% set listingData = getListingItemData() %}
+{% set listingData = getListingItemData(type=\"\", default_id=\"\") %}
 
 {{printVar(listingData)}}
 ";
@@ -1082,9 +1084,13 @@ jQuery(document).ready(function(){
 		$strCode .= "	<hr>\n";
 		
 		$strCode .= "	# ---- User Meta Fields: ----- \n\n";
+				
+		$strCode .= "	Url Posts: {{{$itemName}.url_posts}} <br>\n ";
+		$strCode .= "	Num Posts: {{{$itemName}.num_posts}} <br>\n\n ";
 		
 		$arrMetaKeys = UniteFunctionsWPUC::getUserMetaKeys();
-		
+			
+			
 		foreach($arrMetaKeys as $key){
 			$title = UniteFunctionsUC::convertHandleToTitle($key);
 		

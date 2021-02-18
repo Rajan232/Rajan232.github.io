@@ -504,12 +504,18 @@ class UniteProviderFunctionsUC{
 	 * add system contsant data to template engine
 	 */
 	public static function addSystemConstantData($data){
-
-		$data["uc_platform_title"] = "WordPress";
-		$data["uc_platform"] = "blox_wp";
 		
 		$data["uc_url_home"] = get_home_url();
 		$data["uc_url_blog"] = UniteFunctionsWPUC::getUrlBlog();
+		
+		$isWPMLExists = UniteCreatorWpmlIntegrate::isWpmlExists();
+		if($isWPMLExists == true){
+			
+			$objWpml = new UniteCreatorWpmlIntegrate();
+			$activeLanguage = $objWpml->getActiveLanguage();
+			
+			$data["uc_lang"] = $activeLanguage;
+		}
 		
 		return($data);
 	}

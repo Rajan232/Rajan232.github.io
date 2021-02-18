@@ -3,7 +3,7 @@ Contributors: Maxim Vendorov, Amit Keren
 Donate link: http://unlimited-elements.com/
 Tags: elementor, elements, addons, elementor addon, elementor widget, page builder, builder, visual editor, wordpress page builder, elementor
 Requires at least: 3.5
-Tested up to: 5.6
+Tested up to: 5.6.1
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -579,6 +579,24 @@ Note : This plugin works with Elementor. Make sure you have [Elementor](https://
 3. Navigate to Unlimited Elements in the WordPress side menu and install the widget you want by hovering over it and clicking install.
 
 == Changelog ==
+
+version 1.4.66 = 2021-02-18
+
+* Feature: added "box shadow" attribute type
+* Feature: added url_posts and num_posts to users output
+* Feature: added option for selector 2 and selector 3 in several attributes
+* Feature: added copy / paste attributes sections in widget editor
+* Feature: added option for get default object to getListingItemData function
+* Feature: added support for wpml site language inside a widget
+* Feature: added acf image and thumbnails widths and heights to placeholders list
+* Fix: load js include file in editor even if no js code
+* Fix: fixed some php notice with exclude terms posts selection
+* Fix: fixed small bug in getListingItemData function with no object returned
+* Fix: fixed post selection manual select no posts shown at init
+* Fix: fixed bug when private posts not fetched on manual posts selection
+* Change: updated codemirror to latest version, added code search feature
+* Change: updated freemius sdk to 2.4.2
+
 
 version 1.4.65 = 2021-02-03
 
