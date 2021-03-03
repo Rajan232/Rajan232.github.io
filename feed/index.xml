@@ -10,7 +10,7 @@
 <channel>
 	<title>Rajan Pusalkar &#8211; My Personal Portfolio</title>
 	<atom:link href="https://rajanpusalkar.me/feed/" rel="self" type="application/rss+xml" />
-	<link>https://rajanpusalkar.me</link>
+	<link>https://rajanpusalkar.me/</link>
 	<description></description>
 	<lastBuildDate>Sat, 27 Feb 2021 13:52:17 +0000</lastBuildDate>
 	<language>en-US</language>
@@ -23,7 +23,7 @@
 <image>
 	<url>https://rajanpusalkar.me/wp-content/uploads/2021/02/44932164-4f84-4a8e-b5d1-60698a5d593c_200x200-1.png</url>
 	<title>Rajan Pusalkar &#8211; My Personal Portfolio</title>
-	<link>https://rajanpusalkar.me</link>
+	<link>https://rajanpusalkar.me/</link>
 	<width>32</width>
 	<height>32</height>
 </image> 
