@@ -9,7 +9,6 @@ import DemoInstall from './screens/DemoInstall'
 import SiteExport from './screens/SiteExport'
 import DemoToInstall from './screens/DemoInstall/DemoToInstall'
 import OptIn from './screens/OptIn'
-import BetaConsent from './components/BetaConsent'
 
 ctEvents.on('ct:dashboard:routes', (r) => {
 	r.push({
@@ -51,14 +50,6 @@ ctEvents.on('ct:dashboard:home:before', (r) => {
 	}
 
 	r.content = <OptIn />
-})
-
-ctEvents.on('ct:dashboard:home:after', (r) => {
-	if (ctDashboardLocalizations.plugin_data.hide_beta_updates) {
-		return
-	}
-
-	r.content = <BetaConsent />
 })
 
 ctEvents.on('ct:dashboard:heading:after', (r) => {

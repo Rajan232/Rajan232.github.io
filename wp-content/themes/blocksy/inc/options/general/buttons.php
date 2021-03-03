@@ -20,7 +20,7 @@ $options = [
 				'type' => 'ct-slider',
 				'min' => 30,
 				'max' => 100,
-				'value' => 45,
+				'value' => 40,
 				'responsive' => true,
 				'setting' => [ 'transport' => 'postMessage' ],
 			],

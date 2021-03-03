@@ -1,3 +1,27 @@
+1.7.71: 2021-02-24
+- Improvement: Validation issue with `ontouchmove` attribute
+- Improvement: WooCommerce small improvements
+- Improvement: Archives grid CSS
+- Improvement: Social icons official color
+- Fix: Unique widgets ID not outputted
+
+1.7.70: 2021-02-22
+- New: Breadcrumbs - add support for SEO plugins breadcrumbs
+- New: Support for adjust the quantity input values filter
+- Improvement: Add label options for Account, Cart, Search and Wishlist items
+- Improvement: Thinner Search icon
+- Improvement: Respect primary category in breadcrumbs for RankMath, SEOPress, The Seo Framework and WPSEO
+- Fix: Link type 4 and 5 text color
+- Fix: Drowdown color when input color is set to transparent
+
+1.7.70-beta1: 2021-02-20
+- Improvement: Add label options for Account, Cart, Search and Wishlist items
+- Improvement: Thinner Search icon
+- Improvement: Adjust the quantity input values
+- Improvement: Respect primary category in breadcrumbs for RankMath, SEOPress, The Seo Framework and WPSEO
+- Fix: Link type 4 and 5 text color
+- Fix: Drowdown color when input color is set to transparent
+
 1.7.69: 2021-02-16
 - New: Detect WPRocket Lazy load
 - Fix: Images display block problem

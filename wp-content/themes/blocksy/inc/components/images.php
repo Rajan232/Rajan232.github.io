@@ -124,7 +124,11 @@ if (! function_exists('blocksy_image')) {
 		}
 
 		if ( $args['ratio_blocks'] ) {
-			$args['inner_content'] .= blocksy_generate_ratio($args['ratio'], $args['attachment_id']);
+			$args['inner_content'] .= blocksy_generate_ratio(
+				$args['ratio'],
+				$args['attachment_id'],
+				$args['size']
+			);
 		}
 
 		if ( isset( $args['html_atts']['class'] ) ) {
@@ -256,14 +260,30 @@ if (! function_exists('blocksy_get_image_element')) {
  * @param string $ratio 1/1 | 1/2 | 4/3 | 3/4 ...
  */
 if (! function_exists('blocksy_generate_ratio')) {
-	function blocksy_generate_ratio($ratio, $attachment_id = null) {
+	function blocksy_generate_ratio($ratio, $attachment_id = null, $size = null) {
 		$result = 0;
 
 		if ('original' === $ratio) {
 			if (! $attachment_id) {
 				$result = 1;
 			} else {
-				$info = wp_get_attachment_metadata($attachment_id);
+				$all_sizes = blocksy_get_all_wp_image_sizes();
+
+				if (
+					$size
+					&&
+					$size !== 'full'
+					&&
+					isset($all_sizes[$size])
+					&&
+					$all_sizes[$size]['width']
+					&&
+					$all_sizes[$size]['height']
+				) {
+					$info = $all_sizes[$size];
+				} else {
+					$info = wp_get_attachment_metadata($attachment_id);
+				}
 
 				if (
 					$info
@@ -288,6 +308,32 @@ if (! function_exists('blocksy_generate_ratio')) {
 
 		$style = 'padding-bottom: ' . round($result * 100, 1) . '%';
 		return '<span class="ct-ratio" style="' . $style . '"></span>';
+	}
+}
+
+
+if (! function_exists('blocksy_get_all_wp_image_sizes')) {
+	function blocksy_get_all_wp_image_sizes() {
+		global $_wp_additional_image_sizes;
+
+		$default_image_sizes = get_intermediate_image_sizes();
+
+		$image_sizes = [];
+
+		foreach ($default_image_sizes as $size) {
+			$image_sizes[ $size ] = [];
+			$image_sizes[ $size ][ 'width' ] = intval( get_option( "{$size}_size_w" ) );
+			$image_sizes[ $size ][ 'height' ] = intval( get_option( "{$size}_size_h" ) );
+			$image_sizes[ $size ][ 'crop' ] = get_option( "{$size}_crop" ) ? get_option( "{$size}_crop" ) : false;
+		}
+
+		if ( isset( $_wp_additional_image_sizes ) && count( $_wp_additional_image_sizes ) ) {
+			$image_sizes = array_merge( $image_sizes, $_wp_additional_image_sizes );
+		}
+
+		// blocksy_print($image_sizes);
+
+		return $image_sizes;
 	}
 }
 
@@ -369,7 +415,7 @@ if (! function_exists('blocksy_simple_image')) {
 
 		$other_html_atts = trim( $other_html_atts );
 
-		if ( $args['ratio_blocks'] ) {
+		if ($args['ratio_blocks']) {
 			$args['inner_content'] .= blocksy_generate_ratio($args['ratio']);
 		}
 

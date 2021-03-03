@@ -31,7 +31,6 @@
 		&:hover a,
 		&.is-active a {
 			color: #fff;
-			font-weight: 600;
 			background: var(--paletteColor1);
 		}
 
@@ -73,6 +72,10 @@
 
 	.woocommerce-MyAccount-navigation-link--edit-account a:before {
 		content: '\e907';
+	}
+
+	.woocommerce-MyAccount-navigation-link--woo-wish-list a:before {
+		content: '\e908';
 	}
 
 	.woocommerce-MyAccount-navigation-link--customer-logout a:before {

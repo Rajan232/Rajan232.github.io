@@ -213,18 +213,16 @@ if (! function_exists('blocksy_flexy_pills')) {
 
 		foreach (range(1, ceil($args['pills_count'])) as $index) {
 			if ($args['pills_images']) {
-				$image_output = blocksy_image([
+				$image_output = '<li>' . blocksy_image([
 					'attachment_id' => $args['pills_images'][$index - 1],
-					'ratio' => '1/1',
-					'tag_name' => 'li',
+					'ratio' => 'original',
+					'tag_name' => 'span',
 					'size' => "woocommerce_gallery_thumbnail",
 					'class' => intval($index) === 1 ? 'active' : '',
-					'suffix' => 'static',
-					'ratio_blocks' => false,
 					'html_atts' => [
 						'aria-label' => sprintf(__('Slide %s', 'blocksy'), $index)
 					]
-				]);
+				]) . '</li>';
 
 				echo $image_output;
 			} else {

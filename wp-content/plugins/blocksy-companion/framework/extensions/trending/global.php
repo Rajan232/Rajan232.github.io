@@ -1,8 +1,23 @@
 <?php
 
+blc_call_fn(['fn' => 'blocksy_output_font_css'], [
+	'font_value' => get_theme_mod( 'trendingBlockPostsFont',
+		blocksy_typography_default_values([
+			'size' => '15px',
+			'variation' => 'n5',
+		])
+	),
+	'css' => $css,
+	'tablet_css' => $tablet_css,
+	'mobile_css' => $mobile_css,
+	'selector' => '.ct-trending-block .ct-item-title',
+]);
+
 blc_call_fn(['fn' => 'blocksy_output_background_css'], [
 	'selector' => '.ct-trending-block',
 	'css' => $css,
+	'tablet_css' => $tablet_css,
+	'mobile_css' => $mobile_css,
 	'value' => get_theme_mod(
 		'trending_block_background',
 		blc_call_fn([
@@ -15,7 +30,8 @@ blc_call_fn(['fn' => 'blocksy_output_background_css'], [
 				],
 			],
 		])
-	)
+	),
+	'responsive' => true,
 ]);
 
 blc_call_fn(['fn' => 'blocksy_output_responsive'], [
@@ -39,6 +55,8 @@ blc_call_fn(['fn' => 'blocksy_output_colors'], [
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 	],
 	'css' => $css,
+	'tablet_css' => $tablet_css,
+	'mobile_css' => $mobile_css,
 	'variables' => [
 		'default' => [
 			'selector' => '.ct-trending-block',
@@ -50,4 +68,5 @@ blc_call_fn(['fn' => 'blocksy_output_colors'], [
 			'variable' => 'linkHoverColor'
 		],
 	],
+	'responsive' => true,
 ]);

@@ -39,10 +39,11 @@
 		}
 
 		&.active {
+			z-index: 1;
 			--tab-visibility: 1;
 
 			a {
-				color: var(--linkHoverColor);
+				color: var(--linkActiveColor);
 			}
 		}
 	}
@@ -52,7 +53,6 @@
 		width: 100%;
 		padding: var(--tab-padding, 1em 2em);
 		text-align: center;
-		// --linkInitialColor: var(--color);
 	}
 
 	@include media-breakpoint-up (md) {
@@ -80,6 +80,10 @@
 
 	a {
 		border: 1px solid var(--border-color);
+	}
+
+	.active a {
+		border-color: var(--tab-background, var(--border-color));
 	}
 }
 

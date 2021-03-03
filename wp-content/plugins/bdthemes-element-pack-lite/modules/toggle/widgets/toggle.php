@@ -272,8 +272,8 @@ class Toggle extends Module_Base {
                 'type'      => Controls_Manager::SWITCHER,
                 'default'   => 'no',
                 'separator' => 'before',
-                // 'condition'	  =>[
-                // 	'source!' => 'widget',
+                // 'condition'    =>[
+                //  'source!' => 'widget',
                 // ],
             ]
         );
@@ -621,10 +621,10 @@ class Toggle extends Module_Base {
                     'id'    => 'bdt-show-hide-' . esc_attr($id),
                     'class' => 'bdt-show-hide',
                     // 'bdt-show-hide' => [
-                    // 	wp_json_encode( array_filter( [
-                    // 		"collapsible" => true,
-                    // 		"transition"  => "ease-in-out"
-                    // 	] ) )
+                    //  wp_json_encode( array_filter( [
+                    //      "collapsible" => true,
+                    //      "transition"  => "ease-in-out"
+                    //  ] ) )
                     // ]
                 ]
             ]
@@ -642,8 +642,8 @@ class Toggle extends Module_Base {
                         wp_json_encode(array_filter([
                                 "id"                   => esc_attr($id),
                                 "status_scrollspy"     => $settings['active_scrollspy'],
-                                "scrollspy_top_offset" => $settings['scrollspy_top_offset']['size'],
-                                "scrollspy_time"       => $settings['scrollspy_time']['size'],
+                                "scrollspy_top_offset" => (isset($settings['scrollspy_top_offset']['size']) ? $settings['scrollspy_top_offset']['size'] : 70),
+                                "scrollspy_time"       => (isset($settings['scrollspy_time']['size']) ? $settings['scrollspy_time']['size'] : 1000),
                                 "hash_location"        => $settings['hash_location'],
                                 "toggle_initially_open"     => ($settings['toggle_initially_open'] == 'yes') ? 'yes' : ' ',
                                 "by_widget_selector_status" => ($settings['source'] == 'widget') ? 'yes' : 'no',
@@ -679,7 +679,7 @@ class Toggle extends Module_Base {
 
         $this->add_render_attribute('tab_title', ['class' => ['bdt-show-hide-title'],]);
         // if( $settings['hash_location'] == 'yes' ){
-        // 	$this->add_render_attribute( 'tab_title', [ 'href' => [ '#bdt-show-hide-'.$this->get_id() ], ] );
+        //  $this->add_render_attribute( 'tab_title', [ 'href' => [ '#bdt-show-hide-'.$this->get_id() ], ] );
         // }
 
         $this->add_render_attribute('toggle_content', ['class' => ['bdt-show-hide-content'],]);
@@ -707,7 +707,7 @@ class Toggle extends Module_Base {
                     </div>
 
                     <a <?php echo $this->get_render_attribute_string('tab_title'); ?> href='javascript:void(0)'>
-						<!--  -->
+                        <!--  -->
                         <?php if ( 'yes' === $settings['toggle_icon_show'] ) : ?>
                             <?php if($settings['toggle_icon_position'] == 'left') : ?>
                             <span class="bdt-show-hide-icon left-position" aria-hidden="true">
@@ -734,35 +734,35 @@ class Toggle extends Module_Base {
                         <?php endif; ?>
                         <!--  -->
                         <span class="bdt-toggle-open">
-							<?php echo wp_kses($settings['toggle_title'], element_pack_allow_tags('title')); ?>
-						</span>
+                            <?php echo wp_kses($settings['toggle_title'], element_pack_allow_tags('title')); ?>
+                        </span>
                         <span class="bdt-toggle-close">
-							<?php echo wp_kses($settings['toggle_open_title'], element_pack_allow_tags('title'));
+                            <?php echo wp_kses($settings['toggle_open_title'], element_pack_allow_tags('title'));
                             ?>
-						</span>
+                        </span>
                         <?php if ( 'yes' === $settings['toggle_icon_show'] ) : ?>
                             <?php if($settings['toggle_icon_position'] == 'right') : ?>
                             <span class="bdt-show-hide-icon" aria-hidden="true">
 
-								<span class="bdt-show-hide-icon-closed">
-									<?php if ( $is_new || $migrated ) :
+                                <span class="bdt-show-hide-icon-closed">
+                                    <?php if ( $is_new || $migrated ) :
                                         Icons_Manager::render_icon($settings['toggle_icon_normal'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
                                     else : ?>
                                         <i class="<?php echo esc_attr($settings['icon_normal']); ?>"
                                            aria-hidden="true"></i>
                                     <?php endif; ?>
-									</span>
+                                    </span>
 
-									<span class="bdt-show-hide-icon-opened">
-										<?php if ( $active_is_new || $active_migrated ) :
+                                    <span class="bdt-show-hide-icon-opened">
+                                        <?php if ( $active_is_new || $active_migrated ) :
                                             Icons_Manager::render_icon($settings['toggle_icon_active'], ['aria-hidden' => 'true', 'class' => 'fa-fw']);
                                         else : ?>
                                             <i class="<?php echo esc_attr($settings['icon_active']); ?>"
                                                aria-hidden="true"></i>
                                         <?php endif; ?>
-										</span>
+                                        </span>
 
-									</span>
+                                    </span>
                             <?php endif; ?>
                         <?php endif; ?>
 

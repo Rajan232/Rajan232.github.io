@@ -1,10 +1,6 @@
 .ct-header-search {
 	display: flex;
 	align-items: center;
-
-	&:hover .ct-icon {
-		--icon-color: var(--icon-hover-color, var(--paletteColor2));
-	}
 }
 
 // Search modal form
@@ -64,9 +60,11 @@
 
 		.search-submit {
 			right: 0;
-			color: #fff;
 			border-radius: 100%;
 			background: var(--linkHoverColor);
+
+			--icon-color: #fff;
+			--icon-size: calc(100% / 3);
 
 			@include media-breakpoint-down (sm) {
 				--search-button-size: 40px;
@@ -76,11 +74,6 @@
 			@include media-breakpoint-up (md) {
 				--search-button-size: 48px;
 				top: calc(50% - 24px);
-			}
-
-			svg {
-				width: calc(100% / 3);
-				height: calc(100% / 3);
 			}
 
 			&:focus {

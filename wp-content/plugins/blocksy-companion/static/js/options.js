@@ -3,7 +3,7 @@ import { Fill } from '@wordpress/components'
 import DisplayCondition from './options/DisplayCondition'
 import CustomizerOptionsManager from './options/CustomizerOptionsManager'
 
-import { onDocumentLoaded } from '../../framework/extensions/cookies-consent/static/js/helpers'
+import { onDocumentLoaded } from 'blocksy-options'
 
 import ctEvents from 'ct-events'
 

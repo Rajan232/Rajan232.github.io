@@ -245,7 +245,6 @@ export const handleMenuVariables = ({ itemId }) => ({
 					to_add: '[data-transparent-row="yes"]',
 				})
 			),
-
 			variable: 'linkInitialColor',
 			type: 'color:default',
 		},
@@ -262,7 +261,6 @@ export const handleMenuVariables = ({ itemId }) => ({
 					to_add: '[data-transparent-row="yes"]',
 				})
 			),
-
 			variable: 'linkHoverColor',
 			type: 'color:hover',
 		},

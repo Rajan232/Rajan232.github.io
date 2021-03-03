@@ -1,17 +1,17 @@
-import { markImagesAsLoaded } from '../../../cookies-consent/static/js/lazy-load-helpers'
+import { markImagesAsLoaded } from 'blocksy-frontend'
 
 const store = {}
 
-const cachedFetch = url =>
+const cachedFetch = (url) =>
 	store[url]
-		? new Promise(resolve => {
+		? new Promise((resolve) => {
 				resolve(store[url])
 				if (!window.ct_customizer_localizations) {
 					store[url] = store[url].clone()
 				}
 		  })
-		: new Promise(resolve =>
-				fetch(url).then(response => {
+		: new Promise((resolve) =>
+				fetch(url).then((response) => {
 					resolve(response)
 
 					if (!window.ct_customizer_localizations) {
@@ -26,7 +26,7 @@ const loadPage = (args = {}) => {
 		// prev | next
 		action: null,
 
-		...args
+		...args,
 	}
 
 	if (!args.el) {
@@ -64,7 +64,7 @@ const loadPage = (args = {}) => {
 	let newPage = args.action === 'prev' ? currentPage - 1 : currentPage + 1
 
 	Promise.all([
-		new Promise(resolve => {
+		new Promise((resolve) => {
 			args.el.classList.add('ct-leave-active')
 			requestAnimationFrame(() => {
 				args.el.classList.remove('ct-leave-active')
@@ -76,20 +76,20 @@ const loadPage = (args = {}) => {
 
 		cachedFetch(
 			`${ct_localizations.ajax_url}?action=blocksy_get_trending_posts&page=${newPage}`
-		).then(response => response.json())
+		).then((response) => response.json()),
 	]).then(([_, { success, data }]) => {
 		if (!success) {
 			return
 		}
 
 		let {
-			posts: { is_last_page, posts }
+			posts: { is_last_page, posts },
 		} = data
 
 		args.el.dataset.page = `${newPage}${is_last_page ? ':last' : ''}`
-		;[...args.el.querySelectorAll('a')].map(el => el.remove())
+		;[...args.el.querySelectorAll('a')].map((el) => el.remove())
 
-		posts.map(post =>
+		posts.map((post) =>
 			args.el.insertAdjacentHTML(
 				'beforeend',
 				`<a href="${post.url}">
@@ -120,19 +120,19 @@ const loadPage = (args = {}) => {
 	})
 }
 
-export const mount = el => {
+export const mount = (el) => {
 	if (el.hasListeners) {
 		return
 	}
 
 	el.hasListeners = true
 
-	el.querySelector('.ct-arrow-left').addEventListener('click', e => {
+	el.querySelector('.ct-arrow-left').addEventListener('click', (e) => {
 		e.preventDefault()
 		loadPage({ el, action: 'prev' })
 	})
 
-	el.querySelector('.ct-arrow-right').addEventListener('click', e => {
+	el.querySelector('.ct-arrow-right').addEventListener('click', (e) => {
 		e.preventDefault()
 		loadPage({ el, action: 'next' })
 	})

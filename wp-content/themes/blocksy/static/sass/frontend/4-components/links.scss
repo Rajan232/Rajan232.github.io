@@ -38,10 +38,10 @@ a {
 // type 3
 [data-link="type-3"] {
 	#{$selector} {
-		--background-decoration: linear-gradient(currentColor, currentColor);
 		background-position: 0% 100%;
 		background-repeat: no-repeat;
 		background-size: 0% 2px;
+		--background-decoration: linear-gradient(currentColor, currentColor);
 
 		&:hover, &:focus {
 			background-size: 100% 2px;
@@ -52,13 +52,13 @@ a {
 // type 4
 [data-link="type-4"] {
 	#{$selector} {
-		--background-decoration: linear-gradient(var(--linkInitialColor), var(--linkInitialColor));
 		background-position: 0% 100%;
 		background-repeat: no-repeat;
 		background-size: 100% 2px;
+		--background-decoration: linear-gradient(var(--linkInitialColor), var(--linkInitialColor));
 
 		&:hover, &:focus {
-			--linkHoverColor: #fff;
+			color: #fff;
 			background-size: 100% 100%;
 			--background-decoration: linear-gradient(var(--linkHoverColor), var(--linkHoverColor));
 		}
@@ -67,13 +67,13 @@ a {
 
 // type 5
 [data-link="type-5"] {
-	#{$selector} {
-		--background-decoration: linear-gradient(var(--linkHoverColor), var(--linkHoverColor));
+	#{$selector} {		
 		background-repeat: no-repeat;
 		background-size: 0% 100%;
+		--background-decoration: linear-gradient(var(--linkHoverColor), var(--linkHoverColor));
 
 		&:hover, &:focus {
-			--linkHoverColor: #fff;
+			color: #fff;
 			background-size: 100% 100%;
 		}
 	}

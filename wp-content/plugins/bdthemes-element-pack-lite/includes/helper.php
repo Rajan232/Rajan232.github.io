@@ -2,10 +2,21 @@
 use ElementPack\Element_Pack_Loader;
 
 
-
+if ( !defined('BDTEP') ) {
+    define('BDTEP', '');
+} //Add prefix for all widgets <span class="bdt-widget-badge"></span>
+if ( !defined('BDTEP_CP') ) {
+    define('BDTEP_CP', '<span class="bdt-ep-widget-badge"></span>');
+}//Add prefix for all widgets <span class="bdt-widget-badge"></span>
 if ( !defined('BDTEP_NC') ) {
     define('BDTEP_NC', '<span class="bdt-ep-new-control"></span>');
 } // if you have any custom style
+if ( !defined('BDTEP_SLUG') ) {
+    define('BDTEP_SLUG', 'element-pack');
+} // set your own alias
+if ( !defined('BDTEP_TITLE') ) {
+    define('BDTEP_TITLE', 'Element Pack');
+} // Set your own name for plugin
 
 /**
  * Show any alert by this function

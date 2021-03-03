@@ -19,8 +19,8 @@ body:not(.ct-loading) {
 	bottom: 0;
 	opacity: 0;
 	visibility: hidden;
-	content-visibility: auto;
 	pointer-events: none;
+	content-visibility: auto;
 
 	&.active {
 		opacity: 1;

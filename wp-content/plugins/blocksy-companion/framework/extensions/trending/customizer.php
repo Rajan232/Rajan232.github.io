@@ -139,12 +139,23 @@ $options = [
 					'type' => 'tab',
 					'options' => [
 
+						'trendingBlockPostsFont' => [
+							'type' => 'ct-typography',
+							'label' => __( 'Posts Font', 'blc' ),
+							'value' => blocksy_typography_default_values([
+								'size' => '15px',
+								'variation' => 'n5',
+							]),
+							'setting' => [ 'transport' => 'postMessage' ],
+						],
+
 						'trendingBlockFontColor' => [
 							'label' => __( 'Font Color', 'blc' ),
 							'type'  => 'ct-color-picker',
-							'design' => 'inline',
+							'design' => 'block:right',
+							'divider' => 'top',
+							'responsive' => true,
 							'sync' => 'live',
-
 							'value' => [
 								'default' => [
 									'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
@@ -173,7 +184,8 @@ $options = [
 						'trending_block_background' => [
 							'label' => __( 'Container Background', 'blc' ),
 							'type' => 'ct-background',
-							'design' => 'inline',
+							'design' => 'block:right',
+							'responsive' => true,
 							'divider' => 'top',
 							'sync' => 'live',
 							'value' => blocksy_background_default_value([

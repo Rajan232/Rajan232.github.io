@@ -108,11 +108,7 @@ blocksy_output_responsive([
 	'mobile_css' => $mobile_css,
 	'selector' => ':root',
 	'variableName' => 'buttonMinHeight',
-	'value' => get_theme_mod('buttonMinHeight', [
-		'mobile' => 45,
-		'tablet' => 45,
-		'desktop' => 45,
-	])
+	'value' => get_theme_mod('buttonMinHeight', 40)
 ]);
 
 if (get_theme_mod('buttonHoverEffect', 'yes') !== 'yes') {

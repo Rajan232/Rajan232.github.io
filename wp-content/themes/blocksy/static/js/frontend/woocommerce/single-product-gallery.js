@@ -103,12 +103,6 @@ export const mount = () => {
 				'.single-product .flexy-items .ct-image-container, .single-product .woocommerce-product-gallery > .ct-image-container'
 			),
 		].map((el) => {
-			if (el.hasPhotoswipeListener) {
-				return
-			}
-
-			el.hasPhotoswipeListener = true
-
 			if (
 				((wp.customize &&
 					wp.customize('has_product_single_lightbox') &&
@@ -116,19 +110,22 @@ export const mount = () => {
 					!wp.customize) &&
 				!onlyZoom
 			) {
-				el.addEventListener('click', (e) => {
-					e.preventDefault()
+				if (!el.hasPhotoswipeListener) {
+					el.hasPhotoswipeListener = true
+					el.addEventListener('click', (e) => {
+						e.preventDefault()
 
-					let activeIndex = 0
+						let activeIndex = 0
 
-					if (el.closest('.flexy-items')) {
-						activeIndex = [
-							...el.closest('.flexy-items').children,
-						].indexOf(el.parentNode)
-					}
+						if (el.closest('.flexy-items')) {
+							activeIndex = [
+								...el.closest('.flexy-items').children,
+							].indexOf(el.parentNode)
+						}
 
-					window.PhotoSwipe && openPhotoswipeFor(el, activeIndex)
-				})
+						window.PhotoSwipe && openPhotoswipeFor(el, activeIndex)
+					})
+				}
 			}
 
 			if ($.fn.zoom) {
@@ -379,6 +376,13 @@ export const mount = () => {
 		if (!variation) {
 			slideToFirst()
 			resetView()
+			;[
+				...context[0]
+					.closest('.single-product')
+					.querySelectorAll('.zoomImg'),
+			].map((el) => el.remove())
+
+			renderPhotoswipe({ onlyZoom: true })
 
 			old && old.apply(context, args)
 			return
@@ -389,7 +393,6 @@ export const mount = () => {
 		const maybePillImage = context[0]
 			.closest('.single-product')
 			.querySelector(`.flexy-items [srcset*="${variation.image.src}"]`)
-
 		if (maybePillImage) {
 			const pill = context[0]
 				.closest('.single-product')
@@ -404,10 +407,21 @@ export const mount = () => {
 			pill && pill.click()
 		} else {
 			slideToFirst()
+
 			let pill = context[0]
 				.closest('.single-product')
 				.querySelector('.flexy-pills > *').firstElementChild
 				.firstElementChild
+
+			if (
+				context[0]
+					.closest('.single-product')
+					.querySelector(`.flexy-pills[data-type="circle"]`)
+			) {
+				pill = context[0]
+					.closest('.single-product')
+					.querySelector('.flexy-pills > *').firstElementChild
+			}
 
 			let slide = context[0]
 				.closest('.single-product')
@@ -446,6 +460,14 @@ export const mount = () => {
 
 			slideToFirst()
 		}
+
+		;[
+			...context[0]
+				.closest('.single-product')
+				.querySelectorAll('.zoomImg'),
+		].map((el) => el.remove())
+
+		renderPhotoswipe({ onlyZoom: true })
 
 		old && old.apply(context, args)
 	}

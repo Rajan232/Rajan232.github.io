@@ -68,7 +68,7 @@ if (typeof jQuery === 'undefined') {
         }
         this.el.empty().css(proConfig)
         $('<div class="inner"></div>').appendTo(this.el).css(innerConfig)
-        $(window).scroll(function(e) {
+        $(window).on('scroll', function(e) {
             window.requestAnimationFrame(function() {
                 var width = Math.max(0, Math.min(1, $(window).scrollTop() / resHeight))
                 $('.inner').show().css('width', width * 100 + '%')

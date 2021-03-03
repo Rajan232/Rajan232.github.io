@@ -27,6 +27,11 @@ export const mutateSelector = (args = {}) => {
 		return [first, `${args.to_add}${second}`, ...rest]
 	}
 
+	if (args.operation === 'el-suffix' && args.selector.length > 1) {
+		let [first, second, ...rest] = args.selector
+		return [first, `${second}${args.to_add}`, ...rest]
+	}
+
 	if (args.operation === 'container-suffix') {
 		let [first, ...rest] = args.selector
 

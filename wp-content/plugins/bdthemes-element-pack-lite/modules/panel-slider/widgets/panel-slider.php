@@ -1141,7 +1141,7 @@ class Panel_Slider extends Module_Base {
 						wp_json_encode(array_filter([
 							"autoplay"       => $settings["autoplay"] ? [ "delay" => $settings["autoplay_speed"] ] : false,
 							"loop"           => $settings["loop"] ? true : false,
-							"speed"          => $settings["speed"]["size"],
+							"speed"          => $settings["speed"],
 							"pauseOnHover"   => $settings["pauseonhover"] ? true : false,
 							"slidesPerView"  => (int) $columns_mobile,
 							"observer"       => $settings["observer"] ? true : false,

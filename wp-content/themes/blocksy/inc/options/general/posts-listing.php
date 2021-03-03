@@ -365,7 +365,7 @@ $options = [
 										'design' => 'inline',
 										'value' => 40,
 										'min' => 10,
-										'max' => 100,
+										'max' => 300,
 									],
 								],
 							],

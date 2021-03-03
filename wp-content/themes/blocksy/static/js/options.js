@@ -31,3 +31,11 @@ export { default as OutsideClickHandler } from './options/options/react-outside-
 export { Transition, animated } from 'react-spring/renderprops'
 export { default as bezierEasing } from 'bezier-easing'
 export { default as usePopoverMaker } from './options/helpers/usePopoverMaker'
+
+export const onDocumentLoaded = (cb) => {
+	if (/comp|inter|loaded/.test(document.readyState)) {
+		cb()
+	} else {
+		document.addEventListener('DOMContentLoaded', cb, false)
+	}
+}

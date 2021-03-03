@@ -12,6 +12,7 @@ export const mount = (sliderEl) => {
 	}
 
 	markImagesAsLoaded(sliderEl.querySelector('.flexy-items'))
+	markImagesAsLoaded(sliderEl.querySelector('.flexy-pills'))
 
 	const inst = new Flexy(sliderEl.querySelector('.flexy-items'), {
 		flexyAttributeEl: sliderEl,

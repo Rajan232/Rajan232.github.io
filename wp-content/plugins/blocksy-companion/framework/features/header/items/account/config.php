@@ -14,27 +14,12 @@ $config = [
 		'loggedin_text',
 		'login_account_action',
 		'loggedout_account_custom_page',
-		'login_style',
-		'accountHeaderIcon',
-		'accountHeaderIconPosition',
-		'accountHeaderAvatarPosition',
-
-		/*
-		'logo_type',
-		'blogname',
-		'custom_logo',
-		'has_mobile_logo',
-		'mobile_header_logo',
-		'has_tagline',
-		'site_description_wrapper',
-		'site_title_wrapper'
-		 */
+		'logged_out_style',
+		'accountHeaderIcon'
 	],
-	/*
 
 	'translation_keys' => [
-		['key' => 'blogname']
+		['key' => 'login_label']
 	]
-	 */
 ];
 

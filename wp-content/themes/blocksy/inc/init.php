@@ -506,7 +506,7 @@ add_action(
 				'name' => esc_html__( 'Main Sidebar', 'blocksy' ),
 				'id' => 'sidebar-1',
 				'description' => esc_html__( 'Add widgets here.', 'blocksy' ),
-				'before_widget' => '<div class="ct-widget %2$s">',
+				'before_widget' => '<div class="ct-widget %2$s" id="%1$s">',
 				'after_widget' => '</div>',
 				'before_title' => '<' . $sidebar_title_tag . ' class="widget-title">',
 				'after_title' => '</' . $sidebar_title_tag . '>',
@@ -522,7 +522,7 @@ add_action(
 				[
 					'id' => 'ct-footer-sidebar-' . $i,
 					'name' => "Footer Column $i",
-					'before_widget' => '<div class="ct-widget %2$s">',
+					'before_widget' => '<div class="ct-widget %2$s" id="%1$s">',
 					'after_widget' => '</div>',
 					'before_title' => '<' . $sidebar_title_tag . ' class="widget-title">',
 					'after_title' => '</' . $sidebar_title_tag . '>',
@@ -681,7 +681,6 @@ require get_template_directory() . '/inc/components/hero-section.php';
 require get_template_directory() . '/inc/components/social-box.php';
 
 require get_template_directory() . '/inc/css/visibility.php';
-require get_template_directory() . '/inc/header-helpers.php';
 require get_template_directory() . '/inc/meta-boxes.php';
 require get_template_directory() . '/inc/components/posts-listing.php';
 

@@ -4,6 +4,10 @@ if (! function_exists('woocommerce_mini_cart')) {
     return '';
 }
 
+if (! isset($device)) {
+	$device = 'desktop';
+}
+
 $has_only_item = false;
 $has_only_cart = false;
 
@@ -29,17 +33,16 @@ $svgs = apply_filters('blocksy:header:cart:icons', [
 	'type-6' => '<svg class="ct-icon" width="15" height="15" viewBox="0 0 10 10"><path d="M10 4.2c0-.1-.1-.2-.2-.3-.1-.3-.4-.4-.6-.4h-.9L5.8.9C5.6.6 5.3.5 5 .5c-.3 0-.6.1-.8.4L1.7 3.5H.8c-.2 0-.5.1-.6.3-.1.1-.2.3-.2.5V4.9l.6 3.4c.1.8.8 1.3 1.5 1.3H7.8c.7 0 1.4-.6 1.5-1.3l.6-3.4v-.3-.2c.1-.1.1-.2.1-.2zM4.7 1.4c.1-.1.2-.2.3-.2s.2 0 .3.1l2 2.1H2.7l2-2zM2.9 7.8c-.2 0-.4-.1-.4-.4l-.1-1.7c0-.2.2-.4.4-.4s.3.2.4.4l.1 1.8c0 .1-.2.2-.4.3zm2.5-.4c0 .2-.2.4-.4.4s-.4-.2-.4-.4V5.6c0-.2.2-.4.4-.4s.4.2.4.4v1.8zm2.2-1.7l-.2 1.7c0 .2-.2.4-.4.4s-.3-.2-.3-.4l.1-1.8c0-.2.2-.4.4-.4s.4.2.4.5c0-.1 0-.1 0 0z"/></svg>',
 ]);
 
-$current_count = WC()->cart->get_cart_contents_count();
 
 $class = 'ct-header-cart';
 
-$class .= ' ' . blocksy_visibility_classes(
-	blocksy_default_akg('header_cart_visibility', $atts, [
-		'desktop' => true,
-		'tablet' => true,
-		'mobile' => true,
-	])
-);
+$item_visibility = blocksy_default_akg('header_search_visibility', $atts, [
+	'tablet' => true,
+	'mobile' => true,
+]);
+
+$class .= ' ' . blocksy_visibility_classes($item_visibility);
+
 
 $badge_output = '';
 
@@ -55,21 +58,29 @@ $has_cart_dropdown = blocksy_default_akg(
 
 $cart_drawer_type = blocksy_default_akg('cart_drawer_type', $atts, 'dropdown');
 
-$subtotal_output = '';
+$cart_total_class = 'ct-label';
 
-if (is_customize_preview()) {
-	$subtotal_output = 'data-subtotal="' . esc_attr(WC()->cart->get_cart_subtotal()) . '"';
-}
-
-$cart_total_class = 'ct-cart-total';
-
-$cart_total_class .= ' ' . blocksy_visibility_classes(
-	blocksy_default_akg('cart_subtotal_visibility', $atts, [
+$cart_subtotal_visibility = blocksy_default_akg(
+	'cart_subtotal_visibility',
+	$atts,
+	[
 		'desktop' => true,
 		'tablet' => true,
 		'mobile' => true,
-	])
+	]
 );
+
+$cart_total_class .= ' ' . blocksy_visibility_classes($cart_subtotal_visibility);
+$has_subtotal = (
+	blocksy_some_device($cart_subtotal_visibility)
+	||
+	is_customize_preview()
+);
+
+$cart_total_position = blocksy_expand_responsive_value(
+	blocksy_akg('cart_total_position', $atts, 'left')
+);
+
 
 $type = blocksy_default_akg('mini_cart_type', $atts, 'type-1');
 
@@ -108,12 +119,15 @@ if ($has_cart_dropdown && $cart_drawer_type === 'offcanvas') {
 	}
 }
 
+$url = apply_filters('blocksy:header:cart:url', $url);
+
 ob_start();
 
 $data_count_output = '';
+$current_count = WC()->cart->get_cart_contents_count();
 
 if (intval($current_count) > 0) {
-	$data_count_output = 'data-items-count="' . esc_attr($current_count) . '"';
+	$data_count_output = 'style="--counter: \'' . esc_attr($current_count) . '\'"';
 }
 
 ?>
@@ -122,23 +136,27 @@ if (intval($current_count) > 0) {
 	href="<?php echo esc_attr($url) ?>"
 	<?php echo wp_kses_post($badge_output) ?>
 	<?php echo $data_count_output ?>
+	data-label="<?php echo $cart_total_position[$device] ?>"
 	aria-label="<?php echo __('Cart', 'blocksy') ?>"
 	<?php echo $auto_open_output ?>>
 
-	<span class="ct-cart-label"><?php echo __('Cart', 'blocksy') ?></span>
-	<span class="<?php echo $cart_total_class ?>">
-		<?php echo WC()->cart->get_cart_subtotal(); ?>
+	<?php if ($has_subtotal) { ?>
+		<span class="<?php echo $cart_total_class ?>">
+			<?php echo WC()->cart->get_cart_subtotal(); ?>
+		</span>
+	<?php } ?>
+
+
+	<span class="ct-icon-container">
+		<?php
+			/**
+			 * Note to code reviewers: This line doesn't need to be escaped.
+			 * The value used here escapes the value properly.
+			 * It contains an inline SVG, which is safe.
+			 */
+			echo $svgs[$type]
+		?>
 	</span>
-
-
-	<?php
-		/**
-		 * Note to code reviewers: This line doesn't need to be escaped.
-		 * The value used here escapes the value properly.
-		 * It contains an inline SVG, which is safe.
-		 */
-		echo $svgs[$type]
-	?>
 </a>
 
 <?php
@@ -169,7 +187,6 @@ if ($has_only_cart) {
 
 <div
 	class="<?php echo esc_attr($class) ?>"
-	<?php echo wp_kses_post($subtotal_output) ?>
 	<?php echo blocksy_attr_to_html($attr) ?>>
 
 	<?php

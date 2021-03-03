@@ -162,6 +162,10 @@ figure {
 	max-width: 100%;
 }
 
+svg > * {
+	transition: none;
+}
+
 // Lists -------------------------------------
 ul {
 	list-style-type: var(--listStyleType, disc);

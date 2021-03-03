@@ -7,8 +7,7 @@ input[type='date'],
 input[type='email'],
 input[type='number'],
 input[type='search'],
-input[type='password'],
-span.select2-container--default .select2-selection--single {
+input[type='password'] {
 	width: var(--formWidth, 100%);
 	height: var(--formInputHeight, 40px);
 	color: var(--formTextInitialColor, var(--color));

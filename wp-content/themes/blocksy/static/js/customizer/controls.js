@@ -130,3 +130,10 @@ export { default as Select } from '../options/options/ct-select'
  */
 export { DragDropContext as PlacementsDragDropContext } from './panels-builder/placements/BuilderRoot'
 export { DragDropContext as ColumnsDragDropContext } from '../options/options/ct-footer-builder'
+export const onDocumentLoaded = (cb) => {
+	if (/comp|inter|loaded/.test(document.readyState)) {
+		cb()
+	} else {
+		document.addEventListener('DOMContentLoaded', cb, false)
+	}
+}

@@ -2,13 +2,13 @@
 
 $class = 'ct-header-cta';
 
-$class = trim($class . ' ' . blocksy_visibility_classes(
-	blocksy_akg('visibility', $atts, [
-		'desktop' => true,
-		'tablet' => true,
-		'mobile' => true,
-	])
-));
+$visibility = blocksy_default_akg('visibility', $atts, [
+	'tablet' => true,
+	'mobile' => true,
+]);
+
+$class .= ' ' . blocksy_visibility_classes($visibility);
+
 
 $type = blocksy_default_akg('header_button_type', $atts, 'type-1');
 $size = blocksy_default_akg('header_button_size', $atts, 'small');
@@ -17,18 +17,12 @@ $link = blocksy_translate_dynamic(
 	'header:' . $section_id . ':button:header_button_link'
 );
 
-$visibility = blocksy_default_akg('visibility', $atts, [
-	'tablet' => true,
-	'mobile' => true,
-]);
-
 $target_output = '';
 
 if (blocksy_default_akg('header_button_target', $atts, 'no') === 'yes') {
 	$target_output = 'target="_blank" rel="noopener noreferrer"';
 }
 
-$class .= ' ' . blocksy_visibility_classes($visibility);
 $button_class = 'ct-button';
 
 if ($type === 'type-2') {

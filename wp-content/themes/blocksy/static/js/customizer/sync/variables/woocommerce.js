@@ -388,6 +388,12 @@ export const getWooVariablesFor = () => ({
 			variable: 'linkHoverColor',
 			type: 'color:hover',
 		},
+
+		{
+			selector: '.woocommerce-tabs .tabs',
+			variable: 'linkActiveColor',
+			type: 'color:active',
+		},
 	],
 
 	woo_tabs_border_color: {

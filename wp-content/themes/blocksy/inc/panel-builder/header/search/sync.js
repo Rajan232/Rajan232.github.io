@@ -8,6 +8,7 @@ import {
 	assembleSelector,
 	mutateSelector,
 } from '../../../../static/js/customizer/sync/helpers'
+import { typographyOption } from '../../../../static/js/customizer/sync/variables/typography'
 
 ctEvents.on(
 	'ct:header:sync:collect-variable-descriptors',
@@ -20,6 +21,168 @@ ctEvents.on(
 				unit: 'px',
 			},
 
+			searchHeaderIconColor: [
+				{
+					selector: assembleSelector(getRootSelectorFor({ itemId })),
+					variable: 'icon-color',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(getRootSelectorFor({ itemId })),
+					variable: 'icon-hover-color',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+
+			...typographyOption({
+				id: 'search_label_font',
+
+				selector: assembleSelector(
+					mutateSelector({
+						selector: getRootSelectorFor({ itemId }),
+						operation: 'suffix',
+						to_add: '.ct-label',
+					})
+				),
+			}),
+
+			header_search_font_color: [
+				{
+					selector: assembleSelector(getRootSelectorFor({ itemId })),
+					variable: 'linkInitialColor',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(getRootSelectorFor({ itemId })),
+					variable: 'linkHoverColor',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+
+			// transparent state
+			transparent_header_search_font_color: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-transparent-row="yes"]',
+						})
+					),
+					variable: 'linkInitialColor',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-transparent-row="yes"]',
+						})
+					),
+					variable: 'linkHoverColor',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+			
+			transparentSearchHeaderIconColor: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-transparent-row="yes"]',
+						})
+					),
+
+					variable: 'icon-color',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-transparent-row="yes"]',
+						})
+					),
+
+					variable: 'icon-hover-color',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+
+			// sticky state
+			sticky_header_search_font_color: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'linkInitialColor',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'linkHoverColor',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+			
+			stickySearchHeaderIconColor: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'icon-color',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'icon-hover-color',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+
+
+			// modal
 			searchHeaderLinkColor: [
 				{
 					selector: assembleSelector(
@@ -99,89 +262,60 @@ ctEvents.on(
 				responsive: true,
 				important: true,
 			},
-
-			// default state
-			searchHeaderIconColor: [
-				{
-					selector: assembleSelector(getRootSelectorFor({ itemId })),
-					variable: 'icon-color',
-					type: 'color:default',
-					responsive: true,
-				},
-
-				{
-					selector: assembleSelector(getRootSelectorFor({ itemId })),
-					variable: 'icon-hover-color',
-					type: 'color:hover',
-					responsive: true,
-				},
-			],
-
-			// transparent state
-			transparentSearchHeaderIconColor: [
-				{
-					selector: assembleSelector(
-						mutateSelector({
-							selector: getRootSelectorFor({ itemId }),
-							operation: 'between',
-							to_add: '[data-transparent-row="yes"]',
-						})
-					),
-
-					variable: 'icon-color',
-					type: 'color:default',
-					responsive: true,
-				},
-
-				{
-					selector: assembleSelector(
-						mutateSelector({
-							selector: getRootSelectorFor({ itemId }),
-							operation: 'between',
-							to_add: '[data-transparent-row="yes"]',
-						})
-					),
-
-					variable: 'icon-hover-color',
-					type: 'color:hover',
-					responsive: true,
-				},
-			],
-
-			// sticky state
-			stickySearchHeaderIconColor: [
-				{
-					selector: assembleSelector(
-						mutateSelector({
-							selector: getRootSelectorFor({ itemId }),
-							operation: 'between',
-							to_add: '[data-sticky*="yes"]',
-						})
-					),
-					variable: 'icon-color',
-					type: 'color:default',
-					responsive: true,
-				},
-
-				{
-					selector: assembleSelector(
-						mutateSelector({
-							selector: getRootSelectorFor({ itemId }),
-							operation: 'between',
-							to_add: '[data-sticky*="yes"]',
-						})
-					),
-					variable: 'icon-hover-color',
-					type: 'color:hover',
-					responsive: true,
-				},
-			],
 		})
 	}
 )
 
 ctEvents.on('ct:header:sync:item:search', ({ optionId, optionValue }) => {
 	const selector = '[data-id="search"]'
+
+	if (optionId === 'search_label') {
+		updateAndSaveEl(selector, (el) => {
+			;[...el.querySelectorAll('.ct-label')].map((label) => {
+				label.innerHTML = optionValue
+			})
+		})
+	}
+
+	if (optionId === 'search_label_visibility') {
+		updateAndSaveEl(selector, (el) => {
+			;[...el.querySelectorAll('.ct-label')].map((label) => {
+				responsiveClassesFor(optionValue, label)
+			})
+		})
+	}
+
+	if (optionId === 'search_label_position') {
+		updateAndSaveEl(
+			selector,
+			(el) => {
+				if (!optionValue.desktop) {
+					optionValue = {
+						desktop: optionValue,
+						mobile: optionValue,
+					}
+				}
+
+				el.dataset.label = optionValue.desktop
+			},
+			{ onlyView: 'desktop' }
+		)
+
+		updateAndSaveEl(
+			selector,
+			(el) => {
+				if (!optionValue.desktop) {
+					optionValue = {
+						desktop: optionValue,
+						mobile: optionValue,
+					}
+				}
+
+				el.dataset.label = optionValue.mobile
+			},
+			{ onlyView: 'mobile' }
+		)
+	}
 
 	if (optionId === 'header_search_visibility') {
 		updateAndSaveEl(selector, (el) =>

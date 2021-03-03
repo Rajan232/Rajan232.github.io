@@ -7,8 +7,7 @@
 [data-forms='classic'] input[type='email'],
 [data-forms='classic'] input[type='number'],
 [data-forms='classic'] input[type='search'],
-[data-forms='classic'] input[type='password'],
-[data-forms='classic'] span.select2-container--default .select2-selection--single {
+[data-forms='classic'] input[type='password'] {
 	background-color: var(--formBackgroundInitialColor);
 
 	&:focus {

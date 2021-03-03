@@ -276,11 +276,11 @@ class Image_Magnifier extends Module_Base {
 		$big_image_src = ( $big_image_src ) ? : $image_url;
 
 
-		$horizontal_offset = ($settings['horizontal_offset']['size']) ? $settings['horizontal_offset']['size'] : 0;
-		$vertical_offset   = ($settings['vertical_offset']['size']) ? $settings['vertical_offset']['size'] : 0;
+		$horizontal_offset = (isset($settings['horizontal_offset']['size']) ? $settings['horizontal_offset']['size'] : 0);
+		$vertical_offset   = (isset($settings['vertical_offset']['size']) ? $settings['vertical_offset']['size'] : 0);
 		
-		$zoom_ratio_width  = ($settings['zoom_ratio']['width']) ? $settings['zoom_ratio']['width'] : 480;
-		$zoom_ratio_height = ($settings['zoom_ratio']['height']) ? $settings['zoom_ratio']['height'] : 300;
+		$zoom_ratio_width  = ( isset($settings['zoom_ratio']['width']) ? $settings['zoom_ratio']['width'] : 480);
+		$zoom_ratio_height = (isset($settings['zoom_ratio']['height']) ? $settings['zoom_ratio']['height'] : 300);
 
 		$this->add_render_attribute(
 			[

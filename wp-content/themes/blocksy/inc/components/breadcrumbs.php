@@ -237,8 +237,13 @@ class Blocksy_Breadcrumbs_Builder {
 				$terms = wp_get_post_terms($post->ID, $slugs);
 
 				if (! empty($terms)) {
-					$lowest_term = $this->get_lowest_taxonomy_terms($terms);
+					$lowest_term = $this->get_lowest_taxonomy_terms(
+						$post, $terms,
+						$slugs[0]
+					);
+
 					$term = $lowest_term[0];
+
 					$return = array_merge(
 						$return,
 						array_reverse(
@@ -375,7 +380,40 @@ class Blocksy_Breadcrumbs_Builder {
 	 * Returns the lowest hierarchical term
 	 * @return array
 	 */
-	private function get_lowest_taxonomy_terms($terms) {
+	private function get_lowest_taxonomy_terms($post, $terms, $taxonomy) {
+		$post_id = $post->ID;
+
+		$primary_term = null;
+
+		if (class_exists('WPSEO_Primary_Term')) {
+			$primary_term = new WPSEO_Primary_Term($taxonomy, $post_id);
+			$primary_term = get_term($primary_term->get_primary_term());
+		}
+
+		// B. The SEO Framework
+		if (function_exists('the_seo_framework')) {
+			$primary_term = the_seo_framework()->get_primary_term(
+				$post_id,
+				$taxonomy
+			);
+		}
+
+		// C. RankMath
+		if (class_exists('RankMath')) {
+			$primary_cat_id = get_post_meta($post_id, "rank_math_primary_{$taxonomy}", true);
+			$primary_term = (!empty($primary_cat_id)) ? get_term($primary_cat_id, $taxonomy) : '';
+		}
+
+		// D. SEOPress
+		if (function_exists('seopress_init') && $taxonomy == 'category') {
+			$primary_cat_id = get_post_meta($post_id, '_seopress_robots_primary_cat', true);
+			$primary_term = (!empty($primary_cat_id)) ? get_term($primary_cat_id, 'category') : '';
+		}
+
+		if ($primary_term) {
+			return [$primary_term];
+		}
+
 		// if terms is not array or its empty don't proceed
 		if (! is_array($terms) || empty($terms)) {
 			return false;
@@ -416,6 +454,57 @@ class Blocksy_Breadcrumbs_Builder {
 	}
 
 	public function render() {
+		$source = get_theme_mod('breadcrumbs_source', 'default');
+
+		if (
+			function_exists('rank_math_the_breadcrumbs')
+			&&
+			$source === 'rankmath'
+		) {
+			ob_start();
+			rank_math_the_breadcrumbs();
+			$content = ob_get_clean();
+
+			if (! empty($content)) {
+				return '<div class="ct-breadcrumbs">' . $content . '</div>';
+			}
+		}
+
+		if (
+			function_exists('yoast_breadcrumb')
+			&&
+			$source === 'yoast'
+		) {
+			ob_start();
+			yoast_breadcrumb('<div class="ct-breadcrumbs">', '</div>');
+			return ob_get_clean();
+		}
+
+		if (
+			function_exists('seopress_display_breadcrumbs')
+			&&
+			$source === 'seopress'
+		) {
+			ob_start();
+			echo '<div class="ct-breadcrumbs">';
+			seopress_display_breadcrumbs();
+			echo '</div>';
+			return ob_get_clean();
+		}
+
+		if (
+			function_exists('bcn_display')
+			&&
+			$source === 'bcnxt'
+		) {
+			ob_start();
+			echo '<div class="ct-breadcrumbs">';
+			bcn_display();
+			echo '</div>';
+			return ob_get_clean();
+		}
+
+
 		$items = $this->get_breadcrumbs();
 
 		$separators = [
@@ -457,11 +546,7 @@ class Blocksy_Breadcrumbs_Builder {
 
 						echo '<span class="last-item" ' . blocksy_schema_org_definitions('breadcrumb_item') . '>';
 
-						if (
-							blocksy_has_schema_org_markup()
-							&&
-							count($items) > 1
-						) {
+						if (blocksy_has_schema_org_markup()) {
 							echo '<meta itemprop="position" content="' . ($i + 1) . '">';
 						}
 
@@ -499,11 +584,7 @@ class Blocksy_Breadcrumbs_Builder {
 					} else if ($i === 0) {
 						echo '<span class="first-item" ' .  blocksy_schema_org_definitions('breadcrumb_item') . '>';
 
-						if (
-							blocksy_has_schema_org_markup()
-							&&
-							count($items) > 1
-						) {
+						if (blocksy_has_schema_org_markup()) {
 							echo '<meta itemprop="position" content="' . ($i + 1) . '">';
 						}
 
@@ -537,11 +618,7 @@ class Blocksy_Breadcrumbs_Builder {
 					} else {
 						echo '<span class="' . ($i - 1) . '-item" ' . blocksy_schema_org_definitions('breadcrumb_item') . '>';
 
-						if (
-							blocksy_has_schema_org_markup()
-							&&
-							count($items) > 1
-						) {
+						if (blocksy_has_schema_org_markup()) {
 							echo '<meta itemprop="position" content="' . ($i + 1) . '">';
 						}
 

@@ -87,6 +87,10 @@ $options = [
 							'hover' => [
 								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
 							],
+
+							'active' => [
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+							],
 						],
 
 						'pickers' => [
@@ -96,8 +100,14 @@ $options = [
 							],
 
 							[
-								'title' => __( 'Hover/Active', 'blocksy' ),
+								'title' => __( 'Hover', 'blocksy' ),
 								'id' => 'hover',
+								'inherit' => 'var(--linkHoverColor)'
+							],
+
+							[
+								'title' => __( 'Active', 'blocksy' ),
+								'id' => 'active',
 								'inherit' => 'var(--linkHoverColor)'
 							],
 						],

@@ -1,6 +1,6 @@
 import ctEvents from 'ct-events'
 import cookie from 'js-cookie'
-import { onDocumentLoaded } from './helpers'
+import { onDocumentLoaded } from 'blocksy-frontend'
 
 const initCookies = () => {
 	const notification = document.querySelector('.cookie-notification')
@@ -41,6 +41,7 @@ const initCookies = () => {
 						new Date() * 1 +
 							periods[el.closest('[data-period]').dataset.period]
 					),
+					sameSite: 'lax',
 				})
 			}
 

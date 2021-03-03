@@ -194,7 +194,9 @@ add_action($action_to_hook, function () {
 				do_action('blocksy:woocommerce:product-card:thumbnail:start');
 
 				if ($product->is_in_stock()) {
-					woocommerce_show_product_loop_sale_flash();
+					if (get_theme_mod('has_sale_badge', 'yes') === 'yes') {
+						woocommerce_show_product_loop_sale_flash();
+					}
 				} else {
 					echo '<span class="out-of-stock-badge">' . __('Out of stock', 'blocksy') . '</span>';
 				}

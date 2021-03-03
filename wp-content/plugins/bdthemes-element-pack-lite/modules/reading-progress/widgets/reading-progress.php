@@ -58,7 +58,8 @@ class Reading_Progress extends Module_Base
     }
   
     public function get_script_depends() {
-        return ['progressHorizontal', 'progressScroll'];
+        // return ['progressHorizontal', 'progressScroll'];
+        return ['progressHorizontal'];
     } 
 
 

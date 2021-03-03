@@ -665,6 +665,7 @@ blocksy_output_colors([
 	'default' => [
 		'default' => [ 'color' => 'var(--color)' ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		'active' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 	],
 	'css' => $css,
 	'variables' => [
@@ -676,6 +677,11 @@ blocksy_output_colors([
 		'hover' => [
 			'selector' => '.woocommerce-tabs .tabs',
 			'variable' => 'linkHoverColor'
+		],
+
+		'active' => [
+			'selector' => '.woocommerce-tabs .tabs',
+			'variable' => 'linkActiveColor'
 		],
 	],
 ]);

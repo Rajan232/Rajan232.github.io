@@ -1,4 +1,4 @@
-import { onDocumentLoaded } from '../../../cookies-consent/static/js/helpers'
+import { onDocumentLoaded } from 'blocksy-frontend'
 
 onDocumentLoaded(() => {
 	;[

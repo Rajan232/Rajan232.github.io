@@ -18,7 +18,7 @@ class BlocksyExtensionTrending {
 			wp_enqueue_script(
 				'blocksy-ext-trending-scripts',
 				BLOCKSY_URL . 'framework/extensions/trending/static/bundle/main.js',
-				['ct-events'],
+				['ct-events', 'ct-scripts'],
 				$data['Version'],
 				true
 			);

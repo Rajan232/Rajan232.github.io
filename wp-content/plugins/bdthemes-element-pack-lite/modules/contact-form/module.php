@@ -98,7 +98,7 @@ class Module extends Element_Pack_Module_Base {
 			    // get the website's name and puts it in front of the subject
 			    $email_subject = "[" . get_bloginfo( 'name' ) . "] " . $form_data['subject'];
 			    // get the message from the form and add the IP address of the user below it
-			    $email_message = $this->message_html($form_data['message'], $form_data['name'], $contact_number, $form_data['email']);
+			    $email_message = $this->message_html($form_data['message'], $form_data['name'], $form_data['email'], $contact_number);
 			    // set the e-mail headers with the user's name, e-mail address and character encoding
 			    $headers  = "Reply-To: " . $form_data['name'] . " <" . $form_data['email'] . ">\n";
 			    $headers .= "Content-Type: text/html; charset=UTF-8\n";
@@ -120,8 +120,8 @@ class Module extends Element_Pack_Module_Base {
 
 	    die;
 	}
-
-	public function message_html($message, $name, $number = '', $email) {
+ 
+	public function message_html($message, $name, $email, $number = '') {
 		
 		$fullmsg  = "<html><body style='background-color: #f5f5f5; padding: 35px;'>";
 		$fullmsg .= "<div style='max-width: 768px; margin: 0 auto; background-color: #fff; padding: 50px 35px;'>";

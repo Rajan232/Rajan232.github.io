@@ -27,29 +27,27 @@ $buttons-type-1:
 
 	// has drop shadow
 	@supports (filter: blur()) {
-		@media (hover) {
+		&:before {
+			display: var(--buttonShadow, block);
+			position: absolute;
+			z-index: -1;
+			content: '';
+			top: 12px;
+			left: 10px;
+			right: 10px;
+			bottom: 0;
+			opacity: 0;
+			border-radius: inherit;
+			background: inherit;
+			transition: opacity 0.2s ease;
+			filter: blur(11px);
+		}
+
+		&:hover {
+			transform: var(--buttonTransform, translate3d(0, -3px, 0));
+
 			&:before {
-				display: var(--buttonShadow, block);
-				position: absolute;
-				z-index: -1;
-				content: '';
-				top: 12px;
-				left: 10px;
-				right: 10px;
-				bottom: 0;
-				opacity: 0;
-				border-radius: inherit;
-				background: inherit;
-				transition: opacity 0.2s ease;
-				filter: blur(11px);
-			}
-
-			&:hover {
-				transform: var(--buttonTransform, translate3d(0, -3px, 0));
-
-				&:before {
-					opacity: 0.8;
-				}
+				opacity: 0.8;
 			}
 		}
 	}

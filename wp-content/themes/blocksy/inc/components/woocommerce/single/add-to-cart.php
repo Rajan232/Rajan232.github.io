@@ -20,7 +20,15 @@ add_action(
 			return;
 		}
 
-		if (! $root_product->is_type('simple') && ! $root_product->is_type('variable')){
+		if (
+			! $root_product->is_type('simple')
+			&&
+			! $root_product->is_type('variable')
+			&&
+			! $root_product->is_type('subscription')
+			&&
+			! $root_product->is_type('variable-subscription')
+		) {
 			return;
 		}
 
@@ -51,7 +59,15 @@ add_action(
 			return;
 		}
 
-		if (! $root_product->is_type('simple') && ! $root_product->is_type('variable')){
+		if (
+			! $root_product->is_type('simple')
+			&&
+			! $root_product->is_type('variable')
+			&&
+			! $root_product->is_type('subscription')
+			&&
+			! $root_product->is_type('variable-subscription')
+		) {
 			return;
 		}
 

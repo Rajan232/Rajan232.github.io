@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
 const listenToClicks = () =>
-	[...document.querySelectorAll('.quantity')].map(singleQuantity => {
+	[...document.querySelectorAll('.quantity')].map((singleQuantity) => {
 		if (
 			singleQuantity.querySelector('.ct-increase') &&
 			!singleQuantity.querySelector('.ct-increase').ctHasListener
@@ -10,7 +10,7 @@ const listenToClicks = () =>
 
 			singleQuantity
 				.querySelector('.ct-increase')
-				.addEventListener('click', e => {
+				.addEventListener('click', (e) => {
 					const input = singleQuantity.querySelector('input')
 
 					const max = input.getAttribute('max')
@@ -19,7 +19,10 @@ const listenToClicks = () =>
 
 					const properValue = parseInt(input.value, 10) || 0
 
-					input.value = properValue < max ? properValue + 1 : max
+					input.value =
+						properValue < max
+							? properValue + parseFloat(input.step || '1')
+							: max
 					$(input).trigger('change')
 				})
 		}
@@ -31,7 +34,7 @@ const listenToClicks = () =>
 			singleQuantity.querySelector('.ct-decrease').ctHasListener = true
 			singleQuantity
 				.querySelector('.ct-decrease')
-				.addEventListener('click', e => {
+				.addEventListener('click', (e) => {
 					const input = singleQuantity.querySelector('input')
 
 					const min = input.getAttribute('min')
@@ -40,7 +43,10 @@ const listenToClicks = () =>
 
 					const properValue = parseInt(input.value, 10) || 0
 
-					input.value = properValue > min ? properValue - 1 : min
+					input.value =
+						properValue > min
+							? properValue - parseFloat(input.step || '1')
+							: min
 					$(input).trigger('change')
 				})
 		}

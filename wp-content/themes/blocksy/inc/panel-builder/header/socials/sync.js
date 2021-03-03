@@ -57,7 +57,7 @@ ctEvents.on(
 							to_add: '[data-color="custom"]',
 						})
 					),
-					variable: 'linkInitialColor',
+					variable: 'icon-color',
 					type: 'color:default',
 					responsive: true,
 				},
@@ -70,7 +70,7 @@ ctEvents.on(
 							to_add: '[data-color="custom"]',
 						})
 					),
-					variable: 'linkHoverColor',
+					variable: 'icon-hover-color',
 					type: 'color:hover',
 					responsive: true,
 				},
@@ -120,7 +120,7 @@ ctEvents.on(
 						})
 					),
 
-					variable: 'linkInitialColor',
+					variable: 'icon-color',
 					type: 'color:default',
 					responsive: true,
 				},
@@ -139,7 +139,7 @@ ctEvents.on(
 						})
 					),
 
-					variable: 'linkHoverColor',
+					variable: 'icon-hover-color',
 					type: 'color:hover',
 					responsive: true,
 				},
@@ -200,7 +200,7 @@ ctEvents.on(
 							to_add: '[data-sticky*="yes"]',
 						})
 					),
-					variable: 'linkInitialColor',
+					variable: 'icon-color',
 					type: 'color:default',
 					responsive: true,
 				},
@@ -218,7 +218,7 @@ ctEvents.on(
 							to_add: '[data-sticky*="yes"]',
 						})
 					),
-					variable: 'linkHoverColor',
+					variable: 'icon-hover-color',
 					type: 'color:hover',
 					responsive: true,
 				},

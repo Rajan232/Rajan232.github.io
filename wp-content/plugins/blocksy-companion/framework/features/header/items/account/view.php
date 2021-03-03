@@ -1,5 +1,9 @@
 <?php
 
+if (! isset($device)) {
+	$device = 'desktop';
+}
+
 $current_user_id = get_current_user_id();
 
 if (is_customize_preview()) {
@@ -22,182 +26,31 @@ $icon = apply_filters('blocksy:header:account:icons', [
 	'type-6' => '<svg class="ct-icon" width="15" height="15" viewBox="0 0 15 15"><path d="M14.1 4.9L7.9.1c-.2-.1-.6-.1-.8 0L.9 4.9c-.1.1-.2.3-.2.5V13c0 1.1.9 2 2 2h9.6c1.1 0 2-.9 2-2V5.5c0-.2-.1-.4-.2-.6zm-5.2 8.7H6.1V8.2h2.8v5.4zm4.1-.7c0 .4-.3.7-.7.7h-2V7.5c0-.4-.3-.7-.7-.7H5.4c-.4 0-.7.3-.7.7v6.1h-2c-.4 0-.7-.3-.7-.7V5.8l5.6-4.2L13 5.8v7.1z"/></svg>',
 ]);
 
+$path = 'login';
 
-if (empty($type)) {
-	$type = 'type-1';
+if (! $current_user_id) {
+	$path = 'logout';
 }
 
-
-$class = 'ct-header-account';
-
-$label_class = 'ct-label';
-
-$label_class .= ' ' . blocksy_visibility_classes(blocksy_akg(
-	'account_label_visibility',
-	$atts,
-	[
-		'desktop' => true,
-		'tablet' => true,
-		'mobile' => true,
-	]
+$attr['class'] = trim('ct-header-account ' . blocksy_visibility_classes(
+	blocksy_default_akg(
+		'header_account_visibility',
+		$atts,
+		[
+			'tablet' => true,
+			'mobile' => true,
+		]
+	)
 ));
 
-
-// Logged in
-$link = get_edit_profile_url();
-$account_link = blocksy_akg('account_link', $atts, 'profile');
-
-if ($account_link === 'dashboard') {
-	$link = admin_url();
-}
-
-if ($account_link === 'logout') {
-	$link = wp_logout_url(blocksy_current_url());
-}
-
-if ($account_link === 'custom') {
-	$link = blocksy_akg('account_custom_page', $atts, '');
-}
-
-$media_html = '';
-$loggedin_label = '';
-
-$avatar_position = blocksy_akg('accountHeaderAvatarPosition', $atts, 'left');
-
-if ($current_user_id) {
-	$loggedin_media = blocksy_akg('loggedin_media', $atts, 'avatar');
-	$loggedin_text = blocksy_akg('loggedin_text', $atts, 'label');
-
-	if ($loggedin_text === 'label') {
-		$loggedin_label = blocksy_akg('loggedin_label', $atts, __('My Account', 'blc'));
-	}
-
-	if ($loggedin_text === 'username') {
-		$user = wp_get_current_user();
-		$loggedin_label = $user->display_name;
-	}
-
-	if ($loggedin_media === 'avatar') {
-		$avatar_size = intval(
-			blocksy_expand_responsive_value(
-				blocksy_akg('accountHeaderAvatarSize', $atts, 18)
-			)['desktop']
-		);
-
-		$media_html = blocksy_simple_image(
-			get_avatar_url(
-				$current_user_id,
-				[
-					'size' => $avatar_size * 2
-				]
-			),
-			[
-				'img_atts' => [
-					'width' => $avatar_size,
-					'height' => $avatar_size
-				]
-			]
-		);
-	}
-
-	if ($loggedin_media === 'icon') {
-		$account_loggedin_icon = blocksy_akg('account_loggedin_icon', $atts, 'type-1');
-		$icon_position = blocksy_akg('account_loggedin_icon_position', $atts, 'left');
-		$media_html = $icon[$account_loggedin_icon];
-	}
-}
-
-if (! $current_user_id) {
-	$link = '#account-modal';
-
-	if (blocksy_akg('login_account_action', $atts, 'modal') === 'custom') {
-		$link = blocksy_akg('loggedout_account_custom_page', $atts, '');
-	}
-
-	$login_style = blocksy_akg('login_style', $atts, [
-		'icon' => true,
-		'label' => true
-	]);
-
-	if ($login_style['icon']) {
-		$icon_type = blocksy_default_akg('accountHeaderIcon', $atts, 'type-1');
-		$media_html = $icon[$icon_type];
-		$icon_position = blocksy_akg('accountHeaderIconPosition', $atts, 'left');
-	}
-
-	$login_label = blocksy_akg('login_label', $atts, __('Login', 'blc'));
-}
-
-$attr['data-state'] = $current_user_id ? 'in' : 'out';
-
-$attr['class'] = $class;
-$attr['href'] = $link;
-
-if ($current_user_id) {
-	$attr['aria-label'] = $loggedin_label;
-}
-
-echo '<a ' . blocksy_attr_to_html($attr) . '>';
-
-if ($current_user_id) {
-	if (
-		(
-			$loggedin_media === 'avatar'
-			&&
-			$avatar_position === 'left'
-		) || (
-			$loggedin_media === 'icon'
-			&&
-			$icon_position === 'left'
-		)
-	) {
-		echo $media_html;
-	}
-
-	if (! empty($loggedin_label)) {
-		echo '<span class="' . $label_class . '">';
-		echo $loggedin_label;
-		echo '</span>';
-	}
-
-	if (
-		(
-			$loggedin_media === 'avatar'
-			&&
-			$avatar_position === 'right'
-		) || (
-			$loggedin_media === 'icon'
-			&&
-			$icon_position === 'right'
-		)
-	) {
-		echo $media_html;
-	}
-}
-
-if (! $current_user_id) {
-	if (
-		$login_style['icon']
-		&&
-		$icon_position === 'left'
-	) {
-		echo $media_html;
-	}
-
-	if ($login_style['label']) {
-		echo '<span class="' . $label_class . '">';
-		echo $login_label;
-		echo '</span>';
-	}
-
-	if (
-		$login_style['icon']
-		&&
-		$icon_position === 'right'
-	) {
-		echo $media_html;
-	}
-}
-
-echo '</a>';
+echo blocksy_render_view(
+	dirname(__FILE__) . '/views/' . $path . '.php',
+	[
+		'atts' => $atts,
+		'attr' => $attr,
+		'icon' => $icon,
+		'device' => $device,
+		'current_user_id' => $current_user_id
+	]
+);
 

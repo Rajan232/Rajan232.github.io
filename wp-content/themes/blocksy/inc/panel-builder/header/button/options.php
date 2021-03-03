@@ -61,7 +61,7 @@ $options = [
 
 			blocksy_rand_md5() => [
 				'type' => 'ct-condition',
-				'condition' => [ 'wp_customizer_current_view' => 'mobile' ],
+				'condition' => [ 'wp_customizer_current_view' => 'tablet|mobile' ],
 				'options' => [
 
 					blocksy_rand_md5() => [
@@ -69,7 +69,7 @@ $options = [
 					],
 
 					'visibility' => [
-						'label' => __( 'Visibility', 'blocksy' ),
+						'label' => __( 'Element Visibility', 'blocksy' ),
 						'type' => 'ct-visibility',
 						'design' => 'block',
 						'allow_empty' => true,
@@ -82,6 +82,7 @@ $options = [
 							'tablet' => __( 'Tablet', 'blocksy' ),
 							'mobile' => __( 'Mobile', 'blocksy' ),
 						]),
+						'setting' => [ 'transport' => 'postMessage' ],
 					],
 				],
 

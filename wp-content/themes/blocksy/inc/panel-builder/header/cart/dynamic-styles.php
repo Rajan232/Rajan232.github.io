@@ -20,8 +20,6 @@ if ($cartIconSize !== 15) {
 	]);
 }
 
-
-// Icon color
 blocksy_output_colors([
 	'value' => blocksy_akg('cartHeaderIconColor', $atts),
 	'default' => [
@@ -45,34 +43,156 @@ blocksy_output_colors([
 	'responsive' => true
 ]);
 
+$has_subtotal = (
+	is_customize_preview()
+	||
+	blocksy_some_device(blocksy_default_akg(
+		'cart_subtotal_visibility',
+		$atts,
+		[
+			'desktop' => true,
+			'tablet' => true,
+			'mobile' => true,
+		]
+	))
+);
 
-// Badge color
-blocksy_output_colors([
-	'value' => blocksy_akg('cartBadgeColor', $atts),
-	'default' => [
-		'background' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-		'text' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-	],
-	'css' => $css,
-	'tablet_css' => $tablet_css,
-	'mobile_css' => $mobile_css,
-	'variables' => [
-		'background' => [
-			'selector' => blocksy_assemble_selector($root_selector),
-			'variable' => 'cartBadgeBackground'
+$has_badge = (
+	is_customize_preview()
+	||
+	blocksy_default_akg('has_cart_badge', $atts, 'yes') === 'yes'
+);
+
+if ($has_badge) {
+	blocksy_output_colors([
+		'value' => blocksy_akg('cartBadgeColor', $atts),
+		'default' => [
+			'background' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			'text' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		],
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+		'variables' => [
+			'background' => [
+				'selector' => blocksy_assemble_selector($root_selector),
+				'variable' => 'cartBadgeBackground'
+			],
 
-		'text' => [
-			'selector' => blocksy_assemble_selector($root_selector),
-			'variable' => 'cartBadgeText'
+			'text' => [
+				'selector' => blocksy_assemble_selector($root_selector),
+				'variable' => 'cartBadgeText'
+			],
 		],
-	],
-	'responsive' => true
-]);
+		'responsive' => true
+	]);
+}
 
+if ($has_subtotal) {
+	blocksy_output_font_css([
+		'font_value' => blocksy_akg( 'cart_total_font', $atts,
+		blocksy_typography_default_values([
+			'size' => '12px',
+			'variation' => 'n6',
+			'text-transform' => 'uppercase',
+		])
+		),
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+		'selector' => blocksy_assemble_selector(
+			blocksy_mutate_selector([
+				'selector' => $root_selector,
+				'operation' => 'suffix',
+				'to_add' => '.ct-label'
+			])
+		)
+	]);
+
+	blocksy_output_colors([
+		'value' => blocksy_akg('cart_total_font_color', $atts),
+		'default' => [
+			'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+		],
+		'css' => $css,
+		'tablet_css' => $tablet_css,
+		'mobile_css' => $mobile_css,
+		'variables' => [
+			'default' => [
+				'selector' => blocksy_assemble_selector(
+					blocksy_mutate_selector([
+						'selector' => $root_selector,
+						'operation' => 'suffix',
+						'to_add' => '.ct-cart-item'
+					])
+				),
+				'variable' => 'linkInitialColor'
+			],
+
+			'hover' => [
+				'selector' => blocksy_assemble_selector(
+					blocksy_mutate_selector([
+						'selector' => $root_selector,
+						'operation' => 'suffix',
+						'to_add' => '.ct-cart-item'
+					])
+				),
+				'variable' => 'linkHoverColor'
+			],
+		],
+		'responsive' => true
+	]);
+}
 
 // transparent state
 if (isset($has_transparent_header) && $has_transparent_header) {
+	if ($has_subtotal) {
+		blocksy_output_colors([
+			'value' => blocksy_akg('transparent_cart_total_font_color', $atts),
+			'default' => [
+				'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+				'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			],
+			'css' => $css,
+			'tablet_css' => $tablet_css,
+			'mobile_css' => $mobile_css,
+
+			'variables' => [
+				'default' => [
+					'selector' => blocksy_assemble_selector(
+						blocksy_mutate_selector([
+							'selector' => blocksy_mutate_selector([
+								'selector' => $root_selector,
+								'operation' => 'suffix',
+								'to_add' => '.ct-cart-item'
+							]),
+							'operation' => 'between',
+							'to_add' => '[data-transparent-row="yes"]'
+						])
+					),
+					'variable' => 'linkInitialColor'
+				],
+
+				'hover' => [
+					'selector' => blocksy_assemble_selector(
+						blocksy_mutate_selector([
+							'selector' => blocksy_mutate_selector([
+								'selector' => $root_selector,
+								'operation' => 'suffix',
+								'to_add' => '.ct-cart-item'
+							]),
+							'operation' => 'between',
+							'to_add' => '[data-transparent-row="yes"]'
+						])
+					),
+					'variable' => 'linkHoverColor'
+				],
+			],
+			'responsive' => true
+		]);
+	}
+
 	blocksy_output_colors([
 		'value' => blocksy_akg('transparentCartHeaderIconColor', $atts),
 		'default' => [
@@ -109,48 +229,95 @@ if (isset($has_transparent_header) && $has_transparent_header) {
 		'responsive' => true
 	]);
 
-
 	// Badge color
-	blocksy_output_colors([
-		'value' => blocksy_akg('transparentCartBadgeColor', $atts),
-		'default' => [
-			'background' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-			'text' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-		],
-		'css' => $css,
-		'tablet_css' => $tablet_css,
-		'mobile_css' => $mobile_css,
-
-		'variables' => [
-			'background' => [
-				'selector' => blocksy_assemble_selector(
-					blocksy_mutate_selector([
-						'selector' => $root_selector,
-						'operation' => 'between',
-						'to_add' => '[data-transparent-row="yes"]'
-					])
-				),
-				'variable' => 'cartBadgeBackground'
+	if ($has_badge) {
+		blocksy_output_colors([
+			'value' => blocksy_akg('transparentCartBadgeColor', $atts),
+			'default' => [
+				'background' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+				'text' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 			],
+			'css' => $css,
+			'tablet_css' => $tablet_css,
+			'mobile_css' => $mobile_css,
 
-			'text' => [
-				'selector' => blocksy_assemble_selector(
-					blocksy_mutate_selector([
-						'selector' => $root_selector,
-						'operation' => 'between',
-						'to_add' => '[data-transparent-row="yes"]'
-					])
-				),
-				'variable' => 'cartBadgeText'
+			'variables' => [
+				'background' => [
+					'selector' => blocksy_assemble_selector(
+						blocksy_mutate_selector([
+							'selector' => $root_selector,
+							'operation' => 'between',
+							'to_add' => '[data-transparent-row="yes"]'
+						])
+					),
+					'variable' => 'cartBadgeBackground'
+				],
+
+				'text' => [
+					'selector' => blocksy_assemble_selector(
+						blocksy_mutate_selector([
+							'selector' => $root_selector,
+							'operation' => 'between',
+							'to_add' => '[data-transparent-row="yes"]'
+						])
+					),
+					'variable' => 'cartBadgeText'
+				],
 			],
-		],
-		'responsive' => true
-	]);
+			'responsive' => true
+		]);
+	}
 }
 
 
 // sticky state
 if (isset($has_sticky_header) && $has_sticky_header) {
+	if ($has_subtotal) {
+		blocksy_output_colors([
+			'value' => blocksy_akg('sticky_cart_total_font_color', $atts),
+			'default' => [
+				'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+				'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+			],
+			'css' => $css,
+			'tablet_css' => $tablet_css,
+			'mobile_css' => $mobile_css,
+
+			'variables' => [
+				'default' => [
+					'selector' => blocksy_assemble_selector(
+						blocksy_mutate_selector([
+							'selector' => blocksy_mutate_selector([
+								'selector' => $root_selector,
+								'operation' => 'suffix',
+								'to_add' => '.ct-cart-item'
+							]),
+							'operation' => 'between',
+							'to_add' => '[data-sticky*="yes"]'
+						])
+					),
+					'variable' => 'linkInitialColor'
+				],
+
+				'hover' => [
+					'selector' => blocksy_assemble_selector(
+						blocksy_mutate_selector([
+							'selector' => blocksy_mutate_selector([
+								'selector' => $root_selector,
+								'operation' => 'suffix',
+								'to_add' => '.ct-cart-item'
+							]),
+							'operation' => 'between',
+							'to_add' => '[data-sticky*="yes"]'
+						])
+					),
+					'variable' => 'linkHoverColor'
+				],
+			],
+			'responsive' => true
+		]);
+	}
+
 	blocksy_output_colors([
 		'value' => blocksy_akg('stickyCartHeaderIconColor', $atts),
 		'default' => [
@@ -189,43 +356,44 @@ if (isset($has_sticky_header) && $has_sticky_header) {
 
 
 	// Badge color
-	blocksy_output_colors([
-		'value' => blocksy_akg('stickyCartBadgeColor', $atts),
-		'default' => [
-			'background' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-			'text' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
-		],
-		'css' => $css,
-		'tablet_css' => $tablet_css,
-		'mobile_css' => $mobile_css,
-
-		'variables' => [
-			'background' => [
-				'selector' => blocksy_assemble_selector(
-					blocksy_mutate_selector([
-						'selector' => $root_selector,
-						'operation' => 'between',
-						'to_add' => '[data-sticky*="yes"]'
-					])
-				),
-				'variable' => 'cartBadgeBackground'
+	if ($has_badge) {
+		blocksy_output_colors([
+			'value' => blocksy_akg('stickyCartBadgeColor', $atts),
+			'default' => [
+				'background' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
+				'text' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 			],
+			'css' => $css,
+			'tablet_css' => $tablet_css,
+			'mobile_css' => $mobile_css,
 
-			'text' => [
-				'selector' => blocksy_assemble_selector(
-					blocksy_mutate_selector([
-						'selector' => $root_selector,
-						'operation' => 'between',
-						'to_add' => '[data-sticky*="yes"]'
-					])
-				),
-				'variable' => 'cartBadgeText'
+			'variables' => [
+				'background' => [
+					'selector' => blocksy_assemble_selector(
+						blocksy_mutate_selector([
+							'selector' => $root_selector,
+							'operation' => 'between',
+							'to_add' => '[data-sticky*="yes"]'
+						])
+					),
+					'variable' => 'cartBadgeBackground'
+				],
+
+				'text' => [
+					'selector' => blocksy_assemble_selector(
+						blocksy_mutate_selector([
+							'selector' => $root_selector,
+							'operation' => 'between',
+							'to_add' => '[data-sticky*="yes"]'
+						])
+					),
+					'variable' => 'cartBadgeText'
+				],
 			],
-		],
-		'responsive' => true
-	]);
+			'responsive' => true
+		]);
+	}
 }
-
 
 // dropdown type
 if ($cart_drawer_type === 'dropdown' || is_customize_preview()) {
@@ -510,7 +678,7 @@ if ($cart_drawer_type === 'offcanvas' || is_customize_preview()) {
 			]
 		],
 	]);
-		
+
 }
 
 

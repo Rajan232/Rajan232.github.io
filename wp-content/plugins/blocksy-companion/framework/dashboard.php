@@ -104,12 +104,17 @@ class Dashboard {
 					$connect_template = ob_get_clean();
 				}
 
-				return array_merge([
+				$result = [
 					'is_pro' => blc_fs()->is__premium_only(),
 					'is_anonymous' => $is_anonymous,
-					'connect_template' => $connect_template,
-					'has_beta_consent' => Plugin::instance()->user_wants_beta_updates()
-				], $d);
+					'connect_template' => $connect_template
+				];
+
+				if (Plugin::instance()->premium) {
+					$result['has_beta_consent'] = Plugin::instance()->premium->user_wants_beta_updates();
+				}
+
+				return array_merge($result, $d);
 			}
 		);
 	}

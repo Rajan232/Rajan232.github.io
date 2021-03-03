@@ -40,6 +40,65 @@ $options = [
 				'setting' => [ 'transport' => 'postMessage' ],
 			],
 
+			blocksy_rand_md5() => [
+				'type' => 'ct-divider',
+			],
+
+			'search_label_visibility' => [
+				'label' => __( 'Label Visibility', 'blocksy' ),
+				'type' => 'ct-visibility',
+				'design' => 'block',
+				'allow_empty' => true,
+				'setting' => [ 'transport' => 'postMessage' ],
+				'value' => [
+					'desktop' => false,
+					'tablet' => false,
+					'mobile' => false,
+				],
+
+				'choices' => blocksy_ordered_keys([
+					'desktop' => __( 'Desktop', 'blocksy' ),
+					'tablet' => __( 'Tablet', 'blocksy' ),
+					'mobile' => __( 'Mobile', 'blocksy' ),
+				]),
+			],
+
+			blocksy_rand_md5() => [
+				'type' => 'ct-condition',
+				'condition' => [
+					'any' => [
+						'search_label_visibility/desktop' => true,
+						'search_label_visibility/tablet' => true,
+						'search_label_visibility/mobile' => true,
+					]
+				],
+				'options' => [
+					'search_label_position' => [
+						'type' => 'ct-radio',
+						'label' => __( 'Label Position', 'blocksy' ),
+						'value' => 'left',
+						'view' => 'text',
+						'divider' => 'top',
+						'design' => 'block',
+						'responsive' => [ 'tablet' => 'skip' ],
+						'choices' => [
+							'left' => __( 'Left', 'blocksy' ),
+							'right' => __( 'Right', 'blocksy' ),
+							'bottom' => __( 'Bottom', 'blocksy' ),
+						],
+					],
+
+					'search_label' => [
+						'label' => __( 'Label Text', 'blocksy' ),
+						'type' => 'text',
+						'divider' => 'top',
+						'design' => 'block',
+						'value' => __( 'Search', 'blocksy' ),
+						'sync' => 'live'
+					],
+				],
+			],
+
 		],
 	],
 
@@ -47,6 +106,153 @@ $options = [
 		'title' => __( 'Design', 'blocksy' ),
 		'type' => 'tab',
 		'options' => [
+
+			blocksy_rand_md5() => [
+				'type' => 'ct-condition',
+				'condition' => [
+					'any' => [
+						'search_label_visibility/desktop' => true,
+						'search_label_visibility/tablet' => true,
+						'search_label_visibility/mobile' => true,
+					]
+				],
+				'options' => [
+					'search_label_font' => [
+						'type' => 'ct-typography',
+						'label' => __( 'Label Font', 'blocksy' ),
+						'value' => blocksy_typography_default_values([
+							'size' => '12px',
+							'variation' => 'n6',
+							'text-transform' => 'uppercase',
+						]),
+						'setting' => [ 'transport' => 'postMessage' ],
+					],
+
+					blocksy_rand_md5() => [
+						'type' => 'ct-labeled-group',
+						'label' => __( 'Label Font Color', 'blocksy' ),
+						'responsive' => true,
+						'choices' => [
+							[
+								'id' => 'header_search_font_color',
+								'label' => __('Default State', 'blocksy')
+							],
+
+							[
+								'id' => 'transparent_header_search_font_color',
+								'label' => __('Transparent State', 'blocksy'),
+								'condition' => [
+									'row' => '!offcanvas',
+									'builderSettings/has_transparent_header' => 'yes',
+								],
+							],
+
+							[
+								'id' => 'sticky_header_search_font_color',
+								'label' => __('Sticky State', 'blocksy'),
+								'condition' => [
+									'row' => '!offcanvas',
+									'builderSettings/has_sticky_header' => 'yes',
+								],
+							],
+						],
+						'options' => [
+							'header_search_font_color' => [
+								'label' => __( 'Font Color', 'blocksy' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'block:right',
+								'responsive' => true,
+								'setting' => [ 'transport' => 'postMessage' ],
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+
+									'hover' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Initial', 'blocksy' ),
+										'id' => 'default',
+										'inherit' => 'var(--color)'
+									],
+
+									[
+										'title' => __( 'Hover', 'blocksy' ),
+										'id' => 'hover',
+										'inherit' => 'var(--linkHoverColor)'
+									],
+								],
+							],
+
+							'transparent_header_search_font_color' => [
+								'label' => __( 'Font Color', 'blocksy' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'block:right',
+								'responsive' => true,
+								'setting' => [ 'transport' => 'postMessage' ],
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+
+									'hover' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Initial', 'blocksy' ),
+										'id' => 'default',
+									],
+
+									[
+										'title' => __( 'Hover', 'blocksy' ),
+										'id' => 'hover',
+									],
+								],
+							],
+
+							'sticky_header_search_font_color' => [
+								'label' => __( 'Font Color', 'blocksy' ),
+								'type'  => 'ct-color-picker',
+								'design' => 'block:right',
+								'responsive' => true,
+								'setting' => [ 'transport' => 'postMessage' ],
+								'value' => [
+									'default' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+
+									'hover' => [
+										'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
+									],
+								],
+
+								'pickers' => [
+									[
+										'title' => __( 'Initial', 'blocksy' ),
+										'id' => 'default',
+									],
+
+									[
+										'title' => __( 'Hover', 'blocksy' ),
+										'id' => 'hover',
+									],
+								],
+							],
+						],
+					],
+
+					blocksy_rand_md5() => [
+						'type' => 'ct-divider',
+					],
+				],
+			],
 
 			blocksy_rand_md5() => [
 				'type' => 'ct-labeled-group',
@@ -346,10 +552,9 @@ $options = [
 		],
 	],
 
-
 	blocksy_rand_md5() => [
 		'type' => 'ct-condition',
-		'condition' => [ 'wp_customizer_current_view' => 'mobile' ],
+		'condition' => [ 'wp_customizer_current_view' => 'tablet|mobile' ],
 		'options' => [
 
 			blocksy_rand_md5() => [
@@ -357,7 +562,7 @@ $options = [
 			],
 
 			'header_search_visibility' => [
-				'label' => __( 'Item Visibility', 'blocksy' ),
+				'label' => __( 'Element Visibility', 'blocksy' ),
 				'type' => 'ct-visibility',
 				'design' => 'block',
 				'setting' => [ 'transport' => 'postMessage' ],

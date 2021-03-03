@@ -59,16 +59,16 @@ jQuery(function($) {
         };
         this.init = function() {
             self.prepare();
-            $(window).bind('scroll', function() {
+            $(window).on('scroll', function() {
                 var getOffset = window.pageYOffset || document.documentElement.scrollTop,
                     per = Math.max(0, Math.min(1, getOffset / netHeight));
                 self.updateProgress(per);
             });
-            $(window).bind('resize', function() {
+            $(window).on('resize', function() {
                 self.getHeight();
                 self.addEvent();
             });
-            $(window).bind('load', function() {
+            $(window).on('load', function() {
                 self.getHeight();
                 self.addEvent();
             });

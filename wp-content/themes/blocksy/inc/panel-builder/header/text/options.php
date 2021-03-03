@@ -288,7 +288,7 @@ if ($panel_type === 'header') {
 			],
 
 			'visibility' => [
-				'label' => __( 'Item Visibility', 'blocksy' ),
+				'label' => __( 'Element Visibility', 'blocksy' ),
 				'type' => 'ct-visibility',
 				'design' => 'block',
 				'setting' => [ 'transport' => 'postMessage' ],

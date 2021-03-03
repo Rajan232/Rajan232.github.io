@@ -114,35 +114,6 @@ $options = [
 			],
 
 			blocksy_rand_md5() => [
-				'type' => 'ct-condition',
-				'condition' => [ 'wp_customizer_current_view' => 'mobile' ],
-				'options' => [
-
-					blocksy_rand_md5() => [
-						'type' => 'ct-divider',
-					],
-
-					'visibility' => [
-						'label' => __( 'Item Visibility', 'blocksy' ),
-						'type' => 'ct-visibility',
-						'design' => 'block',
-						'setting' => [ 'transport' => 'postMessage' ],
-						'allow_empty' => true,
-						'value' => [
-							'tablet' => true,
-							'mobile' => true,
-						],
-
-						'choices' => blocksy_ordered_keys([
-							'tablet' => __( 'Tablet', 'blocksy' ),
-							'mobile' => __( 'Mobile', 'blocksy' ),
-						]),
-					],
-
-				],
-			],
-
-			blocksy_rand_md5() => [
 				'type' => 'ct-divider',
 			],
 
@@ -163,6 +134,35 @@ $options = [
 					'tablet' => __( 'Tablet', 'blocksy' ),
 					'mobile' => __( 'Mobile', 'blocksy' ),
 				]),
+			],
+
+			blocksy_rand_md5() => [
+				'type' => 'ct-condition',
+				'condition' => [ 'wp_customizer_current_view' => 'tablet|mobile' ],
+				'options' => [
+
+					blocksy_rand_md5() => [
+						'type' => 'ct-divider',
+					],
+
+					'visibility' => [
+						'label' => __( 'Element Visibility', 'blocksy' ),
+						'type' => 'ct-visibility',
+						'design' => 'block',
+						'setting' => [ 'transport' => 'postMessage' ],
+						'allow_empty' => true,
+						'value' => [
+							'tablet' => true,
+							'mobile' => true,
+						],
+
+						'choices' => blocksy_ordered_keys([
+							'tablet' => __( 'Tablet', 'blocksy' ),
+							'mobile' => __( 'Mobile', 'blocksy' ),
+						]),
+					],
+
+				],
 			],
 
 		],
@@ -215,7 +215,7 @@ $options = [
 
 						'value' => [
 							'default' => [
-								'color' => 'var(--color)',
+								'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT'),
 							],
 
 							'hover' => [
@@ -227,12 +227,13 @@ $options = [
 							[
 								'title' => __( 'Initial', 'blocksy' ),
 								'id' => 'default',
+								'inherit' => 'var(--color)'
 							],
 
 							[
 								'title' => __( 'Hover', 'blocksy' ),
 								'id' => 'hover',
-								'inherit' => 'var(--linkHoverColor)'
+								'inherit' => 'var(--paletteColor2)'
 							],
 						],
 					],

@@ -2,5 +2,9 @@
 
 $config = [
 	'enabled' => class_exists('WooCommerce'),
-	'selective_refresh' => ['has_cart_dropdown', 'mini_cart_type']
+	'typography_keys' => ['cart_total_font'],
+	'selective_refresh' => [
+		'has_cart_dropdown',
+		'mini_cart_type'
+	]
 ];

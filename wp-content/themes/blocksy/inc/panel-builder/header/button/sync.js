@@ -369,6 +369,12 @@ ctEvents.on(
 			})
 		}
 
+		if (optionId === 'visibility') {
+			updateAndSaveEl(selector, (el) =>
+				responsiveClassesFor({ ...optionValue, desktop: true }, el)
+			)
+		}
+
 		if (optionId === 'header_button_size') {
 			updateAndSaveEl(selector, (el) => {
 				el.querySelector(

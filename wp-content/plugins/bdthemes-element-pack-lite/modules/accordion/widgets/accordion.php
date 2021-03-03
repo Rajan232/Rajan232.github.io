@@ -120,12 +120,12 @@ class Accordion extends Module_Base {
         );
 
         $repeater->add_control(
-			'show_custom_icon',
-			[
-				'label'   => esc_html__( 'Show Icon', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'    => Controls_Manager::SWITCHER,
-			]
-		);
+            'show_custom_icon',
+            [
+                'label'   => esc_html__( 'Show Icon', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'    => Controls_Manager::SWITCHER,
+            ]
+        );
 
         $repeater->add_control(
             'repeater_icon',
@@ -139,8 +139,8 @@ class Accordion extends Module_Base {
                 'skin'             => 'inline',
                 'label_block'      => false,
                 'condition' => [
-					'show_custom_icon' => 'yes',
-				]
+                    'show_custom_icon' => 'yes',
+                ]
             ]
         );
 
@@ -470,13 +470,13 @@ class Accordion extends Module_Base {
         );
 
         $this->add_control(
-			'icon_heading',
-			[
-				'label'   => esc_html__( 'Icon', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::HEADING,
-				'separator' => 'before'
-			]
-		);
+            'icon_heading',
+            [
+                'label'   => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+                'type'    => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
 
         $this->add_control(
             'title_icon_color',
@@ -491,31 +491,31 @@ class Accordion extends Module_Base {
         );
 
         $this->add_responsive_control(
-			'title_icon_size',
-			[
-				'label'   => esc_html__( 'Size', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'    => Controls_Manager::SLIDER,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-custom-icon' => 'font-size: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+            'title_icon_size',
+            [
+                'label'   => esc_html__( 'Size', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'    => Controls_Manager::SLIDER,
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-custom-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->add_responsive_control(
-			'icon_indent',
-			[
-				'label'   => esc_html__( 'Spacing', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'    => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'max' => 50,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-custom-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
-				],
-			]
-		);
+            'icon_indent',
+            [
+                'label'   => esc_html__( 'Spacing', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'    => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 50,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-custom-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
 
         $this->end_controls_tab();
 
@@ -547,27 +547,27 @@ class Accordion extends Module_Base {
         );
 
         $this->add_control(
-			'title_hover_border_color',
-			[
-				'label'     => __( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'      => Controls_Manager::COLOR,
-				'condition' => [
-					'title_border_border!' => '',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-accordion .bdt-accordion-item:hover .bdt-accordion-title' => 'border-color: {{VALUE}};',
-				],
-			]
-		);
+            'title_hover_border_color',
+            [
+                'label'     => __( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'      => Controls_Manager::COLOR,
+                'condition' => [
+                    'title_border_border!' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-accordion .bdt-accordion-item:hover .bdt-accordion-title' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
 
         $this->add_control(
-			'icon_hover_heading',
-			[
-				'label'   => esc_html__( 'Icon', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::HEADING,
-				'separator' => 'before'
-			]
-		);
+            'icon_hover_heading',
+            [
+                'label'   => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+                'type'    => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
 
         $this->add_control(
             'title_hover_icon_color',
@@ -641,13 +641,13 @@ class Accordion extends Module_Base {
         );
 
         $this->add_control(
-			'icon_active_heading',
-			[
-				'label'   => esc_html__( 'Icon', 'bdthemes-element-pack' ),
-				'type'    => Controls_Manager::HEADING,
-				'separator' => 'before'
-			]
-		);
+            'icon_active_heading',
+            [
+                'label'   => esc_html__( 'Icon', 'bdthemes-element-pack' ),
+                'type'    => Controls_Manager::HEADING,
+                'separator' => 'before'
+            ]
+        );
 
         $this->add_control(
             'title_active_icon_color',
@@ -721,43 +721,43 @@ class Accordion extends Module_Base {
         );
 
         $this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'      => 'icon_background_color',
-				'selector'  => '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon'
-			]
-		);
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'icon_background_color',
+                'selector'  => '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon'
+            ]
+        );
 
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'        => 'icon_border',
-				'selector'    => '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon',
-			]
-		);
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'        => 'icon_border',
+                'selector'    => '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon',
+            ]
+        );
 
-		$this->add_responsive_control(
-			'icon_border_radius',
-			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
+        $this->add_responsive_control(
+            'icon_border_radius',
+            [
+                'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
 
-		$this->add_responsive_control(
-			'icon_padding',
-			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
+        $this->add_responsive_control(
+            'icon_padding',
+            [
+                'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', 'em', '%' ],
+                'selectors'  => [
+                    '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
         );
 
         $this->add_responsive_control(
@@ -796,12 +796,12 @@ class Accordion extends Module_Base {
         );
 
         $this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'icon_box_shadow',
-				'selector' => '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon',
-			]
-		);
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'icon_box_shadow',
+                'selector' => '{{WRAPPER}} .bdt-accordion-container .bdt-accordion .bdt-accordion-title .bdt-accordion-icon',
+            ]
+        );
 
         $this->end_controls_tab();
 
@@ -825,26 +825,26 @@ class Accordion extends Module_Base {
         );
 
         $this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'      => 'icon_hover_background_color',
-				'selector'  => '{{WRAPPER}} .bdt-accordion .bdt-accordion-item:hover .bdt-accordion-icon'
-			]
-		);
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'icon_hover_background_color',
+                'selector'  => '{{WRAPPER}} .bdt-accordion .bdt-accordion-item:hover .bdt-accordion-icon'
+            ]
+        );
 
         $this->add_control(
-			'icon_hover_border_color',
-			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'      => Controls_Manager::COLOR,
-				'condition' => [
-					'icon_border_border!' => '',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-accordion .bdt-accordion-item:hover .bdt-accordion-icon' => 'border-color: {{VALUE}};',
-				],
-			]
-		);
+            'icon_hover_border_color',
+            [
+                'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'      => Controls_Manager::COLOR,
+                'condition' => [
+                    'icon_border_border!' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-accordion .bdt-accordion-item:hover .bdt-accordion-icon' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
 
         $this->end_controls_tab();
 
@@ -868,26 +868,26 @@ class Accordion extends Module_Base {
         );
 
         $this->add_group_control(
-			Group_Control_Background::get_type(),
-			[
-				'name'      => 'icon_active_background_color',
-				'selector'  => '{{WRAPPER}} .bdt-accordion .bdt-accordion-item.bdt-open .bdt-accordion-icon'
-			]
-		);
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'icon_active_background_color',
+                'selector'  => '{{WRAPPER}} .bdt-accordion .bdt-accordion-item.bdt-open .bdt-accordion-icon'
+            ]
+        );
 
         $this->add_control(
-			'icon_active_border_color',
-			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'type'      => Controls_Manager::COLOR,
-				'condition' => [
-					'icon_border_border!' => '',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-accordion .bdt-accordion-item.bdt-open .bdt-accordion-icon' => 'border-color: {{VALUE}};',
-				],
-			]
-		);
+            'icon_active_border_color',
+            [
+                'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'type'      => Controls_Manager::COLOR,
+                'condition' => [
+                    'icon_border_border!' => '',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .bdt-accordion .bdt-accordion-item.bdt-open .bdt-accordion-icon' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
 
         $this->end_controls_tab();
 
@@ -923,13 +923,13 @@ class Accordion extends Module_Base {
         );
 
         $this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'        => 'item_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'selector'    => '{{WRAPPER}} .bdt-accordion .bdt-accordion-content',
-			]
-		);
+            Group_Control_Border::get_type(),
+            [
+                'name'        => 'item_border',
+                'label'       => __( 'Border', 'bdthemes-element-pack' ) . BDTEP_NC,
+                'selector'    => '{{WRAPPER}} .bdt-accordion .bdt-accordion-content',
+            ]
+        );
 
         $this->add_responsive_control(
             'content_radius',
@@ -981,13 +981,13 @@ class Accordion extends Module_Base {
         );
 
         $this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'content_shadow',
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name'     => 'content_shadow',
                 'label'       => __( 'Box Shadow', 'bdthemes-element-pack' ) . BDTEP_NC,
-				'selector' => '{{WRAPPER}} .bdt-accordion .bdt-accordion-content',
-			]
-		);
+                'selector' => '{{WRAPPER}} .bdt-accordion .bdt-accordion-content',
+            ]
+        );
 
         $this->add_responsive_control(
             'align',
@@ -1116,12 +1116,12 @@ class Accordion extends Module_Base {
                             aria-hidden="true"></i>
                         <?php endif; ?>
 
-				    </span>
+                    </span>
                 <?php endif; ?>
 
                 <span class="bdt-flex bdt-flex-middle">
 
-                    <?php if ( $item['repeater_icon']['value'] and $item['show_custom_icon'] == 'yes' ) : ?>
+                    <?php if ( isset($item['repeater_icon']['value']) and $item['show_custom_icon'] == 'yes' ) : ?>
                         <span class="bdt-accordion-custom-icon">
                             <?php Icons_Manager::render_icon($item['repeater_icon'], ['aria-hidden' => 'true', 'class' => 'fa-fw']); ?>
                         </span>

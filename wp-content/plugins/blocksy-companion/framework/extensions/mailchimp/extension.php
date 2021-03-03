@@ -86,7 +86,7 @@ class BlocksyExtensionMailchimp {
 			wp_enqueue_script(
 				'blocksy-ext-newsletter-subscribe-scripts',
 				BLOCKSY_URL . 'framework/extensions/mailchimp/static/bundle/main.js',
-				[],
+				['ct-scripts'],
 				$data['Version'],
 				true
 			);

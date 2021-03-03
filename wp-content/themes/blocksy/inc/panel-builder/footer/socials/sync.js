@@ -81,7 +81,7 @@ ctEvents.on(
 							to_add: '[data-color="custom"]',
 						})
 					),
-					variable: 'linkInitialColor',
+					variable: 'icon-color',
 					type: 'color:default',
 					responsive: true,
 				},
@@ -97,7 +97,7 @@ ctEvents.on(
 							to_add: '[data-color="custom"]',
 						})
 					),
-					variable: 'linkHoverColor',
+					variable: 'icon-hover-color',
 					type: 'color:hover',
 					responsive: true,
 				},

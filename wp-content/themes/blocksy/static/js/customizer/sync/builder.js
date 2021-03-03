@@ -104,7 +104,7 @@ setTimeout(() => {
 		'ct:footer:sync:collect-variable-descriptors',
 		footerVariableDescriptors
 	)
-}, 100)
+}, 1000)
 
 const makeShortcutFor = (item) => {
 	if ([...item.children].find((e) => e.matches('.ct-customizer-shortcut'))) {

@@ -15,6 +15,11 @@ import { mount as mountMobileMenu } from './frontend/mobile-menu'
 
 import { getCurrentScreen } from './frontend/helpers/current-screen'
 
+/**
+ * iOS hover fix
+ */
+document.addEventListener("click", x=>0)
+
 export { getCurrentScreen } from './frontend/helpers/current-screen'
 
 export const allFrontendEntryPoints = [
@@ -304,4 +309,5 @@ if ($) {
 	})
 }
 
-export { handleEntryPoints } from './helpers'
+export { handleEntryPoints, onDocumentLoaded } from './helpers'
+export { markImagesAsLoaded } from './frontend/lazy-load-helpers'

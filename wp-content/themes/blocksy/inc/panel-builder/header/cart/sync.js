@@ -7,11 +7,13 @@ import {
 	assembleSelector,
 	mutateSelector,
 } from '../../../../static/js/customizer/sync/helpers'
+import { typographyOption } from '../../../../static/js/customizer/sync/variables/typography'
 
 ctEvents.on(
 	'ct:header:sync:collect-variable-descriptors',
 	(variableDescriptors) => {
 		variableDescriptors['cart'] = ({ itemId }) => ({
+
 			cartIconSize: {
 				selector: assembleSelector(getRootSelectorFor({ itemId })),
 				variable: 'icon-size',
@@ -19,89 +21,6 @@ ctEvents.on(
 				unit: 'px',
 			},
 
-			cartDropdownTopOffset: {
-				selector: assembleSelector(
-					mutateSelector({
-						selector: getRootSelectorFor({ itemId }),
-						operation: 'suffix',
-						to_add: '.ct-cart-content',
-					})
-				),
-				variable: 'dropdownTopOffset',
-				unit: 'px',
-			},
-
-			cartFontColor: [
-				{
-					selector: assembleSelector(
-						mutateSelector({
-							selector: getRootSelectorFor({ itemId }),
-							operation: 'suffix',
-							to_add: '.ct-cart-content',
-						})
-					),
-					variable: 'color',
-					type: 'color:default',
-				},
-
-				{
-					selector: assembleSelector(
-						mutateSelector({
-							selector: getRootSelectorFor({ itemId }),
-							operation: 'suffix',
-							to_add: '.ct-cart-content',
-						})
-					),
-					variable: 'linkInitialColor',
-					type: 'color:link_initial',
-				},
-
-				{
-					selector: assembleSelector(
-						mutateSelector({
-							selector: getRootSelectorFor({ itemId }),
-							operation: 'suffix',
-							to_add: '.ct-cart-content',
-						})
-					),
-					variable: 'linkHoverColor',
-					type: 'color:link_hover',
-				},
-			],
-
-			cartTotalFontColor: {
-				selector: assembleSelector(
-					mutateSelector({
-						selector: getRootSelectorFor({ itemId }),
-						operation: 'suffix',
-						to_add: '.ct-cart-content .total',
-					})
-				),
-				variable: 'color',
-				type: 'color:default',
-			},
-
-			cartDropDownBackground: {
-				selector: assembleSelector(
-					mutateSelector({
-						selector: getRootSelectorFor({ itemId }),
-						operation: 'suffix',
-						to_add: '.ct-cart-content',
-					})
-				),
-				variable: 'backgroundColor',
-				type: 'color:default',
-			},
-
-			headerCartMargin: {
-				selector: assembleSelector(getRootSelectorFor({ itemId })),
-				type: 'spacing',
-				variable: 'margin',
-				responsive: true,
-				important: true,
-			},
-
-			// default state
 			cartHeaderIconColor: [
 				{
 					selector: assembleSelector(getRootSelectorFor({ itemId })),
@@ -134,7 +53,84 @@ ctEvents.on(
 				},
 			],
 
+			// cart top total
+			...typographyOption({
+				id: 'cart_total_font',
+
+				selector: assembleSelector(
+					mutateSelector({
+						selector: getRootSelectorFor({ itemId }),
+						operation: 'suffix',
+						to_add: '.ct-label',
+					})
+				),
+			}),
+
+			cart_total_font_color: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '.ct-cart-item',
+						})
+					),
+					variable: 'linkInitialColor',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '.ct-cart-item',
+						})
+					),
+					variable: 'linkHoverColor',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+			
 			// transparent state
+			transparent_cart_total_font_color: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-cart-item',
+							}),
+							operation: 'between',
+							to_add: '[data-transparent-row="yes"]',
+						})
+					),
+					variable: 'linkInitialColor',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-cart-item',
+							}),
+							operation: 'between',
+							to_add: '[data-transparent-row="yes"]',
+						})
+					),
+					variable: 'linkHoverColor',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+			
 			transparentCartHeaderIconColor: [
 				{
 					selector: assembleSelector(
@@ -195,6 +191,42 @@ ctEvents.on(
 			],
 
 			// sticky state
+			sticky_cart_total_font_color: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-cart-item',
+							}),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'linkInitialColor',
+					type: 'color:default',
+					responsive: true,
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: mutateSelector({
+								selector: getRootSelectorFor({ itemId }),
+								operation: 'suffix',
+								to_add: '.ct-cart-item',
+							}),
+							operation: 'between',
+							to_add: '[data-sticky*="yes"]',
+						})
+					),
+					variable: 'linkHoverColor',
+					type: 'color:hover',
+					responsive: true,
+				},
+			],
+			
 			stickyCartHeaderIconColor: [
 				{
 					selector: assembleSelector(
@@ -251,7 +283,82 @@ ctEvents.on(
 				},
 			],
 
-			// panel
+			cartFontColor: [
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '.ct-cart-content',
+						})
+					),
+					variable: 'color',
+					type: 'color:default',
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '.ct-cart-content',
+						})
+					),
+					variable: 'linkInitialColor',
+					type: 'color:link_initial',
+				},
+
+				{
+					selector: assembleSelector(
+						mutateSelector({
+							selector: getRootSelectorFor({ itemId }),
+							operation: 'suffix',
+							to_add: '.ct-cart-content',
+						})
+					),
+					variable: 'linkHoverColor',
+					type: 'color:link_hover',
+				},
+			],
+
+			cartTotalFontColor: {
+				selector: assembleSelector(
+					mutateSelector({
+						selector: getRootSelectorFor({ itemId }),
+						operation: 'suffix',
+						to_add: '.ct-cart-content .total',
+					})
+				),
+				variable: 'color',
+				type: 'color:default',
+			},
+
+			// dropdown type
+			cartDropDownBackground: {
+				selector: assembleSelector(
+					mutateSelector({
+						selector: getRootSelectorFor({ itemId }),
+						operation: 'suffix',
+						to_add: '.ct-cart-content',
+					})
+				),
+				variable: 'backgroundColor',
+				type: 'color:default',
+			},
+
+			cartDropdownTopOffset: {
+				selector: assembleSelector(
+					mutateSelector({
+						selector: getRootSelectorFor({ itemId }),
+						operation: 'suffix',
+						to_add: '.ct-cart-content',
+					})
+				),
+				variable: 'dropdownTopOffset',
+				unit: 'px',
+			},
+
+			// panel type
 			cart_panel_width: {
 				selector: '#woo-cart-panel',
 				variable: 'side-panel-width',
@@ -343,6 +450,14 @@ ctEvents.on(
 					type: 'color:hover',
 				},
 			],
+
+			headerCartMargin: {
+				selector: assembleSelector(getRootSelectorFor({ itemId })),
+				type: 'spacing',
+				variable: 'margin',
+				responsive: true,
+				important: true,
+			},
 		})
 	}
 )
@@ -350,33 +465,50 @@ ctEvents.on(
 ctEvents.on('ct:header:sync:item:cart', ({ optionId, optionValue, values }) => {
 	const selector = '[data-id="cart"]'
 
+	if (optionId === 'cart_subtotal_visibility') {
+		updateAndSaveEl(selector, (el) => {
+			;[...el.querySelectorAll('.ct-label')].map((el) => {
+				responsiveClassesFor(optionValue, el)
+			})
+		})
+	}
+
+	if (optionId === 'cart_total_position') {
+		updateAndSaveEl(
+			selector,
+			(el) => {
+				if (!optionValue.desktop) {
+					optionValue = {
+						desktop: optionValue,
+						mobile: optionValue,
+					}
+				}
+
+				el.firstElementChild.dataset.label = optionValue.desktop
+			},
+			{ onlyView: 'desktop' }
+		)
+
+		updateAndSaveEl(
+			selector,
+			(el) => {
+				if (!optionValue.desktop) {
+					optionValue = {
+						desktop: optionValue,
+						mobile: optionValue,
+					}
+				}
+
+				el.firstElementChild.dataset.label = optionValue.mobile
+			},
+			{ onlyView: 'mobile' }
+		)
+	}
+
 	if (optionId === 'header_cart_visibility') {
 		updateAndSaveEl(selector, (el) =>
 			responsiveClassesFor({ ...optionValue, desktop: true }, el)
 		)
-	}
-
-	if (optionId === 'has_cart_subtotal') {
-		updateAndSaveEl(selector, (el) => {
-			;[...el.querySelectorAll('.ct-cart-total')].map((el) => el.remove())
-
-			if (optionValue === 'yes') {
-				const span = document.createElement('span')
-				span.innerHTML = el.dataset.subtotal
-
-				span.classList.add('ct-cart-total')
-
-				el.querySelector('a').prepend(span)
-			}
-		})
-	}
-
-	if (optionId === 'cart_subtotal_visibility') {
-		updateAndSaveEl(selector, (el) => {
-			;[...el.querySelectorAll('.ct-cart-total')].map((el) => {
-				responsiveClassesFor(optionValue, el)
-			})
-		})
 	}
 
 	if (optionId === 'has_cart_badge') {

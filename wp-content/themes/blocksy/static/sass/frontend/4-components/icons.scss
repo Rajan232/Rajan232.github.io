@@ -1,38 +1,16 @@
-.ct-icon {
+.ct-icon,
+.ct-icon-container svg {
 	position: relative;
 	width: var(--icon-size, 15px);
 	height: var(--icon-size, 15px);
-	fill: var(--icon-color, var(--linkInitialColor));
+	fill: var(--icon-color, var(--color));
 	transition: fill 0.12s cubic-bezier(.455,.03,.515,.955);
-
-	> * {
-		transition: none;
-	}
 }
-
-
 
 .ct-icon-container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--icon-color, var(--linkInitialColor));
-	width: var(--icon-container-size);
-	height: var(--icon-container-size);
-	border-radius: var(--border-radius);
-	transition: color 0.12s cubic-bezier(.455,.03,.515,.955),
-				background-color 0.12s cubic-bezier(.455,.03,.515,.955),
-				border-color 0.12s cubic-bezier(.455,.03,.515,.955);
-
-	svg {
-		fill: currentColor;
-		width: var(--icon-size, 15px);
-		height: var(--icon-size, 15px);
-
-		> * {
-			transition: none;
-		}
-	}
 }
 
 
@@ -47,20 +25,16 @@
 
 
 // icon shape
-[data-icons-type] {
-	> * {
-		transition: none;
-
-		&:hover {
-			.ct-icon-container {
-				color: var(--icon-hover-color, var(--linkHoverColor));
-			}
-		}
-	}
-}
-
 [data-icons-type*=":"] {
 	--icon-container-size: calc(var(--icon-size, 15px) * 2.5);
+
+	.ct-icon-container {
+		width: var(--icon-container-size);
+		height: var(--icon-container-size);
+		border-radius: var(--border-radius);
+		transition: background 0.12s cubic-bezier(.455,.03,.515,.955),
+					border-color 0.12s cubic-bezier(.455,.03,.515,.955);
+	}
 }
 
 [data-icons-type*="square"] {
@@ -69,6 +43,16 @@
 
 [data-icons-type*="rounded"] {
 	--border-radius: 100%;
+}
+
+[data-icons-type] > * {
+	--transition: none;
+
+	&:hover {
+		.ct-icon-container {
+			color: var(--icon-hover-color, var(--paletteColor2));
+		}
+	}
 }
 
 

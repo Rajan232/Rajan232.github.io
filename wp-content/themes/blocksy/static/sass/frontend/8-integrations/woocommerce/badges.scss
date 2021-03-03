@@ -19,36 +19,27 @@
 	background-color: var(--badge-background-color, var(--paletteColor1));
 }
 
-.onsale {
-	&[data-shape="circle"] {
-		--badge-font-size: 11px;
-		--badge-height: 45px;
-		--badge-padding: 3px;
-		--badge-radius: 200px;
-		
-		min-width: 45px;
-	}
+.onsale[data-shape="circle"] {
+	--badge-font-size: 11px;
+	--badge-height: 45px;
+	--badge-padding: 3px;
+	--badge-radius: 200px;
+	min-width: 45px;
 }
 
 
 // product gallery badge position
-.onsale,
-.out-of-stock-badge {
+.product-entry-wrapper {
 	--badge-top: 20px;
 	--badge-left: 20px;
 }
 
-.thumbs-left {
-	.onsale,
-	.out-of-stock-badge {
-		--badge-top: 20px;
+.thumbs-left .product-entry-wrapper {
+	@include media-breakpoint-down (sm) {
+		--badge-left: 20px;
+	}
 
-		@include media-breakpoint-down (sm) {
-			--badge-left: 20px;
-		}
-
-		@include media-breakpoint-up (md) {
-			--badge-left: calc(var(--thumbs-width) + var(--thumbs-spacing, 15px) + 20px);
-		}
+	@include media-breakpoint-up (md) {
+		--badge-left: calc(var(--thumbs-width) + var(--thumbs-spacing, 15px) + 20px);
 	}
 }

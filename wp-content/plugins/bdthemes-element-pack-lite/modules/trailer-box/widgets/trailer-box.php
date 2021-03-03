@@ -308,15 +308,168 @@ class Trailer_Box extends Module_Base {
 
 		$this->end_controls_section();
 
+		//Style
+
 		$this->start_controls_section(
-			'section_content_pre_title',
+			'section_trailer_box_style',
 			[
-				'label' => __( 'Pre Title', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Trailer Box', 'bdthemes-element-pack' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'item_animation',
+			[
+				'label'        => esc_html__( 'Animation', 'bdthemes-element-pack' ),
+				'type'         => Controls_Manager::SELECT,
+				'default'      => 'content',
+				'prefix_class' => 'bdt-item-transition-',				
+				'render_type'  => 'ui',
+				'options'      => [
+					'content'    => esc_html__( 'Content', 'bdthemes-element-pack' ),
+					'scale-up'   => esc_html__( 'Image Scale Up', 'bdthemes-element-pack' ),
+					'scale-down' => esc_html__( 'Image Scale Down', 'bdthemes-element-pack' ),
+					'none'       => esc_html__( 'None', 'bdthemes-element-pack' ),
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'trailer_box_content_padding',
+			[
+				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_pre_title',
+			[
+				'label'     => esc_html__( 'Pre Tilte', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'pre_title!' => '',
 				],
 			]
 		);
+
+		$this->start_controls_tabs( 'tabs_pre_title_style' );
+
+		$this->start_controls_tab(
+			'tab_pre_title_normal',
+			[
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'pre_title_color',
+			[
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'pre_title_bg_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title' => 'background: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'        => 'pre_title_border',
+				'label'       => __( 'Border', 'bdthemes-element-pack' ),
+				'selector'    => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title',
+			]
+		);
+
+		$this->add_control(
+			'pre_title_border_radius',
+			[
+				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			[
+				'name'     => 'tb_pre_title_shadow',
+				'selector' => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title',
+			]
+		);
+
+		$this->add_responsive_control(
+			'tb_pre_title_spacing',
+			[
+				'label' => __( 'Spacing', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'margin-bottom: {{SIZE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'tb_pre_title_opacity',
+			[
+				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.05,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'opacity: {{SIZE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'      => 'pre_title_typography',
+				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'selector'  => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title',
+			]
+		);
+
+		$this->add_control(
+			'pre_title_offset_toggle',
+			[
+				'label' => __('Offset', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => __('None', 'bdthemes-element-pack'),
+				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
+			]
+		);
+		
+		$this->start_popover();
 
 		$this->add_responsive_control(
 			'pre_title_x_position',
@@ -337,6 +490,13 @@ class Trailer_Box extends Module_Base {
 						'min' => -800,
 						'max' => 800,
 					],
+				],
+				'condition' => [
+					'pre_title_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-pre-title-x-offset: {{SIZE}}px;'
 				],
 			]
 		);
@@ -360,6 +520,13 @@ class Trailer_Box extends Module_Base {
 						'min' => -800,
 						'max' => 800,
 					],
+				],
+				'condition' => [
+					'pre_title_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-pre-title-y-offset: {{SIZE}}px;'
 				],
 			]
 		);
@@ -385,10 +552,12 @@ class Trailer_Box extends Module_Base {
 						'step' => 5,
 					],
 				],
+				'condition' => [
+					'pre_title_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
 				'selectors' => [
-					'(desktop){{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'transform: translate({{pre_title_x_position.SIZE}}px, {{pre_title_y_position.SIZE}}px) rotate({{SIZE}}deg);',
-					'(tablet){{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'transform: translate({{pre_title_x_position_tablet.SIZE}}px, {{pre_title_y_position_tablet.SIZE}}px) rotate({{SIZE}}deg);',
-					'(mobile){{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'transform: translate({{pre_title_x_position_mobile.SIZE}}px, {{pre_title_y_position_mobile.SIZE}}px) rotate({{SIZE}}deg);',
+					'{{WRAPPER}}' => '--ep-trailer-box-pre-title-rotate: {{SIZE}}deg;'
 				],
 			]
 		);
@@ -408,87 +577,49 @@ class Trailer_Box extends Module_Base {
 			]
 		);
 
-		$this->end_controls_section();
+		$this->end_popover();
 
-		//Style
-
-		$this->start_controls_section(
-			'section_trailer_box_style',
-			[
-				'label' => esc_html__( 'Trailer Box', 'bdthemes-element-pack' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_responsive_control(
-			'trailer_box_content_padding',
-			[
-				'label'      => esc_html__( 'Content Padding', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
-			]
-		);
-
-		$this->start_controls_tabs( 'tabs_trailer_box_style' );
+		$this->end_controls_tab();
 
 		$this->start_controls_tab(
-			'tab_trailer_box_normal',
+			'tab_pre_title_hover',
 			[
-				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
 			]
 		);
 
 		$this->add_control(
-			'pre_title_heading',
-			[
-				'label'     => esc_html__( 'Pre Title', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => [
-					'pre_title!' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'pre_title_color',
+			'pre_title_color_hover',
 			[
 				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'pre_title!' => '',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
-			[
-				'name'        => 'pre_title_border',
-				'label'       => __( 'Border', 'bdthemes-element-pack' ),
-				'selector'    => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title',
-				'condition' => [
-					'pre_title!' => '',
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-pre-title' => 'color: {{VALUE}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'pre_title_border_radius',
+			'pre_title_bg__hover_color',
 			[
-				'label'      => __( 'Border Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-pre-title' => 'background: {{VALUE}};',
 				],
+			]
+		);
+
+		$this->add_control(
+			'pre_title_border_color_hover',
+			[
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
 				'condition' => [
-					'pre_title!' => '',
+					'pre_title_border_border!' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-pre-title' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -496,56 +627,149 @@ class Trailer_Box extends Module_Base {
 		$this->add_group_control(
 			Group_Control_Text_Shadow::get_type(),
 			[
-				'name'     => 'tb_pre_title_shadow',
-				'selector' => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title',
-				'condition' => [
-					'pre_title!' => '',
-				],
+				'name'     => 'tb_pre_title_shadow_hover',
+				'selector' => '{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title',
 			]
 		);
 
 		$this->add_control(
-			'tb_pre_title_opacity',
+			'tb_pre_title_opacity_hover',
 			[
 				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
 				'type'  => Controls_Manager::SLIDER,
 				'range' => [
 					'px' => [
-						'min'  => 0.05,
+						'min'  => 0,
 						'max'  => 1,
 						'step' => 0.05,
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'opacity: {{SIZE}};',
-				],
-				'condition' => [
-					'pre_title!' => '',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
-			[
-				'name'      => 'pre_title_typography',
-				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
-				'selector'  => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-pre-title',
-				'condition' => [
-					'pre_title!' => '',
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'opacity: {{SIZE}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'title_heading',
+			'pre_title_hover_offset_toggle',
 			[
-				'label'     => esc_html__( 'Title', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
+				'label' => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => __('None', 'bdthemes-element-pack'),
+				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
+			]
+		);
+		
+		$this->start_popover();
+
+		$this->add_responsive_control(
+			'pre_title_hover_x_position',
+			[
+				'label'   => __( 'X Offset', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -800,
+						'max' => 800,
+					],
+				],
+				'condition' => [
+					'pre_title_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-pre-title-hover-x-offset: {{SIZE}}px;'
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'pre_title_hover_y_position',
+			[
+				'label'   => __( 'Y Offset', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -800,
+						'max' => 800,
+					],
+				],
+				'condition' => [
+					'pre_title_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-pre-title-hover-y-offset: {{SIZE}}px;'
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'pre_title_hover_rotate',
+			[
+				'label'   => __( 'Rotate', 'bdthemes-element-pack' ),
+				'type'    => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => -180,
+						'max'  => 180,
+						'step' => 5,
+					],
+				],
+				'condition' => [
+					'pre_title_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-pre-title-hover-rotate: {{SIZE}}deg;'
+				],
+			]
+		);
+
+		$this->add_control(
+			'pre_title_transition_delay',
+			[
+				'label' => __( 'Transition Delay', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'transition-delay: {{SIZE}}s;',
+				],
+			]
+		);
+
+		$this->end_popover();
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_title',
+			[
+				'label'     => esc_html__( 'Tilte', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'title!' => '',
 				],
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_title_style' );
+
+		$this->start_controls_tab(
+			'tab_title_normal',
+			[
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
 			]
 		);
 
@@ -557,9 +781,6 @@ class Trailer_Box extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title' => 'color: {{VALUE}};',
 				],
-				'condition' => [
-					'title!' => '',
-				],
 			]
 		);
 
@@ -569,21 +790,376 @@ class Trailer_Box extends Module_Base {
 				'name'      => 'title_typography',
 				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
 				'selector'  => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title',
-				'condition' => [
-					'title!' => '',
+			]
+		);
+
+		$this->add_control(
+			'title_opacity',
+			[
+				'label' => __( 'Opacity', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title' => 'opacity: {{SIZE}};',
 				],
 			]
 		);
 
 		$this->add_control(
-			'description_heading',
+			'title_offset_toggle',
 			[
-				'label'     => esc_html__( 'Description', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
+				'label' => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => __('None', 'bdthemes-element-pack'),
+				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
+			]
+		);
+		
+		$this->start_popover();
+		
+		$this->add_responsive_control(
+			'title_horizontal_offset',
+			[
+				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'title_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-title-x-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'title_vertical_offset',
+			[
+				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'title_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-title-y-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'title_rotate',
+			[
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -360,
+						'max' => 360,
+						'step' => 5,
+					],
+				],
+				'condition' => [
+					'title_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-title-rotate: {{SIZE}}deg;'
+				],
+			]
+		);
+		
+		$this->end_popover();
+
+		$this->add_control(
+			'title_advanced_style',
+			[
+				'label' => esc_html__('Advanced Style', 'bdthemes-element-pack') . BDTEP_NC,
+				'type'  => Controls_Manager::SWITCHER,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'title_background',
+				'selector' => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title',
+				'condition' => [
+					'title_advanced_style' => 'yes'
+				]
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Text_Shadow::get_type(),
+			[
+				'name' => 'title_text_shadow',
+				'label' => __( 'Text Shadow', 'bdthemes-element-pack'),
+				'selector' => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title',
+				'condition' => [
+					'title_advanced_style' => 'yes'
+				]
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name' 	   => 'title_border',
+				'selector' => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title',
+				'condition' => [
+					'title_advanced_style' => 'yes'
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'title_border_radius',
+			[
+				'label'		 => __('Border Radius', 'bdthemes-element-pack'),
+				'type' 		 => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'title_advanced_style' => 'yes'
+				]
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' 	   => 'title_box_shadow',
+				'selector' => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title',
+				'condition' => [
+					'title_advanced_style' => 'yes'
+				]
+			]
+		);
+
+		$this->add_responsive_control(
+			'title_text_padding',
+			[
+				'label' 	 => __('Padding', 'bdthemes-element-pack'),
+				'type' 		 => Controls_Manager::DIMENSIONS,
+				'size_units' => ['px', 'em', '%'],
+				'selectors'  => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+				'condition' => [
+					'title_advanced_style' => 'yes'
+				]
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'tab_title_hover',
+			[
+				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
+			]
+		);
+
+		$this->add_control(
+			'title_color_hover',
+			[
+				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-title' => 'color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name' => 'title_hover_background',
+				'selector' => '{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-title',
+				'condition' => [
+					'title_advanced_style' => 'yes'
+				]
+			]
+		);
+
+		$this->add_control(
+			'title_border_color_hover',
+			[
+				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::COLOR,
+				'condition' => [
+					'title_border_border!' => '',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-pre-title' => 'border-color: {{VALUE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'title_hover_opacity',
+			[
+				'label' => __( 'Opacity', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-title' => 'opacity: {{SIZE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'title_hover_offset_toggle',
+			[
+				'label' => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => __('None', 'bdthemes-element-pack'),
+				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
+			]
+		);
+		
+		$this->start_popover();
+		
+		$this->add_responsive_control(
+			'title_hover_horizontal_offset',
+			[
+				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'title_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-title-hover-x-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'title_hover_vertical_offset',
+			[
+				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'title_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-title-hover-y-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'title_hover_rotate',
+			[
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -360,
+						'max' => 360,
+						'step' => 5,
+					],
+				],
+				'condition' => [
+					'title_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-title-hover-rotate: {{SIZE}}deg;'
+				],
+			]
+		);
+
+		$this->add_control(
+			'title_transition_delay',
+			[
+				'label' => __( 'Transition Delay', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-desc-inner .bdt-trailer-box-title' => 'transition-delay: {{SIZE}}s;',
+				],
+			]
+		);
+		
+		$this->end_popover();
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_text',
+			[
+				'label'     => esc_html__( 'Text', 'bdthemes-element-pack' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
 					'content!' => '',
 				],
+			]
+		);
+
+		$this->start_controls_tabs( 'tabs_text_style' );
+
+		$this->start_controls_tab(
+			'tab_text_normal',
+			[
+				'label' => esc_html__( 'Normal', 'bdthemes-element-pack' ),
 			]
 		);
 
@@ -595,8 +1171,16 @@ class Trailer_Box extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text' => 'color: {{VALUE}};',
 				],
-				'condition' => [
-					'content!' => '',
+			]
+		);
+
+		$this->add_control(
+			'text_background_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text' => 'background: {{VALUE}};',
 				],
 			]
 		);
@@ -604,7 +1188,7 @@ class Trailer_Box extends Module_Base {
 		$this->add_control(
 			'text_spacing',
 			[
-				'label' => esc_html__('Sapce', 'bdthemes-element-pack'),
+				'label' => esc_html__('Spacing', 'bdthemes-element-pack'),
 				'type'  => Controls_Manager::SLIDER,
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text' => 'margin-top: {{SIZE}}px;',
@@ -618,127 +1202,114 @@ class Trailer_Box extends Module_Base {
 				'name'      => 'text_typography',
 				'label'     => esc_html__( 'Typography', 'bdthemes-element-pack' ),
 				'selector'  => '{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text',
-				'condition' => [
-					'content!' => '',
+			]
+		);
+
+		$this->add_control(
+			'text_opacity',
+			[
+				'label' => __( 'Opacity', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-text' => 'opacity: {{SIZE}};',
 				],
 			]
 		);
+
+		$this->add_control(
+			'text_offset_toggle',
+			[
+				'label' => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => __('None', 'bdthemes-element-pack'),
+				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
+			]
+		);
+		
+		$this->start_popover();
+		
+		$this->add_responsive_control(
+			'text_horizontal_offset',
+			[
+				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'text_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-text-x-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'text_vertical_offset',
+			[
+				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'text_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-text-y-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'text_rotate',
+			[
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -360,
+						'max' => 360,
+						'step' => 5,
+					],
+				],
+				'condition' => [
+					'text_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-text-rotate: {{SIZE}}deg;'
+				],
+			]
+		);
+		
+		$this->end_popover();
 
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
-			'tab_trailer_box_hover',
+			'tab_text_hover',
 			[
 				'label' => esc_html__( 'Hover', 'bdthemes-element-pack' ),
-			]
-		);
-
-		$this->add_control(
-			'pre_title_heading_hover',
-			[
-				'label'     => esc_html__( 'Pre Title', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::HEADING,
-				'condition' => [
-					'pre_title!' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'pre_title_color_hover',
-			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-pre-title' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'pre_title!' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'pre_title_border_color_hover',
-			[
-				'label'     => esc_html__( 'Border Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-pre-title' => 'border-color: {{VALUE}};',
-				],
-				'condition' => [
-					'pre_title!' => '',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			Group_Control_Text_Shadow::get_type(),
-			[
-				'name'     => 'tb_pre_title_shadow_hover',
-				'selector' => '{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title',
-				'condition' => [
-					'pre_title!' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'tb_pre_title_opacity_hover',
-			[
-				'label' => __( 'Opacity', 'bdthemes-element-pack' ),
-				'type'  => Controls_Manager::SLIDER,
-				'range' => [
-					'px' => [
-						'min'  => 0.05,
-						'max'  => 1,
-						'step' => 0.05,
-					],
-				],
-				'selectors' => [
-					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-desc-inner .bdt-trailer-box-pre-title' => 'opacity: {{SIZE}};',
-				],
-				'condition' => [
-					'pre_title!' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'title_heading_hover',
-			[
-				'label'     => esc_html__( 'Title', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => [
-					'title!' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'title_color_hover',
-			[
-				'label'     => esc_html__( 'Color', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::COLOR,
-				'selectors' => [
-					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-title' => 'color: {{VALUE}};',
-				],
-				'condition' => [
-					'title!' => '',
-				],
-			]
-		);
-
-		$this->add_control(
-			'description_heading_hover',
-			[
-				'label'     => esc_html__( 'Description', 'bdthemes-element-pack' ),
-				'type'      => Controls_Manager::HEADING,
-				'separator' => 'before',
-				'condition' => [
-					'content!' => '',
-				],
 			]
 		);
 
@@ -750,33 +1321,140 @@ class Trailer_Box extends Module_Base {
 				'selectors' => [
 					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-text' => 'color: {{VALUE}};',
 				],
-				'condition' => [
-					'content!' => '',
+			]
+		);
+
+		$this->add_control(
+			'text_bg_color_hover',
+			[
+				'label'     => esc_html__( 'Background', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-text' => 'background: {{VALUE}};',
 				],
 			]
 		);
+
+		$this->add_control(
+			'text_hover_opacity',
+			[
+				'label' => __( 'Opacity', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-text' => 'opacity: {{SIZE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'text_hover_offset_toggle',
+			[
+				'label' => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => __('None', 'bdthemes-element-pack'),
+				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
+			]
+		);
+		
+		$this->start_popover();
+		
+		$this->add_responsive_control(
+			'text_hover_horizontal_offset',
+			[
+				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'text_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-text-hover-x-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'text_hover_vertical_offset',
+			[
+				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'text_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-text-hover-y-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'text_hover_rotate',
+			[
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -360,
+						'max' => 360,
+						'step' => 5,
+					],
+				],
+				'condition' => [
+					'text_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-text-hover-rotate: {{SIZE}}deg;'
+				],
+			]
+		);
+
+		$this->add_control(
+			'text_transition_delay',
+			[
+				'label' => __( 'Transition Delay', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-text' => 'transition-delay: {{SIZE}}s;',
+				],
+			]
+		);
+		
+		$this->end_popover();
 
 		$this->end_controls_tab();
 
 		$this->end_controls_tabs();
-
-		$this->add_control(
-			'item_animation',
-			[
-				'label'        => esc_html__( 'Animation', 'bdthemes-element-pack' ),
-				'type'         => Controls_Manager::SELECT,
-				'default'      => 'content',
-				'prefix_class' => 'bdt-item-transition-',				
-				'render_type'  => 'ui',
-				'options'      => [
-					'content'    => esc_html__( 'Content', 'bdthemes-element-pack' ),
-					'scale-up'   => esc_html__( 'Image Scale Up', 'bdthemes-element-pack' ),
-					'scale-down' => esc_html__( 'Image Scale Down', 'bdthemes-element-pack' ),
-					'none'       => esc_html__( 'None', 'bdthemes-element-pack' ),
-				],
-				'separator' => 'before',
-			]
-		);
 
 		$this->end_controls_section();
 
@@ -823,6 +1501,169 @@ class Trailer_Box extends Module_Base {
 			]
 		);
 
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'        => 'border',
+				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
+				'placeholder' => '1px',
+				'default'     => '1px',
+				'selector'    => '{{WRAPPER}} a.bdt-trailer-box-button',
+			]
+		);
+
+		$this->add_responsive_control(
+			'border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} a.bdt-trailer-box-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} a.bdt-trailer-box-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_responsive_control(
+			'button_spacing',
+			[
+				'label'      => esc_html__( 'Margin', 'bdthemes-element-pack' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'selectors'  => [
+					'{{WRAPPER}} a.bdt-trailer-box-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'button_shadow',
+				'selector' => '{{WRAPPER}} a.bdt-trailer-box-button',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'typography',
+				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
+				'selector' => '{{WRAPPER}} a.bdt-trailer-box-button',
+			]
+		);
+
+		$this->add_control(
+			'button_opacity',
+			[
+				'label' => __( 'Opacity', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box .bdt-trailer-box-button' => 'opacity: {{SIZE}};',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_offset_toggle',
+			[
+				'label' => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => __('None', 'bdthemes-element-pack'),
+				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
+			]
+		);
+		
+		$this->start_popover();
+		
+		$this->add_responsive_control(
+			'button_horizontal_offset',
+			[
+				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'button_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-button-x-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'button_vertical_offset',
+			[
+				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'button_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-button-y-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'button_rotate',
+			[
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -360,
+						'max' => 360,
+						'step' => 5,
+					],
+				],
+				'condition' => [
+					'button_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-button-rotate: {{SIZE}}deg;'
+				],
+			]
+		);
+		
+		$this->end_popover();
+
 		$this->end_controls_tab();
 
 		$this->start_controls_tab(
@@ -839,7 +1680,7 @@ class Trailer_Box extends Module_Base {
 				'type'      => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}}.elementor-widget-bdt-trailer-box:hover a.bdt-trailer-box-button' => 'color: {{VALUE}};',
-					'{{WRAPPER}}.elementor-widget-bdt-trailer-box:hover a.bdt-trailer-box-button svg' => 'fill: {{VALUE}};',
+					'{{WRAPPER}}.elementor-widget-bdt-trailer-box:hover a.bdt-trailer-box-button svg *' => 'fill: {{VALUE}};',
 				],
 			]
 		);
@@ -877,75 +1718,126 @@ class Trailer_Box extends Module_Base {
 			]
 		);
 
-		$this->end_controls_tab();
-
-		$this->end_controls_tabs();
-
-		$this->add_group_control(
-			Group_Control_Border::get_type(),
+		$this->add_control(
+			'button_hover_opacity',
 			[
-				'name'        => 'border',
-				'label'       => esc_html__( 'Border', 'bdthemes-element-pack' ),
-				'placeholder' => '1px',
-				'default'     => '1px',
-				'selector'    => '{{WRAPPER}} a.bdt-trailer-box-button',
-				'separator'   => 'before',
+				'label' => __( 'Opacity', 'bdthemes-element-pack' ) . BDTEP_NC,
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-button' => 'opacity: {{SIZE}};',
+				],
 			]
 		);
 
 		$this->add_control(
-			'border_radius',
+			'button_hover_offset_toggle',
 			[
-				'label'      => esc_html__( 'Border Radius', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} a.bdt-trailer-box-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-				],
+				'label' => __('Offset', 'bdthemes-element-pack') . BDTEP_NC,
+				'type' => Controls_Manager::POPOVER_TOGGLE,
+				'label_off' => __('None', 'bdthemes-element-pack'),
+				'label_on' => __('Custom', 'bdthemes-element-pack'),
+				'return_value' => 'yes',
 			]
 		);
-
-		$this->add_group_control(
-			Group_Control_Box_Shadow::get_type(),
-			[
-				'name'     => 'button_shadow',
-				'selector' => '{{WRAPPER}} a.bdt-trailer-box-button',
-			]
-		);
-
+		
+		$this->start_popover();
+		
 		$this->add_responsive_control(
-			'button_padding',
+			'button_hover_horizontal_offset',
 			[
-				'label'      => esc_html__( 'Padding', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} a.bdt-trailer-box-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'label' => __('Horizontal', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
 				],
-				'separator' => 'before',
+				'condition' => [
+					'button_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-button-hover-x-offset: {{SIZE}}px;'
+				],
 			]
 		);
-
+		
 		$this->add_responsive_control(
-			'button_spacing',
+			'button_hover_vertical_offset',
 			[
-				'label'      => esc_html__( 'Spacing', 'bdthemes-element-pack' ),
-				'type'       => Controls_Manager::DIMENSIONS,
-				'size_units' => [ 'px', 'em', '%' ],
-				'selectors'  => [
-					'{{WRAPPER}} a.bdt-trailer-box-button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				'label' => __('Vertical', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -300,
+						'step' => 2,
+						'max' => 300,
+					],
+				],
+				'condition' => [
+					'button_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-button-hover-y-offset: {{SIZE}}px;'
+				],
+			]
+		);
+		
+		$this->add_responsive_control(
+			'button_hover_rotate',
+			[
+				'label' => esc_html__('Rotate', 'bdthemes-element-pack'),
+				'type' => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min' => -360,
+						'max' => 360,
+						'step' => 5,
+					],
+				],
+				'condition' => [
+					'button_hover_offset_toggle' => 'yes'
+				],
+				'render_type' => 'ui',
+				'selectors' => [
+					'{{WRAPPER}}' => '--ep-trailer-box-button-hover-rotate: {{SIZE}}deg;'
 				],
 			]
 		);
 
-		$this->add_group_control(
-			Group_Control_Typography::get_type(),
+		$this->add_control(
+			'button_transition_delay',
 			[
-				'name'     => 'typography',
-				'label'    => esc_html__( 'Typography', 'bdthemes-element-pack' ),
-				'selector' => '{{WRAPPER}} a.bdt-trailer-box-button',
+				'label' => __( 'Transition Delay', 'bdthemes-element-pack' ),
+				'type'  => Controls_Manager::SLIDER,
+				'range' => [
+					'px' => [
+						'min'  => 0,
+						'max'  => 1,
+						'step' => 0.1,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .bdt-trailer-box:hover .bdt-trailer-box-button' => 'transition-delay: {{SIZE}}s;',
+				],
 			]
 		);
+		
+		$this->end_popover();
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 		$this->end_controls_section();
 
@@ -1051,7 +1943,7 @@ class Trailer_Box extends Module_Base {
 
 	public function render_button() {
 		$settings = $this->get_settings_for_display();
-		$target   = ($settings['button']['is_external']) ? '_blank' : '_self';
+		$target   = (isset($settings['button']['is_external'])) ? '_blank' : '_self';
 
 		if ( ! isset( $settings['icon'] ) && ! Icons_Manager::is_migration_allowed() ) {
 			// add old default
@@ -1116,7 +2008,7 @@ class Trailer_Box extends Module_Base {
 
 	public function render() {
 		$settings               = $this->get_settings_for_display();
-		$target   = ($settings['button']['is_external']) ? '_blank' : '_self';
+		$target   = (isset($settings['button']['is_external'])) ? '_blank' : '_self';
 		
 		$origin                 = ' bdt-position-' . $settings['origin'];
 		$has_background_overlay = in_array( $settings['background_overlay_background'], [ 'classic', 'gradient' ] ) ||
@@ -1159,9 +2051,11 @@ class Trailer_Box extends Module_Base {
 						<?php endif; ?>
 
 						<?php if ( '' !== $settings['title'] ) : ?>
-							<<?php echo esc_html($settings['title_tags']); ?> <?php echo $this->get_render_attribute_string('bdt-trailer-box-title'); ?>>
-								<?php echo wp_kses( $settings['title'], element_pack_allow_tags('title') ); ?>
-							</<?php echo esc_html($settings['title_tags']); ?>>
+							<div class="bdt-trailer-box-title-wrap">
+								<<?php echo esc_html($settings['title_tags']); ?> <?php echo $this->get_render_attribute_string('bdt-trailer-box-title'); ?>>
+									<?php echo wp_kses( $settings['title'], element_pack_allow_tags('title') ); ?>
+								</<?php echo esc_html($settings['title_tags']); ?>>
+							</div>
 						<?php endif; ?>
 
 						<?php if ( '' !== $settings['content'] ) : ?>

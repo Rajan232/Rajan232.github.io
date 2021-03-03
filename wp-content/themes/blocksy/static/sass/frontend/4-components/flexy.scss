@@ -71,6 +71,59 @@
 	overflow: hidden;
 }
 
+// flexy pills
+.flexy-pills ol,
+.flex-control-nav {
+	display: flex;
+	flex-direction: var(--pills-direction);
+	justify-content: var(--pills-horizontal-alignment);
+	flex-wrap: var(--pills-wrap, wrap);
+	list-style: none;
+	padding: 0;
+	--contentSpacing: 0;
+	--listItemSpacing: 0;
+
+	li {
+		flex: 0 0 var(--thumbs-width, 20%);
+		width: var(--thumbs-width, 20%);
+		cursor: pointer;
+	}
+}
+
+// flexy pills slider
+.flexy-pills [data-flexy] {
+	overflow: hidden;
+	--pills-wrap: nowrap;
+}
+
+// data type circle
+.flexy-pills[data-type='circle'] li {
+	--thumbs-width: 30px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--thumbs-width);
+
+	&:before {
+		content: '';
+		width: 6px;
+		height: 6px;
+		border-radius: 100%;
+		box-shadow: inset 0 0 0 5px
+			var(--flexyInitialPill, rgba(44, 62, 80, 0.9));
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+
+	&.active {
+		&:before {
+			transform: scale3d(2, 2, 1);
+			box-shadow: inset 0 0 0 1px
+				var(--flexyActivePill, rgba(44, 62, 80, 0.9));
+		}
+	}
+}
+
 // arrows
 [class*='flexy-arrow'] {
 	position: absolute;
@@ -100,6 +153,7 @@
 
 	svg {
 		position: relative;
+		fill: currentColor;
 	}
 
 	&:hover {
@@ -127,56 +181,6 @@
 	transform: translateX(0);
 }
 
-// flexy pills
-.flexy-pills ol,
-.flex-control-nav {
-	display: flex;
-	flex-direction: var(--pills-direction);
-	justify-content: var(--pills-horizontal-alignment);
-	flex-wrap: var(--pills-wrap, wrap);
-	list-style: none;
-	padding: 0;
-	--contentSpacing: 0;
-	--listItemSpacing: 0;
-
-	li {
-		cursor: pointer;
-	}
-}
-
-// data type circle
-.flexy-pills[data-type='circle'] li {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 30px;
-	height: 30px;
-
-	&:before {
-		content: '';
-		width: 6px;
-		height: 6px;
-		border-radius: 100%;
-		box-shadow: inset 0 0 0 5px
-			var(--flexyInitialPill, rgba(44, 62, 80, 0.9));
-		transition: box-shadow 0.2s ease, transform 0.2s ease;
-	}
-
-	&.active {
-		&:before {
-			transform: scale3d(2, 2, 1);
-			box-shadow: inset 0 0 0 1px
-				var(--flexyActivePill, rgba(44, 62, 80, 0.9));
-		}
-	}
-}
-
-// Pills slider
-.flexy-pills [data-flexy] {
-	overflow: hidden;
-	--pills-wrap: nowrap;
-
-	> * {
-		flex: 0 0 20%;
-	}
+.flexy-pills ol:not([data-flexy]) ~ [class*="arrow"] {
+	display: none;
 }

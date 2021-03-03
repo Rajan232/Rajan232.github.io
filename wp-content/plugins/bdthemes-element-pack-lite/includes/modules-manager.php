@@ -128,6 +128,12 @@ final class Manager {
             $modules[] = 'formidable-forms';
         }
 
+		// elementor extend
+		$backdrop_filter = element_pack_option( 'backdrop_filter', 'element_pack_elementor_extend', 'off' );
+		if ( 'on' === $backdrop_filter ) {
+			$modules[] = 'backdrop-filter';
+		}
+
 		// Fetch all modules data
 		foreach ( $modules as $module ) {
 			$this->_modules[ $module ] = require BDTEP_MODULES_PATH . $module . '/module.info.php';

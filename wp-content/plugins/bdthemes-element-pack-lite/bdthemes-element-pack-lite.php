@@ -3,7 +3,7 @@
  * Plugin Name: Element Pack Lite - Addon for Elementor
  * Plugin URI: http://elementpack.pro/
  * Description: Element Pack is a packed of elementor widget. This plugin gives you extra widgets features for elementor page builder plugin.
- * Version: 2.7.0
+ * Version: 2.8.0
  * Author: BdThemes
  * Author URI: https://bdthemes.com/
  * Text Domain: bdthemes-element-pack-lite
@@ -32,7 +32,7 @@ if ( ! function_exists( 'element_pack_pro_installed' ) ) {
 
 if ( ! element_pack_pro_installed() ) {
 	// Some pre define value for easy use
-	define( 'BDTEP_VER', '2.7.0' );
+	define( 'BDTEP_VER', '2.8.0' );
 	define( 'BDTEP__FILE__', __FILE__ );
 	define( 'BDTEP_PNAME', basename( dirname(BDTEP__FILE__) ) );
 	define( 'BDTEP_PBNAME', plugin_basename(BDTEP__FILE__) );
@@ -43,10 +43,7 @@ if ( ! element_pack_pro_installed() ) {
 	define( 'BDTEP_ASSETS_URL', BDTEP_URL . 'assets/' );
 	define( 'BDTEP_ASSETS_PATH', BDTEP_PATH . 'assets/' );
 	define( 'BDTEP_MODULES_URL', BDTEP_URL . 'modules/' );
-	define( 'BDTEP', '' ); //Add prefix for all widgets <span class="bdt-widget-badge"></span>
-	define( 'BDTEP_CP', '<span class="bdt-widget-badge"></span>' ); // if you have any custom style
-	define( 'BDTEP_SLUG', 'element-pack' );// set your own alias 
-	define( 'BDTEP_TITLE', 'Element Pack Lite' ); // Set your own name for plugin
+	
 
 
 	// Helper function here

@@ -12,7 +12,6 @@ if (function_exists('is_shop') && is_shop()) {
 
 $is_page = blocksy_is_page();
 
-
 $prefix = blocksy_manager()->screen->get_prefix();
 
 $default_hero_elements = [];

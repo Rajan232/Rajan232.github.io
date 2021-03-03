@@ -77,7 +77,7 @@ blocksy_output_responsive([
 blocksy_output_colors([
 	'value' => blocksy_akg('footerSocialsIconColor', $atts),
 	'default' => [
-		'default' => [ 'color' => 'var(--color)' ],
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 	],
 	'css' => $css,
@@ -91,7 +91,7 @@ blocksy_output_colors([
 				'operation' => 'suffix',
 				'to_add' => '[data-color="custom"]'
 			])),
-			'variable' => 'linkInitialColor'
+			'variable' => 'icon-color'
 		],
 
 		'hover' => [
@@ -100,7 +100,7 @@ blocksy_output_colors([
 				'operation' => 'suffix',
 				'to_add' => '[data-color="custom"]'
 			])),
-			'variable' => 'linkHoverColor'
+			'variable' => 'icon-hover-color'
 		]
 	],
 

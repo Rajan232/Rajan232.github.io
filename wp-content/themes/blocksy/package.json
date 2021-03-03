@@ -1,6 +1,6 @@
 {
 	"name": "small-ct",
-	"version": "1.7.69",
+	"version": "1.7.71",
 	"title": "Blocksy",
 	"devDependencies": {
 		"@octokit/core": "^3.2.5",

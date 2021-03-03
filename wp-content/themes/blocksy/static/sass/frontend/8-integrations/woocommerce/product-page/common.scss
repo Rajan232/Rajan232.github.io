@@ -1,4 +1,4 @@
-.product[class*="gallery"]{
+.product[class*="gallery"] {
 	form.cart {
 		margin-top: var(--product-element-spacing, 35px);
 		margin-bottom: var(--form-margin-bottom, -15px);
@@ -13,22 +13,6 @@
 		&:after {
 			clear: both;
 		}
-	}
-
-	// buttons
-	@include media-breakpoint-down (xs) {
-		--buttonMinHeight: 45px;
-	}
-
-	@include media-breakpoint-up (sm) {
-		--buttonMinHeight: 55px;
-	}
-
-	.added_to_cart {
-		--buttonTextInitialColor: var(--color);
-		--buttonTextHoverColor: var(--color);
-		--buttonInitialColor: rgba(224,229,235,0.6);
-		--buttonHoverColor: rgba(224,229,235,1);
 	}
 }
 
@@ -55,6 +39,15 @@
 		}
 	}
 
+	// buttons
+	@include media-breakpoint-down (xs) {
+		--buttonMinHeight: 45px;
+	}
+
+	@include media-breakpoint-up (sm) {
+		--buttonMinHeight: 55px;
+	}
+
 	.single_add_to_cart_button {
 		flex: 1;
 		--item-order: 2;
@@ -68,6 +61,10 @@
 
 	.added_to_cart {
 		--item-order: 3;
+		--buttonTextInitialColor: var(--color);
+		--buttonTextHoverColor: var(--color);
+		--buttonInitialColor: rgba(224,229,235,0.6);
+		--buttonHoverColor: rgba(224,229,235,1);
 
 		@include media-breakpoint-up (sm) {
 			flex: 1;

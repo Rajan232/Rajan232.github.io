@@ -58,10 +58,6 @@ class Autoloader {
 			 */
 			'_BlocksyWidgetFactory' => 'framework/widgets-manager.php',
 			'_Blocksy_WP_Import' => 'framework/features/demo-install/wp-importer.php',
-
-			// TODO: remove when getting rid of EDD
-			'_EDD_SL_Plugin_Updater' => 'framework/edd/EDD_SL_Plugin_Updater.php',
-			'_EDD_Theme_Updater_Admin' => 'framework/edd/theme-updater-admin.php'
 		]);
 	}
 

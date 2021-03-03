@@ -68,3 +68,4 @@ export {
 export { updateAndSaveEl } from '../frontend/header/render-loop'
 export { responsiveClassesFor } from './sync/helpers'
 export { typographyOption } from './sync/variables/typography'
+export { checkAndReplace } from './sync/helpers'

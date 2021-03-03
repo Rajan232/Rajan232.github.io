@@ -5,7 +5,7 @@ Requires PHP: 7.0
 Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.7.59
+Stable tag: 1.7.63
 
 == Description ==
 
@@ -23,6 +23,25 @@ It runs and adds its enhancements only if the Blocksy theme is installed and act
 2. Activate the plugin by going to **Plugins** page in WordPress admin and clicking on **Activate** link.
 
 == Changelog ==
+1.7.63: 2021-02-24
+- Improvement: Cookies consent extension use SameSite=Lax in cookies
+- Fix: Correctly order scripts in trending and cookies consent
+
+1.7.62: 2021-02-23
+- Fix: Dashboard JavaScript fixes
+
+1.7.61: 2021-02-23
+- Fix: Dashboard JavaScript fixes
+
+1.7.60: 2021-02-22
+- Improvement: Refactor account header element
+- Fix: Account element custom link
+
+1.7.59.1: 2021-02-20
+- Improvement: Refactor account header element
+- Fix: Freemius optin screen
+- Fix: Account element custom link
+
 1.7.59: 2021-02-16
 - Improvement: Introduce slider view to blocksy_posts shortcode
 - Improvement: Introduce exclude_term_ids in blocksy_posts shortcode

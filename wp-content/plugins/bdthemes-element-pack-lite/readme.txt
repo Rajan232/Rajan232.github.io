@@ -3,9 +3,9 @@ Contributors: bdthemes, selimmw, mohammaadfarid, wpboffinstech
 Donate link: http://bdthemes.com/
 Tags: elementor, elementor addon, pack, addons, widget, ultimate, essential, element, bdthemes, addons for elementor, live copy, template library
 Requires at least: 4.7.0
-Tested up to: 5.6.1
+Tested up to: 5.6.2
 Requires PHP: 5.6.0
-Stable tag: 2.7.0
+Stable tag: 2.8.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -28,6 +28,7 @@ Check, how to use the template library?
 
 
 0. [Accordion](https://elementpack.pro/demo/element/accordion/) - Element Pack Lite plugin provides advanced accordion design for the elementor page builder. This page demonstrates the accordion addon from element pack Lite.
+0. Backdrop Filter (Glassmorphism) - Glassmorphism is a new trend which is getting more popular on website design service. Now you can easily design glassmorphism effect for any widgets and column.
 0. [Business Hours](https://elementpack.pro/demo/element/business-hours/) - Business hours show your company or business hours as a beautiful list of working hours.
 0. [Call Out](https://elementpack.pro/demo/element/call-out/) - Call out addon is the ultimate call out design for elementor from element pack. You can highlight your content using this element. Check the demo now.
 0. [Contact Form 7](https://elementpack.pro/demo/element/contact-form-7/) - You can easily integrate contact form 7 plugin using Element Pack Plugin for Elementor. There are dozens of different design to choose from to design a form
@@ -135,7 +136,7 @@ More widgets are coming soon...
 0. [Give Totals](https://elementpack.pro/demo/element/give-totals/) - Element pack brings the Give totals widget that shows current campaign progress in percentage stat and custom goal numbers alongside a quick donation button.
 0. [HoneyCombs](https://elementpack.pro/demo/element/honeycombs/) - Element pack brings the Honeycombs widget that allows you to create infographic honeycomb-style blocks showing stats, info, icons, and logos on both sides. 
 0. [Hover Video](https://elementpack.pro/demo/element/hover-video/) - Element pack brings the Hover Video widget that creates slider panels for videos stacked together in an accordion formation. Each one folds into a full section content hiding non-active ones.
-0. [Hover Box](https://elementpack.pro/demo/element/hover-box/) - 
+0. [Hover Box](https://elementpack.pro/demo/element/hover-box/) - Display multiple number of full-size images with hover style using small info boxes. Perfect for creating multi-background interfaces.
 0. [Instagram Feed](https://elementpack.pro/demo/element/instagram-feed/) - Example of Instagram feed widget showing on the websites and it comes with a lightbox effect image gallery.  
 0. [Interactive Card](https://elementpack.pro/demo/element/interactive-card/) - Element pack brings the Interactive Card widget for featuring highlights and posts with a smooth graphical flow.
 0. [Image Expand](https://elementpack.pro/demo/element/image-expand/) - Element pack brings the Image Expand widget that creates a unique image accordion where clicking on any image will expand it into a slider while popping back other pictures.
@@ -145,7 +146,7 @@ More widgets are coming soon...
 0. [Instagram](https://elementpack.pro/demo/element/instagram/) - You can easily display your Instagram images on your website with options like Default Instagram, Carousel Example, Masonry Example, and others
 0. [Layer Slider](https://elementpack.pro/demo/element/layer-slider/) - One of the best  WordPress slider in the market with lots of options and features. Its shortcode supports the elementor page builder.
 0. [Lottie Image](https://elementpack.pro/demo/element/lottie-image) - Even more options with your animated Lottie images makes your site more interactive and powerful. This presentation style will
-0. [Lottie Icon Box](https://elementpack.pro/demo/element/lottie-icon-box) - 
+0. [Lottie Icon Box](https://elementpack.pro/demo/element/lottie-icon-box) - Now you can show Animated icons using the Lottie Icon Box widget. Supports up to infinity J-SON animations with Custom Field
 0. [Logo Carousel](https://elementpack.pro/demo/element/logo-carousel/) - Moving content can attract more visitors. Logo Carousel can do that in a user-friendly way with an elementor.
 0. [Modal](https://elementpack.pro/demo/element/modal/) - Modal Default Example, Modal Layout, Custom Link With Heading, Modal Optional Example, Modal Button Style Example customization, and many more options.
 0. [Marker](https://elementpack.pro/demo/element/marker/) - Marker can make your sites more enjoyable with marker and tooltip. You can modify the basic - color, background color, typography with this widget.
@@ -194,7 +195,7 @@ More widgets are coming soon...
 0. [Thumb Gallery](https://elementpack.pro/demo/element/thumb-gallery/) - Default, Skin Custom Content, Content Style, Thumb Position Top Left, Thumb Position Top Right and other examples for you elementor plugin websites
 0. [Timeline](https://elementpack.pro/demo/element/timeline/) - Timeline with different styles like default, Skin Olivier Example, Without Background Example, Skin Olivier Without Image Example and others.
 0. [Timezone](https://elementpack.pro/demo/element/timezone/) - Element pack brings the Timezone widget that colorfully displays timezones of enlisted countries.
-0. [The Newsletter](https://elementpack.pro/demo/element/the-newsletter/) - 
+0. [The Newsletter](https://elementpack.pro/demo/element/the-newsletter/) - The Newsletter widget makes it easy to on-board users in your mail lists. This is an advanced tool that increases mail caching efficiency.
 0. [User Register](https://elementpack.pro/demo/element/user-register/) - WordPress default User register system brings in frontend and you can modify the design and give a fine touch to match your design.
 0. [User Login](https://elementpack.pro/demo/element/user-login/) - Fancy User Login widgets for your WordPress website with element pack pro plugin. you can change and customize also your ready blocks.
 0. [Video Player](https://elementpack.pro/demo/element/video-player/) - When it comes to watching a video, you will always prefer to watch it on YouTube or other popular streaming websites. Our video player plugin is easy to use and ready to go.
@@ -219,8 +220,8 @@ More widgets are coming soon...
 0. [Schedule Content](https://elementpack.pro/demo/element/schedule-content/) - Learn how to create schedule content with element pack pro, makes your job easier, and maintain your routine perfectly.  
 0. [Section Particles](https://elementpack.pro/demo/element/section-particles/) -Section With Particles Effects with different design effect and particles with element pack pro 
 0. [Sticky Section](https://elementpack.pro/demo/sticky-section/) - An element with position: sticky; is positioned based on the user's scroll position. Our sticky section widget will do that for you without any hassle. 
-0. [Transform](https://elementpack.pro/demo/element/transform-example/) - 
-0. [Custom Js](https://elementpack.pro/demo/element/custom-js/) - 
+0. [Transform](https://elementpack.pro/demo/element/transform-example/) - Use our Transform widget to transform any content by X, Y & Z axis. You love Block-puzzle? Make one with the Transform widget.
+0. [Custom Js](https://elementpack.pro/demo/element/custom-js/) - You can load js Script in the header and footer section.
 0. [Equal Height](https://elementpack.pro/demo/element/widget-equal-height) - a new way to match your designs. Now you can show Widget Equal Height on elementor page builder, helps you to match the design.
 0. [Widget Tooltip](https://elementpack.pro/demo/element/widget-tooltip/) - Very useful tools to describe the content or give a short note as a tooltip in element pack pro plugin to make your content more user friendly.
 
@@ -253,6 +254,15 @@ e.g.
 14. Step Flow Example
 
 == Changelog ==
+
+= 2.8.0 =
+
+* Added: Backdrop Filter Extention added
+* Added: Some Control Option added in Trailer Box Widget
+* Added: Some Control Option added in Twitter Grid Widget
+* Added: Some Control Option added in Call Out Widget
+* Fixed: Some PHP 8.1 issue fixed
+* Fixed: Some jQuery deprecated function issue fixed
 
 = 2.7.0 =
 

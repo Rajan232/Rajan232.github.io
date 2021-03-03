@@ -14,8 +14,8 @@ if ($accountHeaderIconSize !== 15) {
 		'mobile_css' => $mobile_css,
 		'selector' => blocksy_assemble_selector(
 			blocksy_mutate_selector([
-				'selector' => [$root_selector[0]],
-				'operation' => 'suffix',
+				'selector' => $root_selector,
+				'operation' => 'el-suffix',
 				'to_add' => '[data-state="out"]'
 			])
 		),
@@ -33,8 +33,8 @@ if ($accountHeaderIconSize !== 15) {
 		'mobile_css' => $mobile_css,
 		'selector' => blocksy_assemble_selector(
 			blocksy_mutate_selector([
-				'selector' => [$root_selector[0]],
-				'operation' => 'suffix',
+				'selector' => $root_selector,
+				'operation' => 'el-suffix',
 				'to_add' => '[data-state="in"]'
 			])
 		),
@@ -172,9 +172,9 @@ blocksy_output_font_css([
 	], blc_call_fn([
 		'fn' => 'blocksy_mutate_selector',
 	], [
-		'selector' => [$root_selector[0]],
+		'selector' => $root_selector,
 		'operation' => 'suffix',
-		'to_add' => '.ct-header-account .ct-label'
+		'to_add' => '.ct-label'
 	])),
 ]);
 
@@ -182,7 +182,7 @@ blocksy_output_font_css([
 blocksy_output_colors([
 	'value' => blocksy_akg('accountHeaderColor', $atts),
 	'default' => [
-		'default' => [ 'color' => 'var(--color)' ],
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 	],
 	'css' => $css,
@@ -211,7 +211,7 @@ blocksy_output_colors([
 blocksy_output_colors([
 	'value' => blocksy_akg('header_account_icon_color', $atts),
 	'default' => [
-		'default' => [ 'color' => 'var(--color)' ],
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 	],
 	'css' => $css,

@@ -3,19 +3,19 @@
 $class = 'ct-header-text';
 
 if ($panel_type === 'header') {
-	$search_visibility = blocksy_default_akg('visibility', $atts, [
+	$visibility = blocksy_default_akg('visibility', $atts, [
 		'tablet' => true,
 		'mobile' => true,
 	]);
 } else {
-	$search_visibility = blocksy_default_akg('footer_visibility', $atts, [
+	$visibility = blocksy_default_akg('footer_visibility', $atts, [
 		'desktop' => true,
 		'tablet' => true,
 		'mobile' => true,
 	]);
 }
 
-$class .= ' ' . blocksy_visibility_classes($search_visibility);
+$class .= ' ' . blocksy_visibility_classes($visibility);
 
 $text = do_shortcode(
 	blocksy_translate_dynamic(

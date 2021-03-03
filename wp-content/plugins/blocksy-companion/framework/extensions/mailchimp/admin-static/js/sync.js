@@ -1,7 +1,4 @@
-import {
-	checkAndReplace,
-	responsiveClassesFor,
-} from '../../../cookies-consent/static/js/sync/helpers'
+import { checkAndReplace, responsiveClassesFor } from 'blocksy-customizer-sync'
 
 import './variables'
 

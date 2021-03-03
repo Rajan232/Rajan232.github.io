@@ -17,7 +17,7 @@ function blocksy_mutate_selector($args = []) {
 		$args,
 		[
 			'selector' => null,
-			// prefix | suffix | between | replace-last | el-prefix
+			// prefix | suffix | between | replace-last | el-prefix | el-suffix
 			'operation' => 'between',
 			'to_add' => ''
 		]
@@ -39,6 +39,11 @@ function blocksy_mutate_selector($args = []) {
 
 	if ($args['operation'] === 'el-prefix' && count($args['selector']) > 1) {
 		$args['selector'][1] = $args['to_add'] . $args['selector'][1];
+		return $args['selector'];
+	}
+
+	if ($args['operation'] === 'el-suffix' && count($args['selector']) > 1) {
+		$args['selector'][1] .= $args['to_add'];
 		return $args['selector'];
 	}
 

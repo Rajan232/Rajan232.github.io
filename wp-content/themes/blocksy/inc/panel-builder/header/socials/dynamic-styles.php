@@ -39,7 +39,7 @@ if ($socialsIconSpacing !== 15) {
 blocksy_output_colors([
 	'value' => blocksy_akg('headerSocialsIconColor', $atts),
 	'default' => [
-		'default' => [ 'color' => 'var(--color)' ],
+		'default' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 		'hover' => [ 'color' => Blocksy_Css_Injector::get_skip_rule_keyword('DEFAULT') ],
 	],
 	'css' => $css,
@@ -53,7 +53,7 @@ blocksy_output_colors([
 				'operation' => 'suffix',
 				'to_add' => '[data-color="custom"]'
 			])),
-			'variable' => 'linkInitialColor'
+			'variable' => 'icon-color'
 		],
 
 		'hover' => [
@@ -62,7 +62,7 @@ blocksy_output_colors([
 				'operation' => 'suffix',
 				'to_add' => '[data-color="custom"]'
 			])),
-			'variable' => 'linkHoverColor'
+			'variable' => 'icon-hover-color'
 		]
 	],
 
@@ -168,7 +168,7 @@ if (isset($has_transparent_header) && $has_transparent_header) {
 						'to_add' => '[data-transparent-row="yes"]'
 					])
 				),
-				'variable' => 'linkInitialColor'
+				'variable' => 'icon-color'
 			],
 
 			'hover' => [
@@ -183,7 +183,7 @@ if (isset($has_transparent_header) && $has_transparent_header) {
 						'to_add' => '[data-transparent-row="yes"]'
 					])
 				),
-				'variable' => 'linkHoverColor'
+				'variable' => 'icon-hover-color'
 			]
 		],
 
@@ -265,7 +265,7 @@ if (isset($has_sticky_header) && $has_sticky_header) {
 						'to_add' => '[data-sticky*="yes"]'
 					])
 				),
-				'variable' => 'linkInitialColor'
+				'variable' => 'icon-color'
 			],
 
 			'hover' => [
@@ -280,7 +280,7 @@ if (isset($has_sticky_header) && $has_sticky_header) {
 						'to_add' => '[data-sticky*="yes"]'
 					])
 				),
-				'variable' => 'linkHoverColor'
+				'variable' => 'icon-hover-color'
 			]
 		],
 

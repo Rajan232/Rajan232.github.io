@@ -281,7 +281,7 @@ class ThemeIntegration {
 				wp_enqueue_script(
 					'blocksy-companion-sync-scripts',
 					BLOCKSY_URL . 'static/bundle/sync.js',
-					['customize-preview', 'wp-date', 'ct-events'],
+					['customize-preview', 'wp-date', 'ct-events', 'ct-customizer'],
 					$data['Version'],
 					true
 				);

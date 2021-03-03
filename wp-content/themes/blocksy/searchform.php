@@ -69,6 +69,7 @@ if (function_exists('pll_home_url')) {
 		<button class="search-submit" aria-label="<?php echo __('Search', 'blocksy')?>">
 			<span hidden><?php echo __('Search', 'blocksy') ?></span>
 			<svg
+				class="ct-icon"
 				width="12px"
 				height="12px"
 				viewBox="0 0 24 24">

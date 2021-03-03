@@ -1388,6 +1388,16 @@ class ElementPack_Admin_Settings {
                     'demo_url'     => 'https://elementpack.pro/demo/element/custom-js/',
                     'video_url'    => '',
                 ],
+                [
+                    'name'         => 'backdrop_filter',
+                    'label'        => esc_html__('Backdrop Filter', 'bdthemes-element-pack'),
+                    'type'         => 'checkbox',
+                    'default'      => "off",
+                    'content_type' => 'new',
+                    'widget_type'  => 'free',
+                    'demo_url'     => 'https://elementpack.pro/demo/element/backdrop-filter/',
+                    'video_url'    => '',
+                ],
 
             ],
             'element_pack_api_settings' => [

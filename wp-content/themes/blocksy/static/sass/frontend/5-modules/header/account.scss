@@ -8,25 +8,10 @@
 		height: var(--avatar-size, 18px);
 		border-radius: 100%;
 	}
-
-	.ct-label {
-		&:first-child {
-			margin-right: 8px;
-		}
-
-		&:nth-child(2) {
-			margin-left: 8px;
-		}
-	}
-
-	&:hover .ct-icon {
-		--icon-color: var(--icon-hover-color, var(--paletteColor2));
-	}
 }
 
 // account modal
 #account-modal {
-	// --overflow: visible;
 	--horizontal-alignment: center;
 	--vertical-alignment: center;
 }

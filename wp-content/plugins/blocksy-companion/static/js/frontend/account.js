@@ -236,13 +236,13 @@ export const mountAccount = () => {
 			el.hasSearchEventListener = true
 
 			el.addEventListener('click', (e) => {
-				e.preventDefault()
-
 				try {
 					document.querySelector(el.hash)
 				} catch (e) {
 					return
 				}
+
+				e.preventDefault()
 
 				activateScreen(document.querySelector(el.hash), {
 					screen: 'login',
